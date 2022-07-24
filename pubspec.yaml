@@ -23,7 +23,9 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   provider: ^6.0.3
-  http: ^0.13.4
+  path: ^1.8.1
+  path_provider: ^2.0.11
+  sqflite_common_ffi: ^2.1.1+1
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +37,7 @@ flutter:
 
   uses-material-design: true
   assets:
+    - assets/flags/
     - lib/languagesKaikki.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
