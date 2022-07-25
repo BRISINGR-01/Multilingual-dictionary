@@ -1,20 +1,33 @@
-class DatabaseHelper {
-  DatabaseHelper(String lang);
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-  Future<List<Map<String, Object?>>> search(String val, String lang, db) async {
+class DatabaseHelper {
+  var _database;
+
+  DatabaseHelper.init(String lang) {
+    sqfliteFfiInit();
+
+    databaseFactoryFfi
+        .openDatabase(
+            'C:/Users/alexp/Desktop/VSC/multilingual_dictionary/databases/all Lang.sql')
+        .then((value) => _database = value);
+  }
+
+  Future<QueryResult> search(String val, String lang) async {
     if (val.isEmpty) return [];
 
-    var result = await db.rawQuery(
+    var result = await _database.rawQuery(
         'SELECT id, display FROM $lang WHERE word LIKE "$val%" LIMIT 30');
 
     return result.toList();
   }
 
-  getById(int id, String lang, db) async {
-    var result = await db.rawQuery('SELECT * FROM $lang WHERE id = $id');
+  getById(int id, String lang) async {
+    var result = await _database.rawQuery('SELECT * FROM $lang WHERE id = $id');
 
     return result.toList()[0];
   }
 
-  close(db) => db.close();
+  close() => _database.close();
 }
+
+typedef QueryResult = List<Map<String, Object?>>;
