@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class FormsTable extends StatelessWidget {
-  FormsTable({Key? key, required this.forms});
+  const FormsTable({Key? key, required this.forms}) : super(key: key);
 
   final List forms;
 

@@ -1,4 +1,6 @@
-import 'dart:convert';
+// ignore_for_file: file_names
+
+import 'dart:convert' show json;
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/formsTable.dart';
 

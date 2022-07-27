@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
+typedef QueryResult = List<Map<String, Object?>>;
+
 class DatabaseHelper {
+  // ignore: prefer_typing_uninitialized_variables
   var _database;
 
   DatabaseHelper.init(String lang) {
@@ -55,4 +59,22 @@ class DatabaseHelper {
   close() => _database.close();
 }
 
-typedef QueryResult = List<Map<String, Object?>>;
+Future<Map<String, dynamic>> getLastUserActivity() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  final mode = prefs.getBool('isModeToEnglish') ?? true;
+  final language = prefs.getString('language') ?? "French";
+
+  return {"isModeToEnglish": mode, "language": language};
+}
+
+void setLastUserActivity({String? language, bool? isModeToEnglish}) async {
+  final prefs = await SharedPreferences.getInstance();
+
+  if (language != null) {
+    await prefs.setString('language', language);
+  }
+  if (isModeToEnglish != null) {
+    await prefs.setBool('isModeToEnglish', isModeToEnglish);
+  }
+}

@@ -6,14 +6,23 @@ import 'package:multilingual_dictionary/download.dart';
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init("Dutch");
 
-  List<String> _languages = ["French", "Dutch"];
-  List<Map<String, Object?>> _items = [];
   String _language = "French";
   String _querry = "";
-  bool _modeToEnglish = true;
+  bool _isModeToEnglish = true;
+  List<String> _languages = ["French", "Dutch"];
+  List<Map<String, Object?>> _items = [];
+
+  @override
+  initState() {
+    super.initState();
+    getLastUserActivity().then((value) => setState(() {
+          _language = value["language"];
+          _isModeToEnglish = value["isModeToEnglish"];
+        }));
+  }
 
   fetchList() async {
-    QueryResult items = _modeToEnglish
+    QueryResult items = _isModeToEnglish
         ? await databaseHelper.searchToEnglish(_querry, _language)
         : await databaseHelper.searchFromEnglish(_querry, _language);
 
@@ -32,7 +41,7 @@ class SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(_modeToEnglish
+          title: Text(_isModeToEnglish
               ? '$_language to English'
               : 'English to $_language'),
         ),
@@ -73,7 +82,7 @@ class SearchState extends State<Search> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: _modeToEnglish
+                      child: _isModeToEnglish
                           ? DropdownButton(
                               value: _language,
                               items: _languages
@@ -85,6 +94,7 @@ class SearchState extends State<Search> {
                               underline: Container(),
                               onChanged: (String? val) {
                                 _language = val as String;
+                                setLastUserActivity(language: _language);
                                 fetchList();
                               })
                           : const Text(
@@ -96,8 +106,10 @@ class SearchState extends State<Search> {
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: ElevatedButton(
                           onPressed: () {
+                            setLastUserActivity(
+                                isModeToEnglish: !_isModeToEnglish);
                             setState(() {
-                              _modeToEnglish = !_modeToEnglish;
+                              _isModeToEnglish = !_isModeToEnglish;
                             });
                             fetchList();
                           },
@@ -106,7 +118,7 @@ class SearchState extends State<Search> {
                           )),
                     ),
                     Expanded(
-                      child: !_modeToEnglish
+                      child: !_isModeToEnglish
                           ? DropdownButton(
                               value: _language,
                               items: _languages
@@ -118,6 +130,7 @@ class SearchState extends State<Search> {
                               underline: Container(),
                               onChanged: (String? val) {
                                 _language = val as String;
+                                setLastUserActivity(language: _language);
                                 fetchList();
                               })
                           : const Text(
