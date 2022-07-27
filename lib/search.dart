@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/database.dart';
 import 'package:multilingual_dictionary/displayWord.dart';
-import 'package:searchfield/searchfield.dart';
 
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init("Dutch");
 
   final List<String> _languages = ["French", "Dutch"];
-  List<Map<String, Object?>> _items = [
-    // {"": ""}
-  ];
+  List<Map<String, Object?>> _items = [];
   String _language = "French";
   String _querry = "";
   bool _modeToEnglish = true;
 
-  refetchList(language) async {
-    if (_modeToEnglish) {
-      QueryResult items = await databaseHelper.search(_querry, language);
+  fetchList() async {
+    QueryResult items = _modeToEnglish
+        ? await databaseHelper.searchToEnglish(_querry, _language)
+        : await databaseHelper.searchFromEnglish(_querry, _language);
 
-      setState(() {
-        _items = items;
-      });
-    }
+    setState(() {
+      _items = items;
+    });
   }
 
   @override
@@ -31,63 +28,103 @@ class SearchState extends State<Search> {
           title: const Text('Languages'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(mainAxisSize: MainAxisSize.max, children: [
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  DropdownButton(
-                      value: _language,
-                      items: _languages
-                          .map((String items) => DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              ))
-                          .toList(),
-                      onChanged: (String? val) {
-                        setState(() {
-                          _language = val ?? "French";
-                        });
-                        refetchList(val);
-                      }),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: ElevatedButton(
-                        onPressed: () => setState(() {
-                              _modeToEnglish = !_modeToEnglish;
-                            }),
-                        child: const Icon(
-                          Icons.swap_horiz_outlined,
-                        )),
-                  ),
-                  const Text(
-                    "English",
-                    style: TextStyle(fontSize: 16),
-                  )
-                ]),
-            TextField(
-              autofocus: true,
-              onChanged: (value) async {
-                List<Map<String, Object?>> items =
-                    await databaseHelper.search(value, _language);
-                setState(() {
-                  _items = items;
+            Container(
+              color: Colors.white,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: _modeToEnglish
+                      ? <Widget>[
+                          DropdownButton(
+                              value: _language,
+                              items: _languages
+                                  .map((String items) => DropdownMenuItem(
+                                        value: items,
+                                        child: Text(items),
+                                      ))
+                                  .toList(),
+                              onChanged: (String? val) {
+                                _language = val as String;
+                                fetchList();
+                              }),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _modeToEnglish = !_modeToEnglish;
+                                  });
+                                  fetchList();
+                                },
+                                child: const Icon(
+                                  Icons.swap_horiz_outlined,
+                                )),
+                          ),
+                          const Text(
+                            "English",
+                            style: TextStyle(fontSize: 16),
+                          )
+                        ]
+                      : <Widget>[
+                          const Padding(
+                            padding: EdgeInsets.only(right: 15),
+                            child: Text(
+                              "English",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _modeToEnglish = !_modeToEnglish;
+                                  });
+                                  fetchList();
+                                },
+                                child: const Icon(
+                                  Icons.swap_horiz_outlined,
+                                )),
+                          ),
+                          DropdownButton(
+                              value: _language,
+                              items: _languages
+                                  .map((String items) => DropdownMenuItem(
+                                        value: items,
+                                        child: Text(items),
+                                      ))
+                                  .toList(),
+                              onChanged: (String? val) {
+                                _language = val as String;
+                                fetchList();
+                              }),
+                        ]),
+            ),
+            Container(
+              color: Colors.white,
+              child: TextField(
+                autofocus: true,
+                onChanged: (value) async {
                   _querry = value;
-                });
-              },
-              decoration: const InputDecoration(
-                hintText: 'Search',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  fetchList();
+                },
+                decoration: const InputDecoration(
+                  hintText: 'Search',
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.lightBlueAccent, width: 1.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  ),
                 ),
               ),
             ),
@@ -97,7 +134,7 @@ class SearchState extends State<Search> {
                   itemCount: _items.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(_items[index]["display"] as String),
+                      title: Text(_items[index]["val"] as String),
                       shape: const RoundedRectangleBorder(
                         side: BorderSide(color: Colors.black38, width: .3),
                         borderRadius: BorderRadius.all(Radius.circular(3)),
