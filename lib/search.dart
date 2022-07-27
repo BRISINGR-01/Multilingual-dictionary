@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/database.dart';
 import 'package:multilingual_dictionary/displayWord.dart';
+import 'package:searchfield/searchfield.dart';
 
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init("Dutch");
 
   final List<String> _languages = ["French", "Dutch"];
-  List<Map<String, Object?>> _items = [];
+  List<Map<String, Object?>> _items = [
+    // {"": ""}
+  ];
   String _language = "French";
   String _querry = "";
   bool _modeToEnglish = true;
@@ -24,40 +27,45 @@ class SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Languages'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
+        appBar: AppBar(
+          title: const Text('Languages'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(mainAxisSize: MainAxisSize.max, children: [
             Row(
-              children: [
-                DropdownButton(
-                    value: _language,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: _languages
-                        .map((String items) => DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            ))
-                        .toList(),
-                    onChanged: (String? val) {
-                      setState(() {
-                        _language = val ?? "French";
-                      });
-                      refetchList(val);
-                    }),
-                ElevatedButton(
-                    onPressed: () => setState(() {
-                          _modeToEnglish = !_modeToEnglish;
-                        }),
-                    child: const Icon(
-                      Icons.swap_horiz_outlined,
-                    )),
-                const Text("English")
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  DropdownButton(
+                      value: _language,
+                      items: _languages
+                          .map((String items) => DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              ))
+                          .toList(),
+                      onChanged: (String? val) {
+                        setState(() {
+                          _language = val ?? "French";
+                        });
+                        refetchList(val);
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: ElevatedButton(
+                        onPressed: () => setState(() {
+                              _modeToEnglish = !_modeToEnglish;
+                            }),
+                        child: const Icon(
+                          Icons.swap_horiz_outlined,
+                        )),
+                  ),
+                  const Text(
+                    "English",
+                    style: TextStyle(fontSize: 16),
+                  )
+                ]),
             TextField(
               autofocus: true,
               onChanged: (value) async {
@@ -108,11 +116,9 @@ class SearchState extends State<Search> {
                       },
                     );
                   }),
-            )
-          ],
-        ),
-      ),
-    );
+            ),
+          ]),
+        ));
   }
 }
 

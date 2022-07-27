@@ -5,6 +5,7 @@ void main() async {
   runApp(MaterialApp(
     home: const Search(),
     theme: ThemeData(
+      fontFamily: "New Times Roman",
       colorScheme: ColorScheme(
         brightness: Brightness.light,
         primary: Colors.lightBlue.shade400,
@@ -29,5 +30,6 @@ void main() async {
         bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
       ),
     ),
+    debugShowCheckedModeBanner: false,
   ));
 }
