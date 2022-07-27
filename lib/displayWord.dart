@@ -81,11 +81,11 @@ class Word extends StatelessWidget {
       setReady();
     });
 
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height - 107.5,
-        width: MediaQuery.of(context).size.width,
-        color: Theme.of(context).colorScheme.background,
+    return Container(
+      height: MediaQuery.of(context).size.height - 107.5,
+      width: MediaQuery.of(context).size.width,
+      color: Theme.of(context).colorScheme.background,
+      child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

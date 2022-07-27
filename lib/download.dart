@@ -4,11 +4,11 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class DownloadLanguages extends StatefulWidget {
+  const DownloadLanguages({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<DownloadLanguages> createState() => _DownloadLanguagesState();
 }
 
 Future<List<String>> getJson() async {
@@ -17,7 +17,7 @@ Future<List<String>> getJson() async {
   return List<String>.from(json.decode(rawJson));
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _DownloadLanguagesState extends State<DownloadLanguages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

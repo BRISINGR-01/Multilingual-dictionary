@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/database.dart';
+import 'package:multilingual_dictionary/data.dart';
 import 'package:multilingual_dictionary/displayWord.dart';
+import 'package:multilingual_dictionary/download.dart';
 
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init("Dutch");
 
-  final List<String> _languages = ["French", "Dutch"];
+  List<String> _languages = ["French", "Dutch"];
   List<Map<String, Object?>> _items = [];
   String _language = "French";
   String _querry = "";
@@ -21,12 +22,47 @@ class SearchState extends State<Search> {
     });
   }
 
+  addLanguage(newLang) {
+    setState(() {
+      _languages = [..._languages, newLang];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Languages'),
+          title: Text(_modeToEnglish
+              ? '$_language to English'
+              : 'English to $_language'),
         ),
+        drawer: Drawer(
+            child: ListView(padding: EdgeInsets.zero, children: [
+          ListTile(
+            title: const Text('Settings'),
+            leading: Icon(Icons.settings,
+                color: Theme.of(context).colorScheme.tertiary),
+            shape: const RoundedRectangleBorder(
+              side: BorderSide(color: Colors.black38, width: .3),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('Download Languages'),
+            leading: Icon(Icons.download,
+                color: Theme.of(context).colorScheme.primary),
+            shape: const RoundedRectangleBorder(
+              side: BorderSide(color: Colors.black38, width: .3),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DownloadLanguages(),
+                  ));
+            },
+          ),
+        ])),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(mainAxisSize: MainAxisSize.max, children: [
@@ -35,9 +71,10 @@ class SearchState extends State<Search> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
-                  children: _modeToEnglish
-                      ? <Widget>[
-                          DropdownButton(
+                  children: [
+                    Expanded(
+                      child: _modeToEnglish
+                          ? DropdownButton(
                               value: _language,
                               items: _languages
                                   .map((String items) => DropdownMenuItem(
@@ -45,52 +82,32 @@ class SearchState extends State<Search> {
                                         child: Text(items),
                                       ))
                                   .toList(),
+                              underline: Container(),
                               onChanged: (String? val) {
                                 _language = val as String;
                                 fetchList();
-                              }),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _modeToEnglish = !_modeToEnglish;
-                                  });
-                                  fetchList();
-                                },
-                                child: const Icon(
-                                  Icons.swap_horiz_outlined,
-                                )),
-                          ),
-                          const Text(
-                            "English",
-                            style: TextStyle(fontSize: 16),
-                          )
-                        ]
-                      : <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.only(right: 15),
-                            child: Text(
+                              })
+                          : const Text(
                               "English",
                               style: TextStyle(fontSize: 16),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _modeToEnglish = !_modeToEnglish;
-                                  });
-                                  fetchList();
-                                },
-                                child: const Icon(
-                                  Icons.swap_horiz_outlined,
-                                )),
-                          ),
-                          DropdownButton(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _modeToEnglish = !_modeToEnglish;
+                            });
+                            fetchList();
+                          },
+                          child: const Icon(
+                            Icons.swap_horiz_outlined,
+                          )),
+                    ),
+                    Expanded(
+                      child: !_modeToEnglish
+                          ? DropdownButton(
                               value: _language,
                               items: _languages
                                   .map((String items) => DropdownMenuItem(
@@ -98,11 +115,17 @@ class SearchState extends State<Search> {
                                         child: Text(items),
                                       ))
                                   .toList(),
+                              underline: Container(),
                               onChanged: (String? val) {
                                 _language = val as String;
                                 fetchList();
-                              }),
-                        ]),
+                              })
+                          : const Text(
+                              "English",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                    ),
+                  ]),
             ),
             Container(
               color: Colors.white,
