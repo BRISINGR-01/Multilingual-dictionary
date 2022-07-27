@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -9,12 +8,12 @@ class DatabaseHelper {
   // ignore: prefer_typing_uninitialized_variables
   var _database;
 
-  DatabaseHelper.init(String lang) {
+  DatabaseHelper.init() {
     sqfliteFfiInit();
 
     databaseFactoryFfi
         .openDatabase(
-            'C:/Users/alexp/Desktop/VSC/multilingual_dictionary/databases/all Lang.sql')
+            'C:/Users/alexp/Desktop/VSC/multilingual_dictionary/assets/database.sql')
         .then((value) => _database = value);
   }
 

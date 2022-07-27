@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:multilingual_dictionary/download.dart';
 import 'package:multilingual_dictionary/search.dart';
 
 void main() async {
   runApp(MaterialApp(
-    home: const Search(),
+    home: const DownloadLanguages(),
     theme: ThemeData(
       fontFamily: "New Times Roman",
       colorScheme: ColorScheme(

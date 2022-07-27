@@ -4,7 +4,7 @@ import 'package:multilingual_dictionary/displayWord.dart';
 import 'package:multilingual_dictionary/download.dart';
 
 class SearchState extends State<Search> {
-  DatabaseHelper databaseHelper = DatabaseHelper.init("Dutch");
+  DatabaseHelper databaseHelper = DatabaseHelper.init();
 
   String _language = "French";
   String _querry = "";
@@ -47,15 +47,15 @@ class SearchState extends State<Search> {
         ),
         drawer: Drawer(
             child: ListView(padding: EdgeInsets.zero, children: [
-          ListTile(
-            title: const Text('Settings'),
-            leading: Icon(Icons.settings,
-                color: Theme.of(context).colorScheme.tertiary),
-            shape: const RoundedRectangleBorder(
-              side: BorderSide(color: Colors.black38, width: .3),
-            ),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   title: const Text('Settings'),
+          //   leading: Icon(Icons.settings,
+          //       color: Theme.of(context).colorScheme.tertiary),
+          //   shape: const RoundedRectangleBorder(
+          //     side: BorderSide(color: Colors.black38, width: .3),
+          //   ),
+          //   onTap: () {},
+          // ),
           ListTile(
             title: const Text('Download Languages'),
             leading: Icon(Icons.download,
