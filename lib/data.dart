@@ -14,7 +14,23 @@ class DatabaseHelper {
     databaseFactoryFfi
         .openDatabase(
             'C:/Users/alexp/Desktop/VSC/multilingual_dictionary/assets/database.sql')
-        .then((value) => _database = value);
+        .then((value) async {
+      _database = value;
+    });
+  }
+
+  Future<List<String>> getLanguages() async {
+    if (_database == null) {
+      await Future.delayed(const Duration(milliseconds: 10));
+      return getLanguages();
+    }
+    await Future.delayed(Duration(milliseconds: 2000));
+
+    List<String> tables = List<String>.from((await _database
+            .rawQuery('SELECT name FROM sqlite_schema WHERE type=\'table\''))
+        .map((e) => e["name"]));
+
+    return tables.where((element) => element != "sqlite_sequence").toList();
   }
 
   Future<QueryResult> searchToEnglish(String val, String lang) async {
@@ -58,16 +74,23 @@ class DatabaseHelper {
   close() => _database.close();
 }
 
-Future<Map<String, dynamic>> getLastUserActivity() async {
+Future<Map<String, dynamic>> getUserData() async {
   final prefs = await SharedPreferences.getInstance();
 
-  final mode = prefs.getBool('isModeToEnglish') ?? true;
-  final language = prefs.getString('language') ?? "French";
+  bool isModeToEnglish = prefs.getBool('isModeToEnglish') ?? true;
+  List<String> languages = prefs.getStringList('languages') ?? [];
+  String language =
+      prefs.getString('language') ?? (languages.isNotEmpty ? languages[0] : "");
 
-  return {"isModeToEnglish": mode, "language": language};
+  return {
+    "isModeToEnglish": isModeToEnglish,
+    "language": language,
+    "languages": languages
+  };
 }
 
-void setLastUserActivity({String? language, bool? isModeToEnglish}) async {
+void setUserData(
+    {String? language, bool? isModeToEnglish, List<String>? languages}) async {
   final prefs = await SharedPreferences.getInstance();
 
   if (language != null) {
@@ -75,5 +98,8 @@ void setLastUserActivity({String? language, bool? isModeToEnglish}) async {
   }
   if (isModeToEnglish != null) {
     await prefs.setBool('isModeToEnglish', isModeToEnglish);
+  }
+  if (languages != null) {
+    await prefs.setStringList('languages', languages);
   }
 }

@@ -29,7 +29,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/flags/
-    - assets/database.sql
     - lib/languagesData.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
