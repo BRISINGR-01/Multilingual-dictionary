@@ -1,8 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:multilingual_dictionary/data.dart';
 
 Future<Map<String, dynamic>> getJson() async {
   String rawJson = await rootBundle.loadString('lib/languagesData.json');
@@ -13,141 +16,198 @@ Future<Map<String, dynamic>> getJson() async {
 class DownloadLanguages extends StatefulWidget {
   final Function editLanguagesList;
   final List<String> downloadedLanguages;
+  final DatabaseHelper databaseHelper;
   const DownloadLanguages(
       {super.key,
       required this.downloadedLanguages,
-      required this.editLanguagesList});
+      required this.editLanguagesList,
+      required this.databaseHelper});
 
   @override
   State<DownloadLanguages> createState() => _DownloadLanguagesState();
 }
 
 class _DownloadLanguagesState extends State<DownloadLanguages> {
-  List<String> downloadedLanguages = [];
-  List<String> loadingLanguages = [];
+  Map<String, Map<String, dynamic>> languagesData = {};
 
   download(String languageToDownload) async {
     setState(() {
-      loadingLanguages = [...loadingLanguages, languageToDownload];
+      languagesData[languageToDownload]!["isLoading"] = true;
+      languagesData[languageToDownload]!["size"] = 0;
     });
 
-    await Future.delayed(const Duration(seconds: 1));
+    void setProgress(num progress) {
+      setState(() {
+        languagesData[languageToDownload]!["progress"] = progress;
+      });
+    }
 
-    List<String> newLanguages = [...downloadedLanguages, languageToDownload];
-    widget.editLanguagesList(newLanguages);
+    int _size = 0;
+
+    void setSize(int size) {
+      _size = size;
+      setState(() {
+        languagesData[languageToDownload]!["size"] = size;
+      });
+    }
+
+    bool isSuccessful = await widget.databaseHelper
+        .addLanguage(languageToDownload, setProgress, setSize);
+
+    if (!isSuccessful) {
+      return setState(() {
+        languagesData[languageToDownload]!["isLoading"] = false;
+        languagesData[languageToDownload]!["size"] = null;
+      });
+    }
+
+    widget.editLanguagesList(addLang: languageToDownload);
+
+    setUserData(
+        sizeOfDatabase: {"language": languageToDownload, "size": _size});
 
     setState(() {
-      loadingLanguages =
-          loadingLanguages.where((lang) => lang != languageToDownload).toList();
-      downloadedLanguages = newLanguages;
+      languagesData[languageToDownload]!["isLoading"] = false;
+      languagesData[languageToDownload]!["isDownloaded"] = true;
     });
   }
 
   delete(String languageToDelete) async {
     setState(() {
-      loadingLanguages = [...loadingLanguages, languageToDelete];
+      languagesData[languageToDelete]!["isLoading"] = true;
+      languagesData[languageToDelete]!["progress"] = null;
     });
 
-    await Future.delayed(const Duration(seconds: 1));
+    await widget.databaseHelper.deleteLanguage(languageToDelete);
 
-    List<String> newLanguages =
-        downloadedLanguages.where((lang) => lang != languageToDelete).toList();
+    widget.editLanguagesList(removeLang: languageToDelete);
 
-    widget.editLanguagesList(newLanguages);
+    setUserData(sizeOfDatabase: {"language": languageToDelete, "size": 0});
+
     setState(() {
-      downloadedLanguages = newLanguages;
-      loadingLanguages =
-          loadingLanguages.where((lang) => lang != languageToDelete).toList();
+      languagesData[languageToDelete]!["isDownloaded"] = false;
+      languagesData[languageToDelete]!["isLoading"] = false;
+      languagesData[languageToDelete]!["size"] = null;
     });
   }
 
   @override
+  void initState() {
+    getUserData(true).then((languages) => setState(() {
+          languages.forEach((lang, size) {
+            languagesData[lang] = {};
+            languagesData[lang]!["size"] = size == 0 ? null : size;
+            languagesData[lang]!["isDownloaded"] = size != 0;
+          });
+        }));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (downloadedLanguages.isEmpty && widget.downloadedLanguages.isNotEmpty) {
-      setState(() {
-        downloadedLanguages = widget.downloadedLanguages;
-      });
-    }
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Languages'),
+        ),
+        body: FutureBuilder(
+            future: getJson(),
+            builder: (context, jsonData) {
+              if (!jsonData.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Languages'),
-      ),
-      body: FutureBuilder(
-          future: getJson(),
-          builder: (context, jsonData) {
-            if (!jsonData.hasData) {
-              return const Center(child: CircularProgressIndicator());
-            }
+              Map<String, dynamic> data = jsonData.data as Map<String, dynamic>;
 
-            Map<String, dynamic> data = jsonData.data as Map<String, dynamic>;
-
-            List<Widget> flags = data["providedByKaikki"]
-                .map<Widget>((item) => data["availableFlags"].containsKey(item)
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1),
-                          ),
-                          child: Image.asset(
-                            'assets/flags/${data["availableFlags"][item]}.png',
-                          ),
-                        ),
-                      )
-                    : const Padding(
-                        padding: EdgeInsets.only(left: 7.5),
-                        child: Icon(Icons.tour_outlined),
-                      ))
-                .toList();
-
-            return ListView.builder(
-              itemCount: data["providedByKaikki"].length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(data["providedByKaikki"][index]),
-                  shape: const RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black38, width: .3),
-                  ),
-                  // leading: Image.asset('${flags[index]}'),
-                  leading: flags[index],
-                  trailing: loadingLanguages
-                          .contains(data["providedByKaikki"][index])
-                      ? OutlinedButton(
-                          child: SizedBox(
-                              width: 15,
-                              height: 15,
-                              child: CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary)),
-                          onPressed: () => {},
-                        )
-                      : downloadedLanguages
-                              .contains(data["providedByKaikki"][index])
-                          ? OutlinedButton(
-                              child: const Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                                semanticLabel: 'delete',
+              List<Widget> flags = data["providedByKaikki"]
+                  .map<Widget>(
+                      (item) => data["availableFlags"].containsKey(item)
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
+                                ),
+                                child: Image.asset(
+                                  'assets/flags/${data["availableFlags"][item]}.png',
+                                ),
                               ),
-                              onPressed: () =>
-                                  delete(data["providedByKaikki"][index]),
                             )
-                          : OutlinedButton(
-                              child: const Icon(
-                                Icons.download,
-                                color: Colors.blue,
-                                semanticLabel: 'download',
-                              ),
-                              onPressed: () =>
-                                  download(data["providedByKaikki"][index]),
-                            ),
-                );
-              },
-            );
-          }),
+                          : const Padding(
+                              padding: EdgeInsets.only(left: 7.5),
+                              child: Icon(Icons.tour_outlined),
+                            ))
+                  .toList();
+
+              return ListView.builder(
+                itemCount: data["providedByKaikki"].length,
+                itemBuilder: (context, index) {
+                  String language = data["providedByKaikki"][index];
+
+                  if (languagesData[language] == null) {
+                    languagesData[language] = {};
+                  }
+
+                  return ListTile(
+                    title: Text(language),
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black38, width: .3),
+                    ),
+                    leading: flags[index],
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(languagesData[language]!["size"] != null
+                            ? '${languagesData[language]!["size"]} Mb '
+                            : ""),
+                        languagesData[language]?["isLoading"] == true
+                            ? OutlinedButton(
+                                child: SizedBox(
+                                    width: 15,
+                                    height: 15,
+                                    child:
+                                        languagesData[language]!["progress"] !=
+                                                null
+                                            ? CircularProgressIndicator(
+                                                value: languagesData[language]![
+                                                    "progress"],
+                                                strokeWidth: 3,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary)
+                                            : CircularProgressIndicator(
+                                                strokeWidth: 3,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary)),
+                                onPressed: () => {},
+                              )
+                            : languagesData[language]!["isDownloaded"] == true
+                                ? OutlinedButton(
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                      semanticLabel: 'delete',
+                                    ),
+                                    onPressed: () => delete(language),
+                                  )
+                                : OutlinedButton(
+                                    child: const Icon(
+                                      Icons.download,
+                                      color: Colors.blue,
+                                      semanticLabel: 'download',
+                                    ),
+                                    onPressed: () => download(language),
+                                  ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }),
+      ),
     );
   }
 }

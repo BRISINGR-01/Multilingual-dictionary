@@ -23,46 +23,48 @@ class _WordDisplayState extends State<WordDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.word["word"]),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.word["word"]),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+        ),
+        bottomNavigationBar: BottomAppBar(
+          shape: !isReadyToDraw || areTablesOpened
+              ? null
+              : const CircularNotchedRectangle(),
+          color: Theme.of(context).colorScheme.tertiary,
+          child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              height: areTablesOpened ? MediaQuery.of(context).size.height : 50,
+              padding: const EdgeInsets.only(top: 70),
+              child: areTablesOpened
+                  ? FormsTable(
+                      forms: widget.word["forms"] ?? [],
+                    )
+                  : null),
+        ),
+        floatingActionButton: isReadyToDraw
+            ? Padding(
+                padding: EdgeInsets.only(top: areTablesOpened ? 80.0 : 0.0),
+                child: FloatingActionButton(
+                  onPressed: () => setState(() {
+                    areTablesOpened = !areTablesOpened;
+                  }),
+                  tooltip: areTablesOpened ? null : 'Tables of forms',
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  child: Icon(
+                      areTablesOpened
+                          ? Icons.expand_more_outlined
+                          : Icons.grid_on_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary),
+                ),
+              )
+            : null,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: Word(word: widget.word, setReady: setReady),
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: !isReadyToDraw || areTablesOpened
-            ? null
-            : const CircularNotchedRectangle(),
-        color: Theme.of(context).colorScheme.tertiary,
-        child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            height: areTablesOpened ? MediaQuery.of(context).size.height : 50,
-            padding: const EdgeInsets.only(top: 70),
-            child: areTablesOpened
-                ? FormsTable(
-                    forms: widget.word["forms"] ?? [],
-                  )
-                : null),
-      ),
-      floatingActionButton: isReadyToDraw
-          ? Padding(
-              padding: EdgeInsets.only(top: areTablesOpened ? 80.0 : 0.0),
-              child: FloatingActionButton(
-                onPressed: () => setState(() {
-                  areTablesOpened = !areTablesOpened;
-                }),
-                tooltip: areTablesOpened ? null : 'Tables of forms',
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: Icon(
-                    areTablesOpened
-                        ? Icons.expand_more_outlined
-                        : Icons.grid_on_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary),
-              ),
-            )
-          : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: Word(word: widget.word, setReady: setReady),
-      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 }
