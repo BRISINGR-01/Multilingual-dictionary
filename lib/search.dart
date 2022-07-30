@@ -18,37 +18,20 @@ class SearchState extends State<Search> {
   initState() {
     super.initState();
 
-    getUserData(false).then((data) async {
-      bool isModeToEnglish = data["isModeToEnglish"];
-      String language = data["language"];
+    databaseHelper.getUserData().then((data) async {
+      String currentLanguage = data["currentLanguage"] ?? "";
       List<String> languages = data["languages"];
 
-      if (languages.isNotEmpty) {
-        setState(() {
-          _isModeToEnglish = isModeToEnglish;
-          _currentLanguage = language;
-          _languages = languages;
-          _isLoading = false;
-        });
-      } else {
-        languages = await databaseHelper.getLanguages();
-
-        setState(() {
-          _isModeToEnglish = isModeToEnglish;
-          _currentLanguage = language.isNotEmpty
-              ? language
-              : languages.isNotEmpty
-                  ? languages[0]
-                  : "";
-          _languages = languages;
-          _isLoading = false;
-          isFirstTime = languages.isEmpty;
-        });
-
-        if (languages.isNotEmpty) {
-          setUserData(languages: languages, language: languages[0]);
-        }
+      if (!languages.contains(currentLanguage) && languages.isNotEmpty) {
+        currentLanguage = languages[0];
       }
+
+      setState(() {
+        _languages = languages;
+        _currentLanguage = currentLanguage;
+        _isModeToEnglish = data["isModeToEnglish"] == "true";
+        _isLoading = false;
+      });
     });
   }
 
@@ -66,20 +49,24 @@ class SearchState extends State<Search> {
     if (addLang != null) {
       setState(() {
         _languages.add(addLang);
-        if (_languages.length == 1) _currentLanguage = _languages[0];
+
+        if (_languages.length == 1) {
+          _currentLanguage = _languages[0];
+          databaseHelper.setUserData("currentLanguage", _currentLanguage);
+        }
       });
     } else {
       setState(() {
         _query = '';
         _options = [];
         _languages.remove(removeLang);
+
         if (!_languages.contains(_currentLanguage)) {
           _currentLanguage = _languages.isNotEmpty ? _languages[0] : "";
+          databaseHelper.setUserData("currentLanguage", _currentLanguage);
         }
       });
     }
-
-    setUserData(languages: _languages, language: _currentLanguage);
   }
 
   @override
@@ -181,7 +168,7 @@ class SearchState extends State<Search> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Column(mainAxisSize: MainAxisSize.max, children: [
                         Container(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.background,
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.max,
@@ -200,8 +187,8 @@ class SearchState extends State<Search> {
                                           underline: Container(),
                                           onChanged: (String? val) {
                                             _currentLanguage = val as String;
-                                            setUserData(
-                                                language: _currentLanguage);
+                                            databaseHelper.setUserData(
+                                                "currentLanguage", val);
                                             fetchOptions(_query);
                                           })
                                       : const Text(
@@ -214,8 +201,9 @@ class SearchState extends State<Search> {
                                       horizontal: 12.0),
                                   child: ElevatedButton(
                                       onPressed: () {
-                                        setUserData(
-                                            isModeToEnglish: !_isModeToEnglish);
+                                        databaseHelper.setUserData(
+                                            "isModeToEnglish",
+                                            "${!_isModeToEnglish}");
                                         setState(() {
                                           _isModeToEnglish = !_isModeToEnglish;
                                         });
@@ -239,8 +227,8 @@ class SearchState extends State<Search> {
                                           underline: Container(),
                                           onChanged: (String? val) {
                                             _currentLanguage = val as String;
-                                            setUserData(
-                                                language: _currentLanguage);
+                                            databaseHelper.setUserData(
+                                                "currentLanguage", val);
                                             fetchOptions(_query);
                                           })
                                       : const Text(

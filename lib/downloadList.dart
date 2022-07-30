@@ -64,7 +64,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
 
     widget.editLanguagesList(addLang: languageToDownload);
 
-    setUserData(sizeOfDatabase: {"language": languageToDownload, "size": size});
+    widget.databaseHelper.setUserData(languageToDownload, "$size");
 
     setState(() {
       languagesData[languageToDownload]!["isLoading"] = false;
@@ -82,7 +82,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
 
     widget.editLanguagesList(removeLang: languageToDelete);
 
-    setUserData(sizeOfDatabase: {"language": languageToDelete, "size": 0});
+    widget.databaseHelper.setUserData(languageToDelete, "0");
 
     setState(() {
       languagesData[languageToDelete]!["isDownloaded"] = false;
@@ -93,11 +93,15 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
 
   @override
   void initState() {
-    getUserData(true).then((languages) => setState(() {
-          languages.forEach((lang, size) {
+    widget.databaseHelper.getUserData().then((data) => setState(() {
+          data["languages"].forEach((lang) {
+            int size = data[lang] == null ? 0 : int.parse(data[lang]);
+
             languagesData[lang] = {};
             languagesData[lang]!["size"] = size == 0 ? null : size;
             languagesData[lang]!["isDownloaded"] = size != 0;
+            // the provided size can be zero which means the databse was deleted
+            // or null which means it was never downloaded
           });
         }));
     super.initState();

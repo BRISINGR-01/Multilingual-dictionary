@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 typedef QueryResult = List<Map<String, Object?>>;
@@ -18,21 +17,53 @@ class DatabaseHelper {
     getApplicationDocumentsDirectory().then((value) async {
       databaseFactoryFfi
           .openDatabase(join(value.path, 'database.sql'))
-          .then((value) => _database = value);
+          .then((value) async {
+        _database = value;
+
+        List<String> tables = List<String>.from((await _database.rawQuery(
+                'SELECT name FROM sqlite_schema WHERE type=\'table\''))
+            .map((e) => e["name"]));
+
+        if (!tables.contains("userData")) {
+          await _database.rawQuery('''
+            CREATE TABLE "userData" (
+              name TEXT ,
+              value TEXT
+            );
+          ''');
+        }
+      });
     });
   }
 
-  Future<List<String>> getLanguages() async {
+  Future<Map<String, dynamic>> getUserData() async {
     if (_database == null) {
       await Future.delayed(const Duration(milliseconds: 10));
-      return getLanguages();
+      return getUserData();
     }
 
-    List<String> tables = List<String>.from((await _database
-            .rawQuery('SELECT name FROM sqlite_schema WHERE type=\'table\''))
-        .map((e) => e["name"]));
+    List<String> languages = List<String>.from((await _database.rawQuery(
+                'SELECT name FROM sqlite_schema WHERE type=\'table\''))
+            .map((tableData) => tableData["name"]))
+        .where((tables) => tables != "sqlite_sequence" && tables != "userData")
+        .toList();
 
-    return tables.where((element) => element != "sqlite_sequence").toList();
+    QueryResult data = await _database.rawQuery('SELECT * FROM "userData"');
+
+    return {
+      "languages": languages,
+      for (var entry in data) entry["name"] as String: entry["value"]
+    };
+  }
+
+  void setUserData(String name, String value) async {
+    if (_database == null) {
+      await Future.delayed(const Duration(milliseconds: 10));
+      return setUserData(name, value);
+    }
+
+    _database.rawQuery(
+        'INSERT OR REPLACE INTO "userData" (name, value) VALUES ("$name", "$value")');
   }
 
   Future<QueryResult> searchToEnglish(String val, String lang) async {
@@ -133,59 +164,6 @@ class DatabaseHelper {
   }
 
   deleteLanguage(String lang) async {
-    await _database.rawQuery('DROP TABLE $lang');
-
-    return;
-  }
-}
-
-Future<Map<String, dynamic>> getUserData(bool getDatabasesSizeOnly) async {
-  final prefs = await SharedPreferences.getInstance();
-
-  List<String> languages = prefs.getStringList('languages') ?? [];
-
-  if (getDatabasesSizeOnly == true) {
-    return {
-      for (String l in languages) l: prefs.getInt(l) ?? 0,
-    };
-  }
-
-  bool isModeToEnglish = prefs.getBool('isModeToEnglish') ?? true;
-  String language =
-      prefs.getString('language') ?? (languages.isNotEmpty ? languages[0] : "");
-
-  return {
-    "isModeToEnglish": isModeToEnglish,
-    "language": language,
-    "languages": languages
-  };
-}
-
-void deleteData() async {
-  final prefs = await SharedPreferences.getInstance();
-
-  prefs.clear();
-}
-
-void setUserData(
-    {String? language,
-    bool? isModeToEnglish,
-    List<String>? languages,
-    Map<String, dynamic>? sizeOfDatabase}) async {
-  final prefs = await SharedPreferences.getInstance();
-
-  if (language != null) {
-    await prefs.setString('language', language);
-  }
-  if (isModeToEnglish != null) {
-    await prefs.setBool('isModeToEnglish', isModeToEnglish);
-  }
-  if (languages != null) {
-    await prefs.setStringList('languages', languages);
-  }
-  if (sizeOfDatabase != null) {
-    print(sizeOfDatabase);
-    await prefs.setInt(sizeOfDatabase["language"], sizeOfDatabase["size"] ?? 0);
-    print(await prefs.getInt(sizeOfDatabase["language"]));
+    return _database.rawQuery('DROP TABLE $lang');
   }
 }
