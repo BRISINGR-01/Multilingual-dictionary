@@ -8,7 +8,7 @@ class SearchState extends State<Search> {
 
   bool _isLoading = true;
   String _currentLanguage = "";
-  String _querry = "";
+  String _query = "";
   bool _isModeToEnglish = true;
   List<String> _languages = [];
   List<Map<String, Object?>> _options = [];
@@ -17,6 +17,7 @@ class SearchState extends State<Search> {
   initState() {
     super.initState();
 
+    // deleteData();
     getUserData(false).then((data) async {
       bool isModeToEnglish = data["isModeToEnglish"];
       String language = data["language"];
@@ -50,10 +51,10 @@ class SearchState extends State<Search> {
     });
   }
 
-  fetchOptions() async {
+  fetchOptions(String querry) async {
     QueryResult items = _isModeToEnglish
-        ? await databaseHelper.searchToEnglish(_querry, _currentLanguage)
-        : await databaseHelper.searchFromEnglish(_querry, _currentLanguage);
+        ? await databaseHelper.searchToEnglish(querry, _currentLanguage)
+        : await databaseHelper.searchFromEnglish(querry, _currentLanguage);
 
     setState(() {
       _options = items;
@@ -68,6 +69,8 @@ class SearchState extends State<Search> {
       });
     } else {
       setState(() {
+        _query = '';
+        _options = [];
         _languages.remove(removeLang);
         if (!_languages.contains(_currentLanguage)) {
           _currentLanguage = _languages.isNotEmpty ? _languages[0] : "";
@@ -198,7 +201,7 @@ class SearchState extends State<Search> {
                                             _currentLanguage = val as String;
                                             setUserData(
                                                 language: _currentLanguage);
-                                            fetchOptions();
+                                            fetchOptions(_query);
                                           })
                                       : const Text(
                                           "English",
@@ -215,7 +218,7 @@ class SearchState extends State<Search> {
                                         setState(() {
                                           _isModeToEnglish = !_isModeToEnglish;
                                         });
-                                        fetchOptions();
+                                        fetchOptions(_query);
                                       },
                                       child: const Icon(
                                         Icons.swap_horiz_outlined,
@@ -237,7 +240,7 @@ class SearchState extends State<Search> {
                                             _currentLanguage = val as String;
                                             setUserData(
                                                 language: _currentLanguage);
-                                            fetchOptions();
+                                            fetchOptions(_query);
                                           })
                                       : const Text(
                                           "English",
@@ -251,8 +254,10 @@ class SearchState extends State<Search> {
                           child: TextField(
                             autofocus: true,
                             onChanged: (value) async {
-                              _querry = value;
-                              fetchOptions();
+                              setState(() {
+                                _query = value;
+                              });
+                              fetchOptions(_query);
                             },
                             decoration: const InputDecoration(
                               hintText: 'Search',

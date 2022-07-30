@@ -47,7 +47,6 @@ app.*.map.json
 /android/app/release
 
 .sqlite3
-/server/*
 
 node_modules/
 databases/

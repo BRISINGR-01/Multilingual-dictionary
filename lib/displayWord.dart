@@ -16,9 +16,11 @@ class _WordDisplayState extends State<WordDisplay> {
   bool isReadyToDraw = false;
   bool areTablesOpened = false;
   void setReady() {
-    setState(() {
-      isReadyToDraw = true;
-    });
+    if (mounted) {
+      setState(() {
+        isReadyToDraw = true;
+      });
+    }
   }
 
   @override

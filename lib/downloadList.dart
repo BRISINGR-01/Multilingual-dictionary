@@ -36,23 +36,24 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
       languagesData[languageToDownload]!["size"] = 0;
     });
 
-    void setProgress(num progress) {
+    int size = 0;
+    void setProgressAndSize(num progress, int currentSize) {
+      size = currentSize;
       setState(() {
-        languagesData[languageToDownload]!["progress"] = progress;
-      });
-    }
-
-    int _size = 0;
-
-    void setSize(int size) {
-      _size = size;
-      setState(() {
-        languagesData[languageToDownload]!["size"] = size;
+        if (progress == 1) {
+          // the download has finished and other processes are occuring
+          // therefore a circular animation should appear
+          languagesData[languageToDownload]!["progress"] = null;
+          languagesData[languageToDownload]!["size"] = currentSize;
+        } else {
+          languagesData[languageToDownload]!["progress"] = progress;
+          languagesData[languageToDownload]!["size"] = currentSize;
+        }
       });
     }
 
     bool isSuccessful = await widget.databaseHelper
-        .addLanguage(languageToDownload, setProgress, setSize);
+        .addLanguage(languageToDownload, setProgressAndSize);
 
     if (!isSuccessful) {
       return setState(() {
@@ -63,8 +64,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
 
     widget.editLanguagesList(addLang: languageToDownload);
 
-    setUserData(
-        sizeOfDatabase: {"language": languageToDownload, "size": _size});
+    setUserData(sizeOfDatabase: {"language": languageToDownload, "size": size});
 
     setState(() {
       languagesData[languageToDownload]!["isLoading"] = false;
@@ -170,10 +170,9 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
                                     child:
                                         languagesData[language]!["progress"] !=
                                                 null
-                                            ? CircularProgressIndicator(
+                                            ? LinearProgressIndicator(
                                                 value: languagesData[language]![
                                                     "progress"],
-                                                strokeWidth: 3,
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .tertiary)

@@ -39,12 +39,12 @@ class DatabaseHelper {
     if (val.isEmpty) return [];
 
     QueryResult result = await _database.rawQuery(
-        'SELECT id, pos, display FROM $lang WHERE word = "val" LIMIT 30');
+        'SELECT id, pos, word FROM $lang WHERE word LIKE "$val%" LIMIT 30');
 
     return result.map((word) {
       return <String, Object?>{
         "id": word["id"],
-        "val": word["display"],
+        "val": word["word"],
       };
     }).toList();
   }
@@ -53,7 +53,7 @@ class DatabaseHelper {
     if (val.isEmpty) return [];
 
     QueryResult result = await _database.rawQuery(
-        'SELECT id, pos, display, translations FROM $lang WHERE EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE "$val%") LIMIT 30');
+        'SELECT id, pos, translations FROM $lang WHERE EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE "$val%") LIMIT 30');
 
     return result.map((word) {
       List<dynamic> translations = json.decode(word["translations"] as String);
@@ -73,72 +73,71 @@ class DatabaseHelper {
     return result.toList()[0];
   }
 
-  addLanguage(String lang, Function setProgress, Function setSize) async {
+  addLanguage(String lang, Function setProgressAndSize) async {
     String url = 'http://localhost:3000/$lang';
-    // String url = 'https://dummy.restapiexample.com/api/v1/employee/1';
-
-    // http.Response response = await http.get(Uri.parse(url));
-
-    // print(response.contentLength);
-    // if (response.statusCode == 200) {
-    //   String data = response.body;
-
-    // } else {
-    //   print(response.reasonPhrase);
-    // }
 
     http.Request request = http.Request('GET', Uri.parse(url));
     http.StreamedResponse streamedResponse = await request.send();
 
-    Directory dir = await getApplicationDocumentsDirectory();
-    File pathToSave = File(join(dir.path, '$lang.sql'));
-
-    // num? totalLength = streamedResponse.contentLength;
     int totalLength =
-        int.parse(streamedResponse.headers["original-length"] ?? "0");
+        int.parse(streamedResponse.headers["original-length"] ?? "1");
     num lengthOfSaved = 0;
 
-    IOSink out = pathToSave.openWrite();
+    Directory dir = await getApplicationDocumentsDirectory();
+    File newSqlFile = File(join(dir.path, '$lang.sql'));
+
+    IOSink out = newSqlFile.openWrite();
     await streamedResponse.stream.map((List<int> d) {
       if (totalLength != 0) {
         lengthOfSaved += d.length / 1024;
 
-        setProgress(lengthOfSaved / totalLength);
-        setSize(lengthOfSaved.round());
+        setProgressAndSize(lengthOfSaved / totalLength, lengthOfSaved.round());
       }
 
       return d;
     }).pipe(out);
-    // streamedResponse.stream.pipe(out);
 
-    // await _database.rawQuery('''CREATE TABLE "$lang" (
-    //   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    //   word TEXT NOT NULL,
-    //   pos TEXT NOT NULL,
-    //   lang TEXT NOT NULL,
-    //   display TEXT NOT NULL,
-    //   origin TEXT,
-    //   ipas TEXT,
-    //   senses TEXT,
-    //   forms TEXT,
-    //   tags TEXT,
-    //   translations TEXT
-    // );''');
+    // File copy = newSqlFile.copySync(join(dir.path, '2$lang.sql'));
+
+    await _database.rawQuery('''
+      CREATE TABLE "$lang" (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        word TEXT NOT NULL,
+        pos TEXT NOT NULL,
+        lang TEXT NOT NULL,
+        display TEXT NOT NULL,
+        origin TEXT,
+        ipas TEXT,
+        senses TEXT,
+        forms TEXT,
+        tags TEXT,
+        translations TEXT
+      );
+    ''');
+
+    await _database.rawQuery('''
+      ATTACH DATABASE "${join(dir.path, '$lang.sql')}" as "new$lang";
+    ''');
+
+    await _database.rawQuery('''
+      INSERT INTO "$lang" SELECT * FROM new$lang.${lang == 'French' ? 'French' : 'Dutch'};
+    ''');
+
+    await _database.rawQuery('''
+      DETACH DATABASE "new$lang";
+    ''');
+
+    // copy.deleteSync();
+    newSqlFile.deleteSync();
 
     return true;
   }
 
   deleteLanguage(String lang) async {
-    // await _database.rawQuery('DROP TABLE $lang');
+    await _database.rawQuery('DROP TABLE $lang');
 
-    Directory dir = await getApplicationDocumentsDirectory();
-    File file = File(join(dir.path, '$lang.sql'));
-
-    await file.delete();
     return;
   }
-
-  close() => _database.close();
 }
 
 Future<Map<String, dynamic>> getUserData(bool getDatabasesSizeOnly) async {
@@ -161,6 +160,12 @@ Future<Map<String, dynamic>> getUserData(bool getDatabasesSizeOnly) async {
     "language": language,
     "languages": languages
   };
+}
+
+void deleteData() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  prefs.clear();
 }
 
 void setUserData(
