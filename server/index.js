@@ -1,7 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const zlib = require("node:zlib");
-const { pipeline } = require("node:stream");
 const http = require("http");
 // const https = require("https");
 const languages = require("./languages.json");

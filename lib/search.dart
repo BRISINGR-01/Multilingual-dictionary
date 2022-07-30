@@ -6,6 +6,7 @@ import 'package:multilingual_dictionary/downloadList.dart';
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init();
 
+  bool isFirstTime = false;
   bool _isLoading = true;
   String _currentLanguage = "";
   String _query = "";
@@ -17,7 +18,6 @@ class SearchState extends State<Search> {
   initState() {
     super.initState();
 
-    // deleteData();
     getUserData(false).then((data) async {
       bool isModeToEnglish = data["isModeToEnglish"];
       String language = data["language"];
@@ -42,6 +42,7 @@ class SearchState extends State<Search> {
                   : "";
           _languages = languages;
           _isLoading = false;
+          isFirstTime = languages.isEmpty;
         });
 
         if (languages.isNotEmpty) {
@@ -252,7 +253,7 @@ class SearchState extends State<Search> {
                         Container(
                           color: Colors.white,
                           child: TextField(
-                            autofocus: true,
+                            autofocus: !isFirstTime,
                             onChanged: (value) async {
                               setState(() {
                                 _query = value;

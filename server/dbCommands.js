@@ -4,8 +4,8 @@ const path = require("path");
 const initCommands = {
   checkIfExists: (lang) =>
     `SELECT name FROM sqlite_master WHERE type='table' AND name='${lang}';`,
-  create: () =>
-    `CREATE TABLE "data" (
+  create: (lang) =>
+    `CREATE TABLE "${lang}" (
       [id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       [word] TEXT NOT NULL,
       [pos] TEXT NOT NULL,

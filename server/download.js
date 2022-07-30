@@ -1,7 +1,5 @@
 const transformer = require("./transformer");
-const fs = require("fs");
 const commands = require("./dbCommands");
-const path = require("path");
 
 module.exports = download;
 async function download(stream, lang) {

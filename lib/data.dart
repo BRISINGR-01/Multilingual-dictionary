@@ -36,10 +36,11 @@ class DatabaseHelper {
   }
 
   Future<QueryResult> searchToEnglish(String val, String lang) async {
+    val = val.trim();
     if (val.isEmpty) return [];
 
     QueryResult result = await _database.rawQuery(
-        'SELECT id, pos, word FROM $lang WHERE word LIKE "$val%" LIMIT 30');
+        'SELECT id, pos, word FROM $lang WHERE word LIKE \'$val%\' LIMIT 30');
 
     return result.map((word) {
       return <String, Object?>{
@@ -74,7 +75,8 @@ class DatabaseHelper {
   }
 
   addLanguage(String lang, Function setProgressAndSize) async {
-    String url = 'http://localhost:3000/$lang';
+    // String url = 'http://localhost:3000/$lang';
+    String url = 'http://192.168.192.105:3000/$lang';
 
     http.Request request = http.Request('GET', Uri.parse(url));
     http.StreamedResponse streamedResponse = await request.send();
@@ -96,8 +98,6 @@ class DatabaseHelper {
 
       return d;
     }).pipe(out);
-
-    // File copy = newSqlFile.copySync(join(dir.path, '2$lang.sql'));
 
     await _database.rawQuery('''
       CREATE TABLE "$lang" (
@@ -127,7 +127,6 @@ class DatabaseHelper {
       DETACH DATABASE "new$lang";
     ''');
 
-    // copy.deleteSync();
     newSqlFile.deleteSync();
 
     return true;
