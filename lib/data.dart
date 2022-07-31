@@ -26,11 +26,15 @@ class DatabaseHelper {
 
         if (!tables.contains("userData")) {
           await _database.rawQuery('''
-            CREATE TABLE "userData" (
+            CREATE TABLE 'userData' (
               name TEXT ,
               value TEXT
             );
           ''');
+          await _database.rawQuery(
+              'INSERT INTO \'userData\' (name, value) VALUES (\'isModeToEnglish\', \'true\')');
+          await _database.rawQuery(
+              'INSERT INTO \'userData\' (name, value) VALUES (\'currentLanguage\', \'\')');
         }
       });
     });
@@ -48,8 +52,9 @@ class DatabaseHelper {
         .where((tables) => tables != "sqlite_sequence" && tables != "userData")
         .toList();
 
-    QueryResult data = await _database.rawQuery('SELECT * FROM "userData"');
+    QueryResult data = await _database.rawQuery('SELECT * FROM \'userData\'');
 
+    print(data);
     return {
       "languages": languages,
       for (var entry in data) entry["name"] as String: entry["value"]
@@ -63,7 +68,7 @@ class DatabaseHelper {
     }
 
     _database.rawQuery(
-        'INSERT OR REPLACE INTO "userData" (name, value) VALUES ("$name", "$value")');
+        'UPDATE \'userData\' SET value = \'$value\' WHERE name = \'$name\'');
   }
 
   Future<QueryResult> searchToEnglish(String val, String lang) async {
@@ -85,7 +90,7 @@ class DatabaseHelper {
     if (val.isEmpty) return [];
 
     QueryResult result = await _database.rawQuery(
-        'SELECT id, pos, translations FROM $lang WHERE EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE "$val%") LIMIT 30');
+        'SELECT id, pos, translations FROM $lang WHERE EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE \'$val%\') LIMIT 30');
 
     return result.map((word) {
       List<dynamic> translations = json.decode(word["translations"] as String);
@@ -131,7 +136,7 @@ class DatabaseHelper {
     }).pipe(out);
 
     await _database.rawQuery('''
-      CREATE TABLE "$lang" (
+      CREATE TABLE '$lang' (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         word TEXT NOT NULL,
         pos TEXT NOT NULL,
@@ -146,17 +151,16 @@ class DatabaseHelper {
       );
     ''');
 
-    await _database.rawQuery('''
-      ATTACH DATABASE "${join(dir.path, '$lang.sql')}" as "new$lang";
-    ''');
+    await _database.rawQuery(
+        'ATTACH DATABASE \'${join(dir.path, '$lang.sql')}\' as \'new$lang\';');
 
-    await _database.rawQuery('''
-      INSERT INTO "$lang" SELECT * FROM new$lang.${lang == 'French' ? 'French' : 'Dutch'};
-    ''');
+    await _database.rawQuery(
+        'INSERT INTO \'$lang\' SELECT * FROM new$lang.${lang == 'French' ? 'French' : 'Dutch'};');
 
-    await _database.rawQuery('''
-      DETACH DATABASE "new$lang";
-    ''');
+    await _database.rawQuery('DETACH DATABASE \'new$lang\';');
+
+    await _database.rawQuery(
+        'INSERT INTO \'userData\' (name, value) VALUES (\'$lang\', \'$totalLength\')');
 
     newSqlFile.deleteSync();
 
@@ -164,6 +168,10 @@ class DatabaseHelper {
   }
 
   deleteLanguage(String lang) async {
-    return _database.rawQuery('DROP TABLE $lang');
+    await _database.rawQuery('DROP TABLE $lang');
+
+    await _database.rawQuery('DELETE FROM userData WHERE name = \'$lang\'');
+
+    await _database.rawQuery('VACUUM');
   }
 }

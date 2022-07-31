@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:multilingual_dictionary/search.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.lightBlue.shade400.withAlpha(180),
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: Colors.lightBlue.shade400,
+    systemNavigationBarIconBrightness: Brightness.light,
+  ));
+
   runApp(MaterialApp(
     home: const Search(),
     theme: ThemeData(
@@ -10,7 +18,7 @@ void main() async {
         brightness: Brightness.light,
         primary: Colors.lightBlue.shade400,
         onPrimary: Colors.white,
-        secondary: Colors.lightGreen,
+        secondary: Colors.lightBlue.shade400,
         onSecondary: Colors.black,
         tertiary: const Color.fromARGB(255, 201, 143, 253),
         onTertiary: Colors.white,

@@ -36,9 +36,8 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
       languagesData[languageToDownload]!["size"] = 0;
     });
 
-    int size = 0;
     void setProgressAndSize(num progress, int currentSize) {
-      size = currentSize;
+      currentSize;
       setState(() {
         if (progress == 1) {
           // the download has finished and other processes are occuring
@@ -63,8 +62,6 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
     }
 
     widget.editLanguagesList(addLang: languageToDownload);
-
-    widget.databaseHelper.setUserData(languageToDownload, "$size");
 
     setState(() {
       languagesData[languageToDownload]!["isLoading"] = false;
@@ -99,7 +96,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
 
             languagesData[lang] = {};
             languagesData[lang]!["size"] = size == 0 ? null : size;
-            languagesData[lang]!["isDownloaded"] = size != 0;
+            languagesData[lang]!["isDownloaded"] = true;
             // the provided size can be zero which means the databse was deleted
             // or null which means it was never downloaded
           });
@@ -197,9 +194,10 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
                                     onPressed: () => delete(language),
                                   )
                                 : OutlinedButton(
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.download,
-                                      color: Colors.blue,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                       semanticLabel: 'download',
                                     ),
                                     onPressed: () => download(language),

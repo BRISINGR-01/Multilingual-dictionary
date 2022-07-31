@@ -123,7 +123,6 @@ function parseSenses(word) {
   return [
     JSON.stringify(senses)
       .replace(/'/g, "´")
-      .toLowerCase()
       .replace(/\(.+?\)/g, "")
       .replace(/\s?\./g, ""),
     JSON.stringify(tags.filter((tag, i) => i === tags.indexOf(tag))),
