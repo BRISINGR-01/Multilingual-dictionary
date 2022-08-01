@@ -54,7 +54,6 @@ class DatabaseHelper {
 
     QueryResult data = await _database.rawQuery('SELECT * FROM \'userData\'');
 
-    print(data);
     return {
       "languages": languages,
       for (var entry in data) entry["name"] as String: entry["value"]
@@ -111,14 +110,14 @@ class DatabaseHelper {
   }
 
   addLanguage(String lang, Function setProgressAndSize) async {
-    // String url = 'http://localhost:3000/$lang';
-    String url = 'http://192.168.192.105:3000/$lang';
+    String url = 'http://localhost:3000/$lang';
+    // String url = 'http://192.168.192.105:3000/$lang';
 
     http.Request request = http.Request('GET', Uri.parse(url));
     http.StreamedResponse streamedResponse = await request.send();
 
     int totalLength =
-        int.parse(streamedResponse.headers["original-length"] ?? "1");
+        int.parse(streamedResponse.headers["Original-Length"] ?? "1");
     num lengthOfSaved = 0;
 
     Directory dir = await getApplicationDocumentsDirectory();
@@ -140,7 +139,6 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         word TEXT NOT NULL,
         pos TEXT NOT NULL,
-        lang TEXT NOT NULL,
         display TEXT NOT NULL,
         origin TEXT,
         ipas TEXT,

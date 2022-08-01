@@ -1,1 +1,1 @@
-# multilingual_dictionaryx
+# multilingual_dictionary

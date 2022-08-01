@@ -95,7 +95,7 @@ class SearchState extends State<Search> {
                       _isModeToEnglish
                           ? '$_currentLanguage to English'
                           : 'English to $_currentLanguage',
-                      style: const TextStyle(fontSize: 300),
+                      style: const TextStyle(fontSize: 30),
                     ),
                   ),
                 ),
