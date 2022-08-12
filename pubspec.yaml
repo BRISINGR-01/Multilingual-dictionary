@@ -30,7 +30,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - lib/languagesData.json
+    - assets/languagesData.json
     - assets/flags/
 
 flutter_icons:

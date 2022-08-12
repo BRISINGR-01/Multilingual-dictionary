@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/data.dart';
-import 'package:multilingual_dictionary/displayWord.dart';
+import 'package:multilingual_dictionary/word/displayWord.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
+import 'package:multilingual_dictionary/grammar.dart';
 
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init();
@@ -12,7 +13,6 @@ class SearchState extends State<Search> {
   String _currentLanguage = "";
   String _query = "";
   bool _isModeToEnglish = true;
-  List<String> _languages = [];
   List<Map<String, Object?>> _options = [];
 
   @override
@@ -28,7 +28,6 @@ class SearchState extends State<Search> {
       }
 
       setState(() {
-        _languages = languages;
         _currentLanguage = currentLanguage;
         _isModeToEnglish = data["isModeToEnglish"] != "false";
         _isLoading = false;
@@ -49,10 +48,10 @@ class SearchState extends State<Search> {
   editLanguagesList({String? addLang, String? removeLang}) {
     if (addLang != null) {
       setState(() {
-        _languages.add(addLang);
+        databaseHelper.languages.add(addLang);
 
-        if (_languages.length == 1) {
-          _currentLanguage = _languages[0];
+        if (databaseHelper.languages.length == 1) {
+          _currentLanguage = databaseHelper.languages[0];
           databaseHelper.setUserData("currentLanguage", _currentLanguage);
         }
       });
@@ -60,10 +59,12 @@ class SearchState extends State<Search> {
       setState(() {
         _query = '';
         _options = [];
-        _languages.remove(removeLang);
+        databaseHelper.languages.remove(removeLang);
 
-        if (!_languages.contains(_currentLanguage)) {
-          _currentLanguage = _languages.isNotEmpty ? _languages[0] : "";
+        if (!databaseHelper.languages.contains(_currentLanguage)) {
+          _currentLanguage = databaseHelper.languages.isNotEmpty
+              ? databaseHelper.languages[0]
+              : "";
           databaseHelper.setUserData("currentLanguage", _currentLanguage);
         }
       });
@@ -85,7 +86,7 @@ class SearchState extends State<Search> {
                   _key.currentState!.openEndDrawer();
                 }
               }),
-          title: _languages.isEmpty
+          title: databaseHelper.languages.isEmpty
               ? const Text("")
               : Padding(
                   padding: const EdgeInsets.only(right: 16.0),
@@ -104,15 +105,15 @@ class SearchState extends State<Search> {
             key: _key,
             drawer: Drawer(
                 child: ListView(padding: EdgeInsets.zero, children: [
-              // ListTile(
-              //   title: const Text('Settings'),
-              //   leading: Icon(Icons.settings,
-              //       color: Theme.of(context).colorScheme.tertiary),
-              //   shape: const RoundedRectangleBorder(
-              //     side: BorderSide(color: Colors.black38, width: .3),
-              //   ),
-              //   onTap: () {},
-              // ),
+              ListTile(
+                title: const Text('Settings'),
+                leading: Icon(Icons.settings,
+                    color: Theme.of(context).colorScheme.primary),
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.black38, width: .3),
+                ),
+                onTap: () {},
+              ),
               ListTile(
                 title: const Text('Download Languages'),
                 leading: Icon(Icons.download,
@@ -128,8 +129,25 @@ class SearchState extends State<Search> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DownloadLanguages(
-                          downloadedLanguages: _languages,
+                          downloadedLanguages: databaseHelper.languages,
                           editLanguagesList: editLanguagesList,
+                          databaseHelper: databaseHelper,
+                        ),
+                      ));
+                },
+              ),
+              ListTile(
+                title: const Text('Grammar'),
+                leading: Icon(Icons.menu_book_outlined,
+                    color: Theme.of(context).colorScheme.primary),
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.black38, width: .3),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Grammar(
                           databaseHelper: databaseHelper,
                         ),
                       ));
@@ -138,7 +156,7 @@ class SearchState extends State<Search> {
             ])),
             body: _isLoading
                 ? const Center(child: CircularProgressIndicator())
-                : _languages.isEmpty
+                : databaseHelper.languages.isEmpty
                     ? SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
@@ -162,7 +180,8 @@ class SearchState extends State<Search> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => DownloadLanguages(
-                                        downloadedLanguages: _languages,
+                                        downloadedLanguages:
+                                            databaseHelper.languages,
                                         editLanguagesList: editLanguagesList,
                                         databaseHelper: databaseHelper,
                                       ),
@@ -204,13 +223,13 @@ class SearchState extends State<Search> {
                         ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                         child:
                             Column(mainAxisSize: MainAxisSize.max, children: [
                           Container(
                             color: Theme.of(context).colorScheme.background,
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 4),
+                              padding: const EdgeInsets.fromLTRB(10, 8, 0, 4),
                               child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.max,
@@ -219,7 +238,7 @@ class SearchState extends State<Search> {
                                       child: _isModeToEnglish
                                           ? DropdownButton(
                                               value: _currentLanguage,
-                                              items: _languages
+                                              items: databaseHelper.languages
                                                   .map((String items) =>
                                                       DropdownMenuItem(
                                                         value: items,
@@ -261,7 +280,7 @@ class SearchState extends State<Search> {
                                       child: !_isModeToEnglish
                                           ? DropdownButton(
                                               value: _currentLanguage,
-                                              items: _languages
+                                              items: databaseHelper.languages
                                                   .map((String items) =>
                                                       DropdownMenuItem(
                                                         value: items,

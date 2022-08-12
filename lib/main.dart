@@ -3,10 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:multilingual_dictionary/search.dart';
 
 void main() async {
+  Color tertiary = const Color.fromARGB(255, 201, 143, 253);
+  Color primary = Colors.lightBlue.shade400;
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.lightBlue.shade400.withAlpha(180),
+    statusBarColor: primary.withAlpha(180),
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Colors.lightBlue.shade400,
+    systemNavigationBarColor: tertiary,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
@@ -16,11 +19,11 @@ void main() async {
       fontFamily: "New Times Roman",
       colorScheme: ColorScheme(
         brightness: Brightness.light,
-        primary: Colors.lightBlue.shade400,
+        primary: primary,
         onPrimary: Colors.white,
-        secondary: Colors.lightBlue.shade400,
+        secondary: tertiary,
         onSecondary: Colors.black,
-        tertiary: const Color.fromARGB(255, 201, 143, 253),
+        tertiary: tertiary,
         onTertiary: Colors.white,
         error: Colors.red,
         onError: Colors.white,

@@ -182,7 +182,9 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .tertiary)),
-                                onPressed: () => {},
+                                onPressed: () {
+                                  widget.databaseHelper.cancel(language);
+                                },
                               )
                             : languagesData[language]!["isDownloaded"] == true
                                 ? OutlinedButton(

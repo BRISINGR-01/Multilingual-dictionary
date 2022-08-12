@@ -10,8 +10,11 @@ typedef QueryResult = List<Map<String, Object?>>;
 class DatabaseHelper {
   // ignore: prefer_typing_uninitialized_variables
   var _database;
+  late Map<String, http.Request> requests;
+  List<String> languages = [];
 
   DatabaseHelper.init() {
+    requests = {};
     sqfliteFfiInit();
 
     getApplicationDocumentsDirectory().then((value) async {
@@ -23,6 +26,10 @@ class DatabaseHelper {
         List<String> tables = List<String>.from((await _database.rawQuery(
                 'SELECT name FROM sqlite_schema WHERE type=\'table\''))
             .map((e) => e["name"]));
+
+        // languages = tables
+        //     .where((table) => table != "sqlite_sequence" && table != "userData")
+        //     .toList();
 
         if (!tables.contains("userData")) {
           await _database.rawQuery('''
@@ -45,12 +52,6 @@ class DatabaseHelper {
       await Future.delayed(const Duration(milliseconds: 10));
       return getUserData();
     }
-
-    List<String> languages = List<String>.from((await _database.rawQuery(
-                'SELECT name FROM sqlite_schema WHERE type=\'table\''))
-            .map((tableData) => tableData["name"]))
-        .where((tables) => tables != "sqlite_sequence" && tables != "userData")
-        .toList();
 
     QueryResult data = await _database.rawQuery('SELECT * FROM \'userData\'');
 
@@ -86,6 +87,8 @@ class DatabaseHelper {
   }
 
   Future<QueryResult> searchFromEnglish(String val, String lang) async {
+    val = RegExp(r'/[\s\d\-\p{L}]+/ug').allMatches(val).join(' ');
+
     if (val.isEmpty) return [];
 
     QueryResult result = await _database.rawQuery(
@@ -111,13 +114,13 @@ class DatabaseHelper {
 
   addLanguage(String lang, Function setProgressAndSize) async {
     String url = 'http://localhost:3000/$lang';
-    // String url = 'http://192.168.192.105:3000/$lang';
+    // String url = 'http://192.168.1.4:3000/$lang';
 
     http.Request request = http.Request('GET', Uri.parse(url));
     http.StreamedResponse streamedResponse = await request.send();
 
     int totalLength =
-        int.parse(streamedResponse.headers["Original-Length"] ?? "1");
+        int.parse(streamedResponse.headers["original-length"] ?? "0");
     num lengthOfSaved = 0;
 
     Directory dir = await getApplicationDocumentsDirectory();
@@ -134,6 +137,8 @@ class DatabaseHelper {
       return d;
     }).pipe(out);
 
+    requests.remove(lang);
+
     await _database.rawQuery('''
       CREATE TABLE '$lang' (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -146,6 +151,13 @@ class DatabaseHelper {
         forms TEXT,
         tags TEXT,
         translations TEXT
+      );
+    ''');
+
+    await _database.rawQuery('''
+      CREATE TABLE '${lang}Grammar' (
+        name TEXT NOT NULL,
+        content TEXT NOT NULL
       );
     ''');
 
@@ -171,5 +183,11 @@ class DatabaseHelper {
     await _database.rawQuery('DELETE FROM userData WHERE name = \'$lang\'');
 
     await _database.rawQuery('VACUUM');
+  }
+
+  cancel(String lang) {}
+
+  getGrammar(String language) {
+    return _database.rawQuery('SELECT * FROM ${language}Grammar');
   }
 }
