@@ -1,0 +1,10 @@
+{
+  "verbs": [
+    ["singular", "first-person"],
+    ["singular", "second-person"],
+    ["singular", "third-person"],
+    ["plural", "first-person"],
+    ["plural", "second-person"],
+    ["plural", "third-person"]
+  ]
+}

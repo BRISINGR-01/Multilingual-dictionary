@@ -1,0 +1,26 @@
+{
+  "personal-pronouns": [
+    [ "en",               "unmarked", "marked"   ],
+    [ "I",                "ik",       "ik"       ],
+    [ "you",              "je",       "jij"      ],
+    [ "you formal",       "u",        "u"        ],
+    [ "he",               "hij",      "hij"      ],
+    [ "she",              "ze",       "zij"      ],
+    [ "it (het)",         "het",      "dit/dat"  ],
+    [ "it (de)",          "hij",      "deze/die" ],
+    [ "we",               "we",       "wij"      ],
+    [ "you",              "jullie",   "jullie"   ],
+    [ "they (persons)",   "ze",       "zij"      ],
+    [ "they (inanimate)", "ze",       "deze/die" ]
+  ],
+  "object-pronouns": [
+    [ "English",          "Dutch - unmarked", "Dutch - marked" ],
+    [ "me",               "me",               "mij"            ],
+    [ "you",              "je",               "jou"            ],
+    [ "her",              "haar [ze]",        "haar"           ],
+    [ "it [het-nouns]",   "het",              "dit, dat"       ],
+    [ "it [de-nouns]",    "hem",              "deze, die"      ],
+    [ "them [persons]",   "ze",               "hun/hen"        ],
+    [ "them [inanimate]", "ze",               "deze, die"      ]
+  ]
+}

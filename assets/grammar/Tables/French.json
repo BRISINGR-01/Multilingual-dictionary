@@ -1,0 +1,170 @@
+{
+  "todo": "check thoroughly + what to do with words with the same exact tags",
+  
+  "constants": {
+    "auxiliary": {
+      "tags": ["infinitive", "multiword-construction"],
+      "regExp": "avoir|être"
+    },
+    "present participle": {
+      "tags": ["gerund", "participle", "present"],
+      "ending": "ant"
+    },
+    "past participle": {
+      "tags": ["participle", "past"],
+      "endings": {"all": ["é", "ée", "és", "ées"]}
+    },
+    "infinitive": {
+      "tags": ["infinitive"]
+    },
+    "aller present": ["vais", "vas", "va", "allons", "allez", "vont"],
+    "venir present": ["viens", "viens", "vient", "venons", "venez", "viennent"],
+    "avoir": {
+      "present indicative": ["ai", "as", "a", "avons", "avez", "ont"],
+      "present subjunctive": ["aie", "aies", "ait", "ayons", "ayez", "aient"],
+      "present conditional": ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
+      "past historic": ["eus", "eus", "eut", "eûmes", "eûtes", "eurent"],
+      "future simple": ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
+      "imperfect indicative": ["avais", "avais", "avait", "avions", "aviez", "avaient"],
+      "imperfect subjunctive": ["eusse", "eusses", "eût", "eussions", "eussiez", "eussent"],
+      "imperative": ["aie", "ayons", "ayez"],
+      "gerund": "ayant"
+    },
+    "être": {
+      "present indicative": ["suis", "es", "est", "sommes", "êtes", "sont"],
+      "present subjunctive": ["sois", "sois", "soit", "soyons", "soyez", "soient"],
+      "present conditional": ["serais", "serias", "serait", "serions", "seriez", "seraient"],
+      "past historic": ["fus", "fus", "fut", "fûmes", "fûtes", "furent"],
+      "future simple": ["serai", "sera", "seras", "serons", "serez", "seront"],
+      "imperfect indicative": ["étais", "étais", "était", "étions", "étiez", "étaient"],
+      "imperfect subjunctive": ["fusse", "fusses", "fût", "fussions", "fussiez", "fussent"],
+      "imperative": ["sois", "soyons", "soyez"],
+      "gerund": "étant"
+    },
+    "de": {
+      "vowel": "'d",
+      "consonant": "de"
+    },
+    "en": "en"
+  },
+
+  "Présent Indicatif": {
+    "tags": ["present", "indicative"],
+    "endings": {
+      "er": ["e", "es", "e", "ons", "ez", "ent"],
+      "ir": ["is", "is", "it", "issons", "issez", "issent"],
+      "re": ["s", "s", "t", "ons", "ez", "ent"]
+    }
+  },
+  "Imparfait Indicatif": {
+    "tags": ["imperfect", "indicative"],
+    "endings": {
+      "er": ["ais", "ais", "ait", "ions", "iez", "aient"],
+      "ir": ["issais", "issais", "issait", "issions", "issiez", "issaient"],
+      "re": ["ais", "ais", "ait", "ions", "iez", "aient"]
+    }
+  },
+  "Futur simple": {
+    "tags": ["future", "indicative"],
+    "endings": {
+      "er": ["erai", "eras", "era", "erons", "erez", "eront"],
+      "ir": ["irai", "iras", "ira", "irons", "irez", "iront"],
+      "re": ["rai", "ras", "ra", "rons", "rez", "ront"]
+    }
+  },
+  "Passé simple": {
+    "tags": ["past", "historic", "indicative"],
+    "endings": {
+      "er": ["ai", "as", "a", "âmes", "âtes", "èrent"],
+      "ir": ["is", "is", "it", "îmes", "îtes", "irent"],
+      "re": ["is", "is", "it", "îmes", "îtes", "irent"]
+    }
+  },
+
+  
+  "Présent Subjonctif": {
+    "tags": ["present", "subjunctive"],
+    "endings": {
+      "er": ["e", "es", "e", "ions", "iez", "ent"],
+      "ir": ["isse", "isses", "isse", "issions", "issiez", "issent"],
+      "re": ["e", "es", "e", "ions", "iez", "ent"]
+    }
+  },
+  "Imparfait Subjonctif": {
+    "tags": ["imperfect", "subjunctive"],
+    "endings": {
+      "er": ["e", "es", "e", "ions", "iez", "ent"],
+      "ir": ["isse", "isses", "ît", "issions", "issiez", "issent"],
+      "re": ["e", "es", "e", "ions", "iez", "ent"]
+    }
+  },
+
+
+  "Présent Conditionnel": {
+    "tags": ["conditional"],
+    "endings": {
+      "er": ["erais", "erais", "erait", "erions", "eriez", "eraient"],
+      "ir": ["irais", "irais", "irait", "irions", "iriez", "iraient"],
+      "re": ["rais", "rais", "rait", "rions", "riez", "raient"]
+    }
+  },
+
+
+  "Passé composé": {
+    "combination": ["auxiliary->present indicative", "past participle"]
+  },
+  "Plus-que-parfait": {
+    "combination": ["auxiliary->imperfect indicative", "past participle"]
+  },
+  "Passé antérieur": {
+    "combination": ["auxiliary->past historic", "past participle"]
+  },
+  "Futur antérieur": {
+    "combination": ["auxiliary->future simple", "past participle"]
+  },
+  
+  "Passé Subjonctif": {
+    "combination": ["auxiliary->present subjunctive", "past participle"]
+  },
+  "Plus-que-parfait Subjunctive": {
+    "combination": ["auxiliary->imperfect subjunctive", "past participle"]
+  },
+
+  "Passé I Conditional": {
+    "combination": ["auxiliary->present conditional", "past participle"]
+  },
+  "Passé II Conditional": {
+    "combination": ["auxiliary->imperfect subjunctive", "past participle"]
+  },
+
+
+  "Présent Impératif": {
+    "tags": ["imperative"],
+    "endings": {
+      "er": ["e", "ons", "ez"],
+      "ir": ["s", "issons", "issez"],
+      "re": ["s", "ons", "ez"]
+    },
+    "table": [
+      "tu", ["singular", "second-person"],
+      "nous", ["plural", "first-person"],
+      "vous", ["plural", "second-person"]
+    ]
+  },
+  "Passé Impératif": {
+    "combination": ["auxiliary->imperative", "imperative"]
+  },
+
+  "Future proche": {
+    "combination": ["aller present", "word->infinitive"]
+  },
+  "Passé récent": {
+    "combination": ["venir present", "de", "infinitive"]
+  },
+  "Gérondif Passé": {
+    "combination": ["en", "auxiliary->gerund", "past participle"]
+  },
+  "Gérondif Présent": {
+    "combination": ["en", "present participle"]
+  }
+}

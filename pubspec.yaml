@@ -32,6 +32,8 @@ flutter:
   assets:
     - assets/languagesData.json
     - assets/flags/
+    - assets/grammar/Italian/
+    - assets/grammar/Dutch/
 
 flutter_icons:
   android: "launcher_icon"

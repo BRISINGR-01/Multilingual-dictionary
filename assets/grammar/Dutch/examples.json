@@ -1,0 +1,141 @@
+{
+  "personal-pronouns-u": [
+    [
+      "Hoi Maaike, blijf #je eten?",
+      "Hi Maaike, will #you stay for dinner?"
+    ],
+    [
+      "Pardon meneer, kunt #u even opzij gaan?",
+      "Excuse me sir, could #you step aside for a moment?"
+    ]
+  ],
+  "personal-pronouns-het_or_hij": [
+    [
+      "[#Het boek]\n #Het staat op de bovenste plank.",
+      "[#The book]\n #It is on the top shelf."
+    ],
+    [
+      "[#De film]\n #Hij draait momenteel in de bioscoop.",
+      "[#The film]\n #It is currently shown in the cinema."
+    ]
+  ],
+  "personal-pronouns-ze_zij_or_die": [
+    [
+      "Unmarked",
+      "[#De schoenen]\n #Ze staan je heel goed.",
+      "[#The shoes]\n #They look very good on you."
+    ],
+    [
+      "Marked",
+      "[#De schoenen]\n #Die staan je heel goed (die andere schoenen niet).",
+      "[#The shoes]\n #They look very good on you (those other shoes don't)."
+    ],
+    [
+      "Unmarked",
+      "[#De ouders]\n #Ze vinden het geen goed idee.",
+      "[#The parents]\n #They do not think it is a good idea."
+    ],
+    [
+      "Marked",
+      "[#De ouders]\n #Zij vinden het geen goed idee (maar ik wel).",
+      "[#The parents]\n #They do not think it is a good idea (but I think it is)."
+    ]
+  ],
+  "personal-pronouns-haar_or_ze": [
+    [
+      "Holland",
+      "Ik heb #haar op de markt gezien.",
+      "I have seen #her on the market."
+    ],
+    [
+      "Flanders",
+      "Ik heb #ze op de markt gezien.",
+      "I have seen #her on the market."
+    ]
+  ],
+  "personal-pronouns-1": [
+    [
+      "#Het #zijn inheemse planten.",
+      "#They #are indigenous plants.\n [lit: It are indigenous plants]"
+    ],
+    [
+      "#Het #waren aardige buren.",
+      "#They #were nice neighbours."
+    ]
+  ],
+  "personal-pronouns-they": [
+    [
+      "[#De planten]\n #Ze #zijn inheems.",
+      "[#the plants]\n #They #are indigenous."
+    ],
+    [
+      "[#De buren]\n #Ze #waren aardig.",
+      "[#the neighbours]\n #They #were nice."
+    ]
+  ],
+  "personal-pronouns-differnce": [
+    [
+      "#Het #zijn inheemse planten.",
+      "#Ze #zijn inheems."
+    ],
+    [
+      "#They #are indigenous plants.",
+      "#They #are indigenous."
+    ],
+    [
+      "#Het #waren aardige buren.",
+      "#Ze #waren aardig."
+    ],
+    [
+      "#They #were nice neighbours.",
+      "#They #were nice.."
+    ]
+  ],
+  "personal-pronouns-her": [
+    [
+      
+        "Holland & Flanders",
+        "#Haar heb ik op de markt gezien (niet hem).",
+        "(It is) #her I have seen on the market (not him)."
+      
+    ]
+  ],
+  "personal-pronouns-het_hem": [
+    [
+      "[#Het boek]\n Ik heb #het op de bovenste plank gezet.",
+      "[#The book]\n I put #it on the top shelf."
+    ],
+    [
+      "[#De film]\n We hebben #hem nog niet gezien.",
+      "[#The film]\n We have not seen #it yet."
+    ]
+  ],
+  "personal-pronouns-them": [
+    [
+      "We verwachtten #hen.",
+      "We expected #them."
+    ],
+    [
+      "Ze vroeg #hun of ze mee wilden komen.",
+      "She asked #them whether they wanted to come along."
+    ],
+    [
+      "Ze vroeg aan #hen of ze mee wilden komen.",
+      "She asked (to) #them whether they wanted to come along."
+    ]
+  ],
+  "personal-pronouns-ze": [
+    [
+      "Wij verwachtten #ze.",
+      "We expected #them."
+    ],
+    [
+      "Ze vroeg #ze of ze mee wilden komen.",
+      "She asked #them whether they wanted to come with us."
+    ],
+    [
+      "Ze vroeg aan #ze of ze mee wilden komen.",
+      "She asked (to) #them whether they wanted to come with us."
+    ]
+  ]
+}

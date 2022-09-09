@@ -27,9 +27,9 @@ class DatabaseHelper {
                 'SELECT name FROM sqlite_schema WHERE type=\'table\''))
             .map((e) => e["name"]));
 
-        // languages = tables
-        //     .where((table) => table != "sqlite_sequence" && table != "userData")
-        //     .toList();
+        languages = tables
+            .where((table) => table != "sqlite_sequence" && table != "userData")
+            .toList();
 
         if (!tables.contains("userData")) {
           await _database.rawQuery('''
@@ -87,12 +87,16 @@ class DatabaseHelper {
   }
 
   Future<QueryResult> searchFromEnglish(String val, String lang) async {
-    val = RegExp(r'/[\s\d\-\p{L}]+/ug').allMatches(val).join(' ');
-
-    if (val.isEmpty) return [];
+    String query = "";
+    RegExp sanitizer = RegExp(r'([\w\s\d\-\p{L}]+)');
+    Iterable<Match> matches = sanitizer.allMatches(val);
+    for (final Match m in matches) {
+      query += m[0]!;
+    }
+    if (query.isEmpty) return [];
 
     QueryResult result = await _database.rawQuery(
-        'SELECT id, pos, translations FROM $lang WHERE EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE \'$val%\') LIMIT 30');
+        'SELECT id, pos, translations FROM $lang WHERE EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE \'$query%\') LIMIT 30');
 
     return result.map((word) {
       List<dynamic> translations = json.decode(word["translations"] as String);
@@ -114,7 +118,7 @@ class DatabaseHelper {
 
   addLanguage(String lang, Function setProgressAndSize) async {
     String url = 'http://localhost:3000/$lang';
-    // String url = 'http://192.168.1.4:3000/$lang';
+    // String url = 'http://192.168.1.106:3000/$lang';
 
     http.Request request = http.Request('GET', Uri.parse(url));
     http.StreamedResponse streamedResponse = await request.send();
@@ -154,20 +158,19 @@ class DatabaseHelper {
       );
     ''');
 
-    await _database.rawQuery('''
-      CREATE TABLE '${lang}Grammar' (
-        name TEXT NOT NULL,
-        content TEXT NOT NULL
-      );
-    ''');
+    // await _database.rawQuery('''
+    //   CREATE TABLE '${lang}Grammar' (
+    //     name TEXT NOT NULL,
+    //     content TEXT NOT NULL
+    //   );
+    // ''');
 
     await _database.rawQuery(
-        'ATTACH DATABASE \'${join(dir.path, '$lang.sql')}\' as \'new$lang\';');
+        'ATTACH DATABASE \'${join(dir.path, '$lang.sql')}\' as \'$lang\';');
 
-    await _database.rawQuery(
-        'INSERT INTO \'$lang\' SELECT * FROM new$lang.${lang == 'French' ? 'French' : 'Dutch'};');
+    await _database.rawQuery('INSERT INTO \'$lang\' SELECT * FROM $lang.$lang');
 
-    await _database.rawQuery('DETACH DATABASE \'new$lang\';');
+    await _database.rawQuery('DETACH DATABASE \'$lang\';');
 
     await _database.rawQuery(
         'INSERT INTO \'userData\' (name, value) VALUES (\'$lang\', \'$totalLength\')');

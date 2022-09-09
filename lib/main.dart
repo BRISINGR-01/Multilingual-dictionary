@@ -14,6 +14,7 @@ void main() async {
   ));
 
   runApp(MaterialApp(
+    // home: const Search(),
     home: const Search(),
     theme: ThemeData(
       fontFamily: "New Times Roman",

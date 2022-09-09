@@ -6,7 +6,7 @@ import 'package:multilingual_dictionary/data.dart';
 import 'package:multilingual_dictionary/grammarPage.dart';
 
 Future<Map<String, dynamic>> getJson() async {
-  String rawJson = await rootBundle.loadString('lib/languagesData.json');
+  String rawJson = await rootBundle.loadString('assets/languagesData.json');
 
   return Map<String, dynamic>.from(json.decode(rawJson));
 }
