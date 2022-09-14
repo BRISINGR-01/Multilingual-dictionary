@@ -1,0 +1,767 @@
+{
+  "Dutch": {},
+  "Italian": {
+    "en": {
+      "tables": {
+        "articles_combinations_a": [
+          [
+            "a + il",
+            "al",
+            "al cinema"
+          ],
+          [
+            "a + l'",
+            "all'",
+            "all'"
+          ],
+          [
+            "a + lo",
+            "allo",
+            "allo stadio"
+          ],
+          [
+            "a + la",
+            "alla",
+            "alla stazione"
+          ],
+          [
+            "a + i",
+            "ai",
+            "ai concerti"
+          ],
+          [
+            "a + gli",
+            "agli",
+            "agli aeroporti"
+          ],
+          [
+            "a + le",
+            "alle",
+            "alle partite"
+          ]
+        ],
+        "articles_combinations_da": [
+          [
+            "da + il",
+            "dal",
+            "dal cinema"
+          ],
+          [
+            "da + l'",
+            "dall'",
+            "dall'albergo"
+          ],
+          [
+            "da + lo",
+            "dallo",
+            "dallo stadio"
+          ],
+          [
+            "da + la",
+            "dalla",
+            "dalla stazione"
+          ],
+          [
+            "da + i",
+            "dai",
+            "dai concerti"
+          ],
+          [
+            "da + gli",
+            "dagli",
+            "dagli aeroporti"
+          ],
+          [
+            "da + le",
+            "dalle",
+            "dalle partite"
+          ]
+        ],
+        "articles_combinations_di": [
+          [
+            "di + il",
+            "del",
+            "del cinema"
+          ],
+          [
+            "di + l'",
+            "dell'",
+            "dell'albergo"
+          ],
+          [
+            "di + lo",
+            "dello",
+            "dello stadio"
+          ],
+          [
+            "di + la",
+            "della",
+            "della stazione"
+          ],
+          [
+            "di + i",
+            "dei",
+            "dei concerti"
+          ],
+          [
+            "di + gli",
+            "degli",
+            "degli aeroporti"
+          ],
+          [
+            "di + le",
+            "delle",
+            "delle partite"
+          ]
+        ],
+        "articles_combinations_in": [
+          [
+            "in + il",
+            "nel",
+            "nel cinema"
+          ],
+          [
+            "in + l'",
+            "nell'",
+            "nell'albergo"
+          ],
+          [
+            "in + lo",
+            "nello",
+            "nello stadio"
+          ],
+          [
+            "in + la",
+            "nella",
+            "nella stazione"
+          ],
+          [
+            "in + i",
+            "nei",
+            "nei concerti"
+          ],
+          [
+            "in + gli",
+            "negli",
+            "negli aeroporti"
+          ],
+          [
+            "in + le",
+            "nelle",
+            "nelle partite"
+          ]
+        ],
+        "articles_combinations_su": [
+          [
+            "su + il",
+            "sul",
+            "sul pavimento"
+          ],
+          [
+            "su + l'",
+            "sull'",
+            "sull'orlo"
+          ],
+          [
+            "su + lo",
+            "sullo",
+            "sullo scoglio"
+          ],
+          [
+            "su + la",
+            "sulla",
+            "sulla spiaggia"
+          ],
+          [
+            "su + i",
+            "sui",
+            "sui monti"
+          ],
+          [
+            "su + gli",
+            "sugli",
+            "sugli scaffali"
+          ],
+          [
+            "su + le",
+            "sulle",
+            "sulle strade"
+          ]
+        ]
+      },
+      "articles": [
+        [
+          "h: Combinations",
+          "@table:articles_combinations_a",
+          "@table:articles_combinations_da",
+          "@table:articles_combinations_di",
+          "@table:articles_combinations_in",
+          "@table:articles_combinations_su"
+        ]
+      ]
+    },
+    "it": {
+      "tables": {
+        "articles_combinations_a": [
+          [
+            "a + il",
+            "al",
+            "al cinema"
+          ],
+          [
+            "a + l'",
+            "all'",
+            "all'"
+          ],
+          [
+            "a + lo",
+            "allo",
+            "allo stadio"
+          ],
+          [
+            "a + la",
+            "alla",
+            "alla stazione"
+          ],
+          [
+            "a + i",
+            "ai",
+            "ai concerti"
+          ],
+          [
+            "a + gli",
+            "agli",
+            "agli aeroporti"
+          ],
+          [
+            "a + le",
+            "alle",
+            "alle partite"
+          ]
+        ],
+        "articles_combinations_da": [
+          [
+            "da + il",
+            "dal",
+            "dal cinema"
+          ],
+          [
+            "da + l'",
+            "dall'",
+            "dall'albergo"
+          ],
+          [
+            "da + lo",
+            "dallo",
+            "dallo stadio"
+          ],
+          [
+            "da + la",
+            "dalla",
+            "dalla stazione"
+          ],
+          [
+            "da + i",
+            "dai",
+            "dai concerti"
+          ],
+          [
+            "da + gli",
+            "dagli",
+            "dagli aeroporti"
+          ],
+          [
+            "da + le",
+            "dalle",
+            "dalle partite"
+          ]
+        ],
+        "articles_combinations_di": [
+          [
+            "di + il",
+            "del",
+            "del cinema"
+          ],
+          [
+            "di + l'",
+            "dell'",
+            "dell'albergo"
+          ],
+          [
+            "di + lo",
+            "dello",
+            "dello stadio"
+          ],
+          [
+            "di + la",
+            "della",
+            "della stazione"
+          ],
+          [
+            "di + i",
+            "dei",
+            "dei concerti"
+          ],
+          [
+            "di + gli",
+            "degli",
+            "degli aeroporti"
+          ],
+          [
+            "di + le",
+            "delle",
+            "delle partite"
+          ]
+        ],
+        "articles_combinations_in": [
+          [
+            "in + il",
+            "nel",
+            "nel cinema"
+          ],
+          [
+            "in + l'",
+            "nell'",
+            "nell'albergo"
+          ],
+          [
+            "in + lo",
+            "nello",
+            "nello stadio"
+          ],
+          [
+            "in + la",
+            "nella",
+            "nella stazione"
+          ],
+          [
+            "in + i",
+            "nei",
+            "nei concerti"
+          ],
+          [
+            "in + gli",
+            "negli",
+            "negli aeroporti"
+          ],
+          [
+            "in + le",
+            "nelle",
+            "nelle partite"
+          ]
+        ],
+        "articles_combinations_su": [
+          [
+            "su + il",
+            "sul",
+            "sul pavimento"
+          ],
+          [
+            "su + l'",
+            "sull'",
+            "sull'orlo"
+          ],
+          [
+            "su + lo",
+            "sullo",
+            "sullo scoglio"
+          ],
+          [
+            "su + la",
+            "sulla",
+            "sulla spiaggia"
+          ],
+          [
+            "su + i",
+            "sui",
+            "sui monti"
+          ],
+          [
+            "su + gli",
+            "sugli",
+            "sugli scaffali"
+          ],
+          [
+            "su + le",
+            "sulle",
+            "sulle strade"
+          ]
+        ],
+        "0": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Prima di consonante",
+            "la",
+            "la penna",
+            "le",
+            "le penne"
+          ],
+          [
+            "Prima di vocale",
+            "l’",
+            "l’isola",
+            "le",
+            "le isole"
+          ]
+        ],
+        "1": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Prima della consonante",
+            "il",
+            "il libro",
+            "i",
+            "i libri"
+          ],
+          [
+            "Prima della vocale",
+            "l’",
+            "l’orologio",
+            "gli",
+            "gli orologi"
+          ],
+          [
+            "Prima de: S + consonante, Z, GN, PS, Y, PN",
+            "lo",
+            "lo studente, lo zaino, lo gnocco, lo psicologo, lo yogurt, lo pneumatico",
+            "gli",
+            "gli studenti, gli zaini, gli gnocchi, gli psicologi, gli yogurt, gli pneumatici"
+          ]
+        ],
+        "2": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Prima della consonante",
+            "una",
+            "una penna",
+            "delle",
+            "delle penne"
+          ],
+          [
+            "Prima della vocale",
+            "un’",
+            "un’isola",
+            "delle",
+            "delle isole"
+          ]
+        ],
+        "3": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Prima della consonante",
+            "un",
+            "un libro",
+            "dei",
+            "dei libri"
+          ],
+          [
+            "Prima della vocale ",
+            "un",
+            "un orologio",
+            "degli",
+            "degli orologi"
+          ],
+          [
+            "Prima:, S + consonante, Z, GN, PS, Y, PN ",
+            "uno",
+            "uno studente, uno zaino, uno gnocco, uno psicologo, uno yogurt, uno pneumatico",
+            "degli",
+            "degli studenti, degli zaini, degli gnocchi, degli psicologi, degli yogurt, degli pneumatici"
+          ]
+        ],
+        "4": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Maschile",
+            "-o",
+            "il dizionario, il libro, lo zaino, lo sbaglio, l’aereo",
+            "-i",
+            "i dizionari, i libri, gli zaini, gli sbagli, gli aerei"
+          ]
+        ],
+        "5": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Femminile",
+            "-a",
+            "la finestra, la porta, la penna, l’ora, l’amica",
+            "-e",
+            "le finestre, le porte, le penne, le ore, le amiche"
+          ]
+        ],
+        "6": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Maschile",
+            "-e",
+            "il padre, il pesce, il bicchiere, il mare, il dolce, il fiore",
+            "-i",
+            "i padri, i pesci, i bicchieri, i mari, i dolci, i fiori"
+          ]
+        ],
+        "7": [
+          [
+            "",
+            "Singolare",
+            "",
+            "Plurale",
+            ""
+          ],
+          [
+            "Femminile",
+            "-e",
+            "la madre, la lezione, la chiave, la nave, la situazione, la volpe",
+            "-i",
+            "le madri, le lezioni, le chiavi, le navi, le situazioni, le volpi"
+          ]
+        ]
+      },
+      "articles": [
+        {
+          "title": "Articoli",
+          "id": "articles",
+          "info": "il, lo, la, l', i, gli, le",
+          "body": [
+            "h: Articoli determinativi",
+            "Gli articoli determinativi in italiano definiscono il genere e il numero dei sostantivi; possono essere al maschile o femminile, al singolare o plurale.",
+            "In italiano, esistono due articoli determinativi femminili per il singolare e uno per il plurale:",
+            "@table:0",
+            "Qui, qualche esempio:",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Gli articoli determinativi maschili in italiano hanno tre forme per il singolare e due per il plurale:",
+            "@table:1",
+            "Qui, qualche esempio:",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Per indicare persone o oggetti specifici",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con sostantivi astratti e concreti, compresi i colori",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con parti del corpo e vestiti",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con le date *se il giorno della settimana non è specificato prima",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con il tempo o altre espressioni temporali",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con i giorni della settimana per parlare di attività abituali",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con descrizioni fisiche con il verbo “avere”",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con titoli e qualificazioni accompagnati dal sostantivo",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con la maggior parte dei nomi geografici, *ad eccezione dei nomi delle città quando le preposizioni “in” o “di” precedono i nomi femminili singolari geografici.",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Talvolta con le persone famose",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Talvolta quando si parla di amici o di membri della famiglia",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "! Gli articoli determinativi non si usano:",
+            "Quando si parla delle lingue, non possono essere usati dopo i verbi “parlare, insegnare, studiare” e dopo le preposizioni “in” e “di”",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con gli aggettivi possessivi singolari, quando si parla dei membri della famiglia, *eccetto per la forma singolare dei membri della famiglia con l’aggettivo possessivo “loro” o quando i nomi sono più confidenziali.",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Con i nomi di città, *città come La Spezia, L’Aquila, L’Avana, Il Cairo, La Mecca rappresentano delle eccezioni.",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "h: Articoli indeterminativi",
+            "Gli articoli indeterminativi sono utilizzati per introdurre qualcosa o qualcuno di nuovo, non menzionato in precedenza; o per parlare su qualcosa o qualcuno in modo generale e indefinito.",
+            "Come per gli articoli determinativi, in italiano esistono due articoli indeterminativi femminili per il singolare e uno per il plurale:",
+            "@table:2",
+            "Qui, alcuni esempi:",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Per la forma maschile, ci sono due articoli indeterminativi per la forma singola e due per la forma plurale:",
+            "@table:3",
+            "! Presta attenzione: con gli articoli indeterminativi, l’APOSTROFO è usato solo con i sostantivi FEMMINILI (es. “un’amica”) e NON con il MASCHILE (es. “un amico”)",
+            "Qui, qualche esempio della forma maschile:",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Persone, animali o cose che sono sconosciute alla persona che parla",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Persone, animali o cose indefinite",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "Parti del corpo (più di una)",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "h: Il nome e il genere (maschile e femminile)",
+            "",
+            "I nomi sono parole che si riferiscono ad una persona o ad una cosa e possono essere maschili, femminili, singolari o plurali.",
+            "I nomi singolari che finiscono in -O sono maschili e terminano in -I alla forma plurale:",
+            "@table:4",
+            "I nomi singolari che finiscono in -A sono femminili e terminano in -E alla forma plurale:",
+            "@table:5",
+            "I nomi singolari che terminano in -E possono essere sia maschili che femminili: non esistono regole specifiche per identificarli, ma si riconoscono solo studiando e facendo pratica! La forma plurale, comunque, termina sempre in -I, come mostrato negli esempi:",
+            "@table:6",
+            "@table:7",
+            "Alcune eccezioni alla regola:",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "I nomi presi in prestito da altre lingue o con accento finale sono invariabili, cambia solamente l’articolo nella forma plurale:",
+            "   · La borsa – Le borse  ",
+            "   · La finestra  – Le finestre ",
+            "   · La porta  – Le porte",
+            "   · L’ora – Le ore",
+            "   · L’alba  – Le albe",
+            "   · L’aula – Le aule",
+            "!PRESTA ATTENZIONE: per volgere un nome dal singolare al plurale, ricorda sempre di cambiare sia l’articolo che la sillaba finale!",
+            "h: Combinazioni",
+            "@table:articles_combinations_a",
+            "@table:articles_combinations_da",
+            "@table:articles_combinations_di",
+            "@table:articles_combinations_in",
+            "@table:articles_combinations_su"
+          ]
+        },
+        [
+          "hi"
+        ]
+      ]
+    }
+  }
+}

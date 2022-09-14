@@ -1,8 +1,6 @@
 "h: "     - headline - larger shrift, margin
 "@table:" - table - in tables.json - displayed in a grid, stored as a two-dimentional array
 "@ex:"    - example - in examples.json - displayed in a table
-"#"      - bold - if the word has a '#' anywhere in it it will be bold: #word / word# / w#ord => <b>word</b>
-"_"      - italic - same as bold, but in italic
 "="      - bullet point - the '=' is replaced by '  ·'
 "\n"     - new line
 

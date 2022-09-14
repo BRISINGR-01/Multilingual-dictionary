@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -158,13 +159,6 @@ class DatabaseHelper {
       );
     ''');
 
-    // await _database.rawQuery('''
-    //   CREATE TABLE '${lang}Grammar' (
-    //     name TEXT NOT NULL,
-    //     content TEXT NOT NULL
-    //   );
-    // ''');
-
     await _database.rawQuery(
         'ATTACH DATABASE \'${join(dir.path, '$lang.sql')}\' as \'$lang\';');
 
@@ -190,7 +184,20 @@ class DatabaseHelper {
 
   cancel(String lang) {}
 
-  getGrammar(String language) {
-    return _database.rawQuery('SELECT * FROM ${language}Grammar');
+  Future<Map<String, dynamic>?> getGrammar(String language) async {
+    language = "Italian";
+    String rawBundle = await rootBundle.loadString('assets/grammarBundle.json');
+
+    return json.decode(rawBundle)[language];
+
+    // List<String> availableLanguages = grammarInfo.keys.toList();
+
+    // String preferredLang = availableLanguages.contains(language)
+    //     ? grammarInfo[language]
+    //     : availableLanguages.contains("English")
+    //         ? "English"
+    //         : availableLanguages[0];
+
+    // return;
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:multilingual_dictionary/data.dart';
 import 'package:multilingual_dictionary/grammarPage.dart';
 
-Future<Map<String, dynamic>> getJson() async {
+Future<Map<String, dynamic>> getLanguagesData() async {
   String rawJson = await rootBundle.loadString('assets/languagesData.json');
 
   return Map<String, dynamic>.from(json.decode(rawJson));
@@ -21,7 +21,10 @@ class Grammar extends StatelessWidget {
     return databaseHelper.languages.length > 1
         ? LanguageChooser(databaseHelper: databaseHelper)
         : databaseHelper.languages.length == 1
-            ? GrammarPage(language: databaseHelper.languages.single)
+            ? GrammarPage(
+                language: databaseHelper.languages.single,
+                databaseHelper: databaseHelper,
+              )
             : const NoGrammar();
   }
 }
@@ -64,7 +67,7 @@ class LanguageChooser extends StatelessWidget {
           title: const Text("Grammar"),
         ),
         body: FutureBuilder(
-            future: getJson(),
+            future: getLanguagesData(),
             builder: (context, jsonData) {
               if (!jsonData.hasData) {
                 return const Center(child: CircularProgressIndicator());
@@ -111,6 +114,7 @@ class LanguageChooser extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => GrammarPage(
                               language: language,
+                              databaseHelper: databaseHelper,
                             ),
                           )));
                 },

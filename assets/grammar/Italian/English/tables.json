@@ -1,34 +1,4 @@
 {
-  "articles": [
-    [
-      "il",
-      "most singular masculine nouns starting with a consonant"
-    ],
-    [
-      "lo",
-      "singular masculine nouns, which start with z, gn or s+consonant"
-    ],
-    [
-      "la",
-      "singular feminine nouns starting with a consonant"
-    ],
-    [
-      "'l",
-      "singular nouns starting with a vowel"
-    ],
-    [
-      "gli",
-      "plural masculine nouns, which start with vowels#, z, gn or s+consonant"
-    ],
-    [
-      "i",
-      "all other plural masculine nouns"
-    ],
-    [
-      "le",
-      "plural feminine"
-    ]
-  ],
   "articles_combinations_a": [
     [
       "a + il",

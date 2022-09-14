@@ -1,7 +1,4 @@
 [
-  "Articles in Italian are defined by a couple of rules:",
-  "@table:articles",
-  "@ex:articles",
   "h: Combinations",
   "@table:articles_combinations_a",
   "@table:articles_combinations_da",
