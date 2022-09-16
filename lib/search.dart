@@ -10,6 +10,7 @@ class SearchState extends State<Search> {
 
   bool shouldAutoFocus = true;
   bool _isLoading = true;
+  TextEditingController controller = TextEditingController();
   String _currentLanguage = "";
   String _query = "";
   bool _isModeToEnglish = true;
@@ -306,6 +307,7 @@ class SearchState extends State<Search> {
                           Container(
                             color: Colors.white,
                             child: TextField(
+                              controller: controller,
                               autofocus: shouldAutoFocus,
                               onChanged: (value) async {
                                 setState(() {
@@ -333,6 +335,7 @@ class SearchState extends State<Search> {
                           ),
                           Expanded(
                             child: ListView.builder(
+                                shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
                                 itemCount: _options.length,
                                 itemBuilder: (context, index) {
@@ -350,6 +353,11 @@ class SearchState extends State<Search> {
                                           await databaseHelper.getById(
                                               _options[index]["id"] as int,
                                               _currentLanguage);
+
+                                      controller.clear();
+                                      setState(() {
+                                        _options = [];
+                                      });
 
                                       if (!mounted) return;
 

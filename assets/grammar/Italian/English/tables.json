@@ -1,4 +1,383 @@
 {
+  "0": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Before consonant",
+      "la",
+      "la penna",
+      "le",
+      "le penne"
+    ],
+    [
+      "Before vowel",
+      "l’",
+      "l’isola",
+      "le",
+      "le isole"
+    ]
+  ],
+  "1": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Before consonant",
+      "il",
+      "il libro",
+      "i",
+      "i libri"
+    ],
+    [
+      "Before vowel",
+      "l’",
+      "l’orologio",
+      "gli",
+      "gli orologi"
+    ],
+    [
+      "Before: S + consonant, Z, GN, PS, Y, PN",
+      "lo",
+      "lo studente, lo zaino, lo gnocco, lo psicologo, lo yogurt, lo pneumatico",
+      "gli",
+      "gli studenti, gli zaini, gli gnocchi, gli psicologi, gli yogurt, gli pneumatici"
+    ]
+  ],
+  "2": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Before consonant",
+      "una",
+      "una penna",
+      "delle",
+      "delle penne"
+    ],
+    [
+      "Before vowel",
+      "un’",
+      "un’isola",
+      "delle",
+      "delle isole"
+    ]
+  ],
+  "3": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Before consonant ",
+      "un",
+      "un libro",
+      "dei",
+      "dei libri"
+    ],
+    [
+      "Before vowel ",
+      "un",
+      "un orologio",
+      "degli",
+      "degli orologi"
+    ],
+    [
+      "Before: S + consonant, Z, GN, PS, Y, PN",
+      "uno",
+      "uno studente, uno zaino, uno gnocco, uno psicolog o,uno yogurt, uno pneumatico",
+      "degli",
+      "degli studenti, degli zaini, degli gnocchi, degli psicologi, degli yogurt, degli pneumatici"
+    ]
+  ],
+  "4": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Masculine",
+      "-o",
+      "il dizionario,il libro,lo zaino,lo sbaglio,l’aereo",
+      "-i",
+      "i dizionari,i libri,gli zaini,gli sbagli,gli aerei"
+    ]
+  ],
+  "5": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Feminine",
+      "-a",
+      "la finestra,la porta,la penna,l’ora,l’amica",
+      "-e",
+      "le finestre,le porte,le penne,le ore,le amiche"
+    ]
+  ],
+  "6": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Masculine",
+      "-e",
+      "Il padre,il pesce,il bicchiere,il mare,il dolce,il fiore",
+      "-i",
+      "i padri,i pesci,i bicchieri,i mari,i dolci,i fiori"
+    ]
+  ],
+  "7": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Feminine",
+      "-e",
+      "la madre,la lezione,la chiave,la nave,la situazione,la volpe",
+      "-i",
+      "le madri,le lezioni,le chiavi,le navi,le situazioni,le volpi"
+    ]
+  ],
+  "8": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "Masculine",
+      "-o",
+      "alto",
+      "-i",
+      "alti"
+    ],
+    [
+      "Feminine",
+      "-a",
+      "buona",
+      "-e",
+      "buone"
+    ],
+    [
+      "Masculine or Feminine",
+      "-e",
+      "intelligente",
+      "-i",
+      "intelligenti"
+    ]
+  ],
+  "9": [
+    [
+      "Singular",
+      "Plural"
+    ],
+    [
+      "Il ragazzo è alto",
+      "I ragazzi sono alti"
+    ],
+    [
+      "La pizza è buona",
+      "Le pizze sono buone"
+    ],
+    [
+      "Il bambino è intelligente",
+      "I bambini sono intelligenti"
+    ],
+    [
+      "La bambina è intelligente",
+      "Le bambine sono intelligenti"
+    ]
+  ],
+  "10": [
+    [
+      "",
+      "Singular",
+      "",
+      "Plural",
+      ""
+    ],
+    [
+      "",
+      "Masculine",
+      "Feminine",
+      "Masculine",
+      "Feminine"
+    ],
+    [
+      "Io",
+      "il mio",
+      "la mia",
+      "i miei",
+      "le mie"
+    ],
+    [
+      "Tu",
+      "il tuo",
+      "la tua",
+      "i tuoi",
+      "le tue"
+    ],
+    [
+      "Lei / Lui",
+      "il suo",
+      "la sua",
+      "i suoi",
+      "le sue"
+    ],
+    [
+      "Noi",
+      "il nostro",
+      "la nostra",
+      "i nostri",
+      "le nostre"
+    ],
+    [
+      "Voi",
+      "il vostro",
+      "la vostra",
+      "i vostri",
+      "le vostre"
+    ],
+    [
+      "Loro",
+      "il loro",
+      "la loro",
+      "i loro",
+      "le loro"
+    ]
+  ],
+  "11": [
+    [
+      "Singular",
+      "Plural"
+    ],
+    [
+      "Laura ha lavorato molto",
+      "Laura ha molta pazienza"
+    ],
+    [
+      "Laura è molto simpatica",
+      "Laura ha molti amici"
+    ],
+    [
+      "I ragazzi hanno studiato poco",
+      "I ragazzi hanno pochi soldi"
+    ],
+    [
+      "I ragazzi mangiano poco",
+      "I ragazzi hanno poca esperienza"
+    ]
+  ],
+  "12": [
+    [
+      "Positive",
+      "Comparative",
+      "Absolute Superlative",
+      "Relative Superlative"
+    ],
+    [
+      "buono",
+      "più buono\nmigliore",
+      "buonissimo\nottimo",
+      "il più buono\nil migliore"
+    ],
+    [
+      "cattivo",
+      "più cattivo\npeggiore",
+      "(cattivissimo)\npessimo",
+      "il più cattivo\nil peggiore"
+    ]
+  ],
+  "13": [
+    [
+      "Positive",
+      "Comparative",
+      "Absolute Superlative",
+      "Relative Superlative"
+    ],
+    [
+      "grande",
+      "più grande\nmaggiore",
+      "grandissimo\nmassimo",
+      "il più grande\nil maggiore"
+    ],
+    [
+      "piccolo",
+      "più piccolo\nminore",
+      "piccolissimo\nminimo",
+      "il più piccolo\nil minore"
+    ]
+  ],
+  "14": [
+    [
+      "Positive",
+      "Comparative",
+      "Absolute Superlative",
+      "Relative Superlative"
+    ],
+    [
+      "alto",
+      "più alto\nsuperiore",
+      "altissimo\nsupremo / sommo",
+      "il più alto\nil superiore"
+    ],
+    [
+      "basso",
+      "più basso\ninferiore",
+      "bassissimo\ninfimo",
+      "il più basso\nl’inferiore"
+    ]
+  ],
+  "15": [
+    [
+      "Positive",
+      "Comparative",
+      "Absolute Superlative"
+    ],
+    [
+      "bene",
+      "meglio",
+      "benissimo"
+    ],
+    [
+      "male",
+      "peggio",
+      "malissimo"
+    ]
+  ],
   "articles_combinations_a": [
     [
       "a + il",
@@ -183,5 +562,12 @@
       "sulle",
       "sulle strade"
     ]
+  ],
+  "no-header": [
+    "articles_combinations_a",
+    "articles_combinations_da",
+    "articles_combinations_di",
+    "articles_combinations_in",
+    "articles_combinations_su"
   ]
 }

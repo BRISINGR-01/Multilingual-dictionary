@@ -16,7 +16,7 @@ void main() async {
   runApp(MaterialApp(
     home: const Search(),
     theme: ThemeData(
-      fontFamily: "New Times Roman",
+      fontFamily: "Noto",
       colorScheme: ColorScheme(
         brightness: Brightness.light,
         primary: primary,

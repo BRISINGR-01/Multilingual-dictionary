@@ -189,15 +189,11 @@ class DatabaseHelper {
     String rawBundle = await rootBundle.loadString('assets/grammarBundle.json');
 
     return json.decode(rawBundle)[language];
+  }
 
-    // List<String> availableLanguages = grammarInfo.keys.toList();
+  Future<Map<String, dynamic>?> getLanguageData() async {
+    String rawBundle = await rootBundle.loadString('assets/languagesData.json');
 
-    // String preferredLang = availableLanguages.contains(language)
-    //     ? grammarInfo[language]
-    //     : availableLanguages.contains("English")
-    //         ? "English"
-    //         : availableLanguages[0];
-
-    // return;
+    return json.decode(rawBundle);
   }
 }

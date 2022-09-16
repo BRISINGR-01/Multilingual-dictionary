@@ -7,12 +7,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:multilingual_dictionary/data.dart';
 
-Future<Map<String, dynamic>> getJson() async {
-  String rawJson = await rootBundle.loadString('assets/languagesData.json');
-
-  return Map<String, dynamic>.from(json.decode(rawJson));
-}
-
 class DownloadLanguages extends StatefulWidget {
   final Function editLanguagesList;
   final List<String> downloadedLanguages;
@@ -112,7 +106,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
           title: const Text('Languages'),
         ),
         body: FutureBuilder(
-            future: getJson(),
+            future: widget.databaseHelper.getLanguageData(),
             builder: (context, jsonData) {
               if (!jsonData.hasData) {
                 return const Center(child: CircularProgressIndicator());

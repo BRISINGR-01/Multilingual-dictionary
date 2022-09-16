@@ -17,8 +17,8 @@ function Italian(
         json.push(el.innerText);
         break;
       case "UL":
-        [...elements[5].children].forEach((il) =>
-          json.push(`-${il.innerText}`)
+        json.push(
+          "-" + [...el.children].map((il) => il.innerText).join(";")
         );
         break;
       case "TABLE":
@@ -31,4 +31,6 @@ function Italian(
         break;
     }
   }
+  console.log(JSON.stringify(json));
+  console.log(JSON.stringify(tables));
 }

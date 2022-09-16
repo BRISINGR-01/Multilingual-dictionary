@@ -353,5 +353,12 @@
       "-i",
       "le madri, le lezioni, le chiavi, le navi, le situazioni, le volpi"
     ]
+  ],
+  "no-header": [
+    "articles_combinations_a",
+    "articles_combinations_da",
+    "articles_combinations_di",
+    "articles_combinations_in",
+    "articles_combinations_su"
   ]
 }
