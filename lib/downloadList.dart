@@ -46,6 +46,11 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
         .addLanguage(languageToDownload, setProgressAndSize);
 
     if (!isSuccessful) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+                'An error ocurred! Please check your internet connection')));
+      }
       return setState(() {
         languagesData[languageToDownload]!["isLoading"] = false;
         languagesData[languageToDownload]!["size"] = null;

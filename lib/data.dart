@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -49,7 +48,6 @@ class DatabaseHelper {
         // });
 
         // _database.rawQuery('DROP TABLE "Collection-Dutch-All"');
-        // _database.rawQuery('DROP TABLE "Collection-Dutch-lol"');
 
         // await _database.rawQuery(
         //     'UPDATE "userData" SET value = \'{"All": 61155}\' WHERE name = "collection-icons"');
@@ -155,8 +153,13 @@ class DatabaseHelper {
     String url = 'http://localhost:3000/$lang';
     // String url = 'http://192.168.1.106:3000/$lang';
 
-    http.Request request = http.Request('GET', Uri.parse(url));
-    http.StreamedResponse streamedResponse = await request.send();
+    http.StreamedResponse streamedResponse;
+    try {
+      http.Request request = http.Request('GET', Uri.parse(url));
+      streamedResponse = await request.send();
+    } catch (e) {
+      return false;
+    }
 
     int totalLength =
         int.parse(streamedResponse.headers["original-length"] ?? "0");
@@ -336,13 +339,11 @@ class CollectionsFunctions {
         (lang) => RegExp("Collection-$lang-.+").hasMatch(collection));
     wordCollections ??= await getWordCollections(language, word["id"]);
 
-    log(collection);
     if ("Collection-$language-All" == collection) {
-      wordCollections!.forEach((wordCollection) {
-        if (wordCollection.startsWith("Coll"))
-          _database.rawQuery(
-              'DELETE FROM \'$wordCollection\' WHERE id = ${word["id"]}');
-      });
+      for (String wordCollection in wordCollections!) {
+        _database.rawQuery(
+            'DELETE FROM \'$wordCollection\' WHERE id = ${word["id"]}');
+      }
     } else {
       _database.rawQuery(
           'UPDATE \'Collection-$language-All\' SET groups = \'${json.encode(wordCollections!.where((el) => el != collection).toList())}\' WHERE id = ${word["id"]}');

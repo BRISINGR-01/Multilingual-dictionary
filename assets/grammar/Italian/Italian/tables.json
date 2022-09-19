@@ -1,189 +1,4 @@
 {
-  "articles_combinations_a": [
-    [
-      "a + il",
-      "al",
-      "al cinema"
-    ],
-    [
-      "a + l'",
-      "all'",
-      "all'"
-    ],
-    [
-      "a + lo",
-      "allo",
-      "allo stadio"
-    ],
-    [
-      "a + la",
-      "alla",
-      "alla stazione"
-    ],
-    [
-      "a + i",
-      "ai",
-      "ai concerti"
-    ],
-    [
-      "a + gli",
-      "agli",
-      "agli aeroporti"
-    ],
-    [
-      "a + le",
-      "alle",
-      "alle partite"
-    ]
-  ],
-  "articles_combinations_da": [
-    [
-      "da + il",
-      "dal",
-      "dal cinema"
-    ],
-    [
-      "da + l'",
-      "dall'",
-      "dall'albergo"
-    ],
-    [
-      "da + lo",
-      "dallo",
-      "dallo stadio"
-    ],
-    [
-      "da + la",
-      "dalla",
-      "dalla stazione"
-    ],
-    [
-      "da + i",
-      "dai",
-      "dai concerti"
-    ],
-    [
-      "da + gli",
-      "dagli",
-      "dagli aeroporti"
-    ],
-    [
-      "da + le",
-      "dalle",
-      "dalle partite"
-    ]
-  ],
-  "articles_combinations_di": [
-    [
-      "di + il",
-      "del",
-      "del cinema"
-    ],
-    [
-      "di + l'",
-      "dell'",
-      "dell'albergo"
-    ],
-    [
-      "di + lo",
-      "dello",
-      "dello stadio"
-    ],
-    [
-      "di + la",
-      "della",
-      "della stazione"
-    ],
-    [
-      "di + i",
-      "dei",
-      "dei concerti"
-    ],
-    [
-      "di + gli",
-      "degli",
-      "degli aeroporti"
-    ],
-    [
-      "di + le",
-      "delle",
-      "delle partite"
-    ]
-  ],
-  "articles_combinations_in": [
-    [
-      "in + il",
-      "nel",
-      "nel cinema"
-    ],
-    [
-      "in + l'",
-      "nell'",
-      "nell'albergo"
-    ],
-    [
-      "in + lo",
-      "nello",
-      "nello stadio"
-    ],
-    [
-      "in + la",
-      "nella",
-      "nella stazione"
-    ],
-    [
-      "in + i",
-      "nei",
-      "nei concerti"
-    ],
-    [
-      "in + gli",
-      "negli",
-      "negli aeroporti"
-    ],
-    [
-      "in + le",
-      "nelle",
-      "nelle partite"
-    ]
-  ],
-  "articles_combinations_su": [
-    [
-      "su + il",
-      "sul",
-      "sul pavimento"
-    ],
-    [
-      "su + l'",
-      "sull'",
-      "sull'orlo"
-    ],
-    [
-      "su + lo",
-      "sullo",
-      "sullo scoglio"
-    ],
-    [
-      "su + la",
-      "sulla",
-      "sulla spiaggia"
-    ],
-    [
-      "su + i",
-      "sui",
-      "sui monti"
-    ],
-    [
-      "su + gli",
-      "sugli",
-      "sugli scaffali"
-    ],
-    [
-      "su + le",
-      "sulle",
-      "sulle strade"
-    ]
-  ],
   "0": [
     [
       "",
@@ -354,11 +169,498 @@
       "le madri, le lezioni, le chiavi, le navi, le situazioni, le volpi"
     ]
   ],
-  "no-header": [
-    "articles_combinations_a",
-    "articles_combinations_da",
-    "articles_combinations_di",
-    "articles_combinations_in",
-    "articles_combinations_su"
+  "8": [
+    [
+      "",
+      "Singolare",
+      "",
+      "Plurale",
+      ""
+    ],
+    [
+      "Maschile",
+      "-o",
+      "alto",
+      "-i",
+      "alti"
+    ],
+    [
+      "Femminile",
+      "-a",
+      "buona",
+      "-e",
+      "buone"
+    ],
+    [
+      "Maschile o Femminile",
+      "-e",
+      "intelligente",
+      "-i",
+      "intelligenti"
+    ]
+  ],
+  "9": [
+    [
+      "Singolare",
+      "Plurale"
+    ],
+    [
+      "Il ragazzo è alto",
+      "I ragazzi sono alti"
+    ],
+    [
+      "La pizza è buona",
+      "Le pizze sono buone"
+    ],
+    [
+      "Il bambino è intelligente",
+      "I bambini sono intelligenti"
+    ],
+    [
+      "La bambina è intelligente",
+      "Le bambine sono intelligenti"
+    ]
+  ],
+  "10": [
+    [
+      "",
+      "Singolare",
+      "",
+      "Plurale",
+      ""
+    ],
+    [
+      "",
+      "Maschile ",
+      "Femminile",
+      "Maschile ",
+      "Femminile"
+    ],
+    [
+      "Io",
+      "il mio",
+      "la mia",
+      "i miei",
+      "le mie"
+    ],
+    [
+      "Tu",
+      "il tuo",
+      "la tua",
+      "i tuoi",
+      "le tue"
+    ],
+    [
+      "Lei / Lui",
+      "il suo",
+      "la sua",
+      "i suoi",
+      "le sue"
+    ],
+    [
+      "Noi",
+      "il nostro",
+      "la nostra",
+      "i nostri",
+      "le nostre"
+    ],
+    [
+      "Voi",
+      "il vostro",
+      "la vostra",
+      "i vostri",
+      "le vostre"
+    ],
+    [
+      "Loro",
+      "il loro",
+      "la loro",
+      "i loro",
+      "le loro"
+    ]
+  ],
+  "11": [
+    [
+      "Singolare",
+      "Plurale"
+    ],
+    [
+      "Laura ha lavorato molto",
+      "Laura ha molta pazienza"
+    ],
+    [
+      "Laura è molto simpatica.",
+      "Laura ha molti amici."
+    ],
+    [
+      "I ragazzi hanno studiato poco.",
+      "I ragazzi hanno pochi soldi"
+    ],
+    [
+      "I ragazzi mangiano poco.",
+      "I ragazzi hanno poca esperienza"
+    ]
+  ],
+  "12": [
+    [
+      "Positivo",
+      "Comparativo",
+      "Superlativo Assoluto",
+      "Superlativo Relativo"
+    ],
+    [
+      "buono",
+      "più buono\n\nmigliore",
+      "buonissimo\n\nottimo",
+      "il più buono\n\nil migliore"
+    ],
+    [
+      "cattivo",
+      "più cattivo\n\npeggiore",
+      "(cattivissimo)\n\npessimo",
+      "il più cattivo\n\nil peggiore"
+    ]
+  ],
+  "13": [
+    [
+      "Positivo",
+      "Comparativo",
+      "Superlativo Assoluto",
+      "Superlativo Relativo"
+    ],
+    [
+      "grande",
+      "più grande\n\nmaggiore",
+      "grandissimo\n\nmassimo",
+      "il più grande\n\nil maggiore"
+    ],
+    [
+      "piccolo",
+      "più piccolo\n\nminore",
+      "piccolissimo\n\nminimo",
+      "il più piccolo\n\nil minore"
+    ]
+  ],
+  "14": [
+    [
+      "Positivo",
+      "Comparativo",
+      "Superlativo Assoluto",
+      "Superlativo Relativo"
+    ],
+    [
+      "alto",
+      "più alto\n\nsuperiore",
+      "altissimo\n\nsupremo / sommo",
+      "il più alto\n\nil superiore"
+    ],
+    [
+      "basso",
+      "più basso\n\ninferiore",
+      "bassissimo\n\ninfimo",
+      "il più basso\n\nl’inferiore"
+    ]
+  ],
+  "15": [
+    [
+      "Positivo",
+      "Comparativo",
+      "Superlativo Assoluto"
+    ],
+    [
+      "bene",
+      "meglio",
+      "benissimo"
+    ],
+    [
+      "male",
+      "peggio",
+      "malissimo"
+    ]
+  ],
+  "16": [
+    [
+      "",
+      "il",
+      "lo",
+      "la",
+      "i",
+      "gli",
+      "le",
+      "l’"
+    ],
+    [
+      "di",
+      "del",
+      "dello",
+      "della",
+      "dei",
+      "degli",
+      "delle",
+      "dell’"
+    ],
+    [
+      "a",
+      "al",
+      "allo",
+      "alla",
+      "ai",
+      "agli",
+      "alle",
+      "all’"
+    ],
+    [
+      "da",
+      "dal",
+      "dallo",
+      "dalla",
+      "dai",
+      "dagli",
+      "dalle",
+      "dall’"
+    ],
+    [
+      "in",
+      "nel",
+      "nello",
+      "nella",
+      "nei",
+      "negli",
+      "nelle",
+      "nell’"
+    ],
+    [
+      "su",
+      "sul",
+      "sullo",
+      "sulla",
+      "sui",
+      "sugli",
+      "sulle",
+      "sull’"
+    ]
+  ],
+  "17": [
+    [
+      "",
+      "il",
+      "lo",
+      "la",
+      "i",
+      "gli",
+      "le",
+      "l’"
+    ],
+    [
+      "di",
+      "del",
+      "dello",
+      "della",
+      "dei",
+      "degli",
+      "delle",
+      "dell’"
+    ]
+  ],
+  "19": [
+    [
+      "",
+      "Singolare",
+      "",
+      "Plurale",
+      ""
+    ],
+    [
+      "",
+      "Atono",
+      "Tonico",
+      "Atono",
+      "Tonico"
+    ],
+    [
+      "Prima persona",
+      "mi",
+      "me",
+      "ci",
+      "noi"
+    ],
+    [
+      "Seconda persona",
+      "ti",
+      "te",
+      "vi",
+      "voi"
+    ],
+    [
+      "Terza persona maschile",
+      "lo (l’)",
+      "lui",
+      "li",
+      "loro"
+    ],
+    [
+      "Terza persona femminile",
+      "la /La* (l’)",
+      "lei/Lei",
+      "le",
+      "loro"
+    ]
+  ],
+  "20": [
+    [
+      "Pronomi diretti",
+      "",
+      "Pronomi composti"
+    ],
+    [
+      "mi",
+      "+ ci =",
+      "mi ci"
+    ],
+    [
+      "ti",
+      "+ ci =",
+      "ti ci"
+    ],
+    [
+      "vi",
+      "+ ci =",
+      "vi ci"
+    ]
+  ],
+  "21": [
+    [
+      "",
+      "Pronomi diretti",
+      "Pronomi composti"
+    ],
+    [
+      "ci +",
+      "lo",
+      "ce lo"
+    ],
+    [
+      "ci +",
+      "la",
+      "ce la"
+    ],
+    [
+      "ci +",
+      "li",
+      "ce li"
+    ],
+    [
+      "ci +",
+      "le",
+      "ce le"
+    ]
+  ],
+  "22": [
+    [
+      "Complemento indiretto",
+      ""
+    ],
+    [
+      "Atono",
+      "Tonico"
+    ],
+    [
+      "mi",
+      "a me"
+    ],
+    [
+      "ti",
+      "a te"
+    ],
+    [
+      "gli",
+      "a lui "
+    ],
+    [
+      "le",
+      "a lei"
+    ],
+    [
+      "Le",
+      "a Lei"
+    ],
+    [
+      "ci",
+      "a noi"
+    ],
+    [
+      "vi",
+      "a voi"
+    ],
+    [
+      "gli",
+      "a loro"
+    ]
+  ],
+  "23": [
+    [
+      "",
+      "Lo",
+      "La",
+      "Li",
+      "Le",
+      "Ne"
+    ],
+    [
+      "Mi",
+      "Me lo",
+      "Me la",
+      "Me li",
+      "Me le",
+      "Me ne"
+    ],
+    [
+      "Ti",
+      "Te lo",
+      "Te la",
+      "Te li",
+      "Te le",
+      "Te ne"
+    ],
+    [
+      "Gli",
+      "Glielo",
+      "Gliela",
+      "Glieli",
+      "Gliele",
+      "Gliene"
+    ],
+    [
+      "Le",
+      "Glielo",
+      "Gliela",
+      "Glieli",
+      "Gliele",
+      "Gliene"
+    ],
+    [
+      "Ci",
+      "Ce lo",
+      "Ce la",
+      "Ce li",
+      "Ce le",
+      "Ce ne"
+    ],
+    [
+      "Vi",
+      "Ve lo",
+      "Ve la",
+      "Ve li",
+      "Ve le",
+      "Ve ne"
+    ],
+    [
+      "Gli",
+      "Glielo",
+      "Gliela",
+      "Glieli",
+      "Gliele",
+      "Gliene"
+    ]
   ]
 }

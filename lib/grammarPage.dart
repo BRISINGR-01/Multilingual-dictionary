@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/Loader.dart';
 
 Future<Map<String, Object?>> getData(
     DatabaseHelper databaseHelper, String language) async {
@@ -32,7 +33,7 @@ class _GrammarPageState extends State<GrammarPage> {
         future: getData(widget.databaseHelper, widget.language),
         builder: ((context, snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return const Loader();
           }
 
           if (snapshot.data == null) {
@@ -67,43 +68,53 @@ class _GrammarPageState extends State<GrammarPage> {
                       )))
                   .toList(),
             ),
-            body: ListView.builder(
-              itemCount: data["grammar"][textLanguage]["articles"]?.length,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    title: Text(
-                      data["grammar"][textLanguage]["articles"][index]["title"],
-                      style: const TextStyle(
-                        fontSize: 30,
+            body: Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: ListView.builder(
+                itemCount: data["grammar"][textLanguage]["articles"]?.length,
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                  width: 2))),
+                      child: ListTile(
+                        title: Text(
+                          data["grammar"][textLanguage]["articles"][index]
+                              ["title"],
+                          style: const TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                        trailing: Text(data["grammar"][textLanguage]["articles"]
+                                [index]["info"] ??
+                            ""),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GrammarSection(
+                                  title: data["grammar"][textLanguage]
+                                      ["articles"][index]["title"],
+                                  text: List<String>.from(data["grammar"]
+                                          [textLanguage]["articles"][index]
+                                      ["body"]),
+                                  language: widget.language,
+                                  databaseHelper: widget.databaseHelper,
+                                  tables: Map<String, List<dynamic>>.from(
+                                      data["grammar"][textLanguage]["tables"]),
+                                ),
+                              ));
+                        },
                       ),
                     ),
-                    trailing: Text(data["grammar"][textLanguage]["articles"]
-                            [index]["info"] ??
-                        ""),
-                    shape: const RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black38, width: .3),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => GrammarSection(
-                              title: data["grammar"][textLanguage]["articles"]
-                                  [index]["title"],
-                              text: List<String>.from(data["grammar"]
-                                  [textLanguage]["articles"][index]["body"]),
-                              language: widget.language,
-                              databaseHelper: widget.databaseHelper,
-                              tables: Map<String, List<dynamic>>.from(
-                                  data["grammar"][textLanguage]["tables"]),
-                            ),
-                          ));
-                    },
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ),
           );
         }),
@@ -166,7 +177,7 @@ class _GrammarSectionState extends State<GrammarSection> {
       future: getData(widget.databaseHelper, widget.language),
       builder: ((context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Loader();
         }
 
         if (snapshot.data == null) {
@@ -208,47 +219,52 @@ class _GrammarSectionState extends State<GrammarSection> {
                     ))
                 .toList(),
           ),
-          body: ListView.builder(
+          body: ListView.separated(
             padding: const EdgeInsets.only(bottom: 64),
             itemCount: widget.text.length,
+            separatorBuilder: ((context, index) =>
+                widget.text[index].startsWith("h: ")
+                    ? const Divider(indent: 24)
+                    : Container()),
             itemBuilder: ((context, index) {
               if (widget.text[index].startsWith("@table:")) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).orientation ==
-                              Orientation.portrait
-                          ? 8
-                          : 32,
-                      vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                   child: Table(
                       border: TableBorder.all(
                           borderRadius: BorderRadius.circular(20)),
                       children: getTableRow(
                           widget.tables[widget.text[index]
                               .replaceFirst("@table:", "")] as List,
-                          widget.tables["no-header"]!.contains(
-                              widget.text[index].replaceFirst("@table:", "")),
+                          widget.tables["no-header"]?.contains(widget
+                                  .text[index]
+                                  .replaceFirst("@table:", "")) ??
+                              false,
                           context)),
                 );
               } else if (widget.text[index].startsWith("h: ")) {
                 return ListTile(
-                  title: Text(
-                    widget.text[index].replaceFirst("h: ", ""),
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 25,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w500),
+                  title: Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 24, 0, 0),
+                    child: Text(
+                      widget.text[index].replaceFirst("h: ", ""),
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 25,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 );
-              } else if (widget.text[index].startsWith("-")) {
+              } else if (widget.text[index].startsWith("\$")) {
                 return ListTile(
                   title: Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(left: 32),
                     child: Text(
                       widget.text[index]
-                          .replaceFirst("-", "\u2022 ")
-                          .split(";")
+                          .replaceFirst("\$", "\u2022 ")
+                          .split("|")
                           .join("\n\u2022 "),
                       style: const TextStyle(fontStyle: FontStyle.italic),
                     ),
@@ -258,7 +274,7 @@ class _GrammarSectionState extends State<GrammarSection> {
 
               return ListTile(
                 title: Padding(
-                  padding: const EdgeInsets.only(left: 8),
+                  padding: const EdgeInsets.only(left: 16),
                   child: Text(
                     widget.text[index],
                   ),

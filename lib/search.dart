@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/Collections.dart';
 import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
 import 'package:multilingual_dictionary/grammar.dart';
@@ -16,10 +17,12 @@ class SearchState extends State<Search> {
   String _query = "";
   bool _isModeToEnglish = true;
   List<Map<String, Object?>> _options = [];
+  late FocusNode searchFieldFocusNode;
 
   @override
   initState() {
     super.initState();
+    searchFieldFocusNode = FocusNode();
 
     databaseHelper.getUserData().then((data) async {
       String currentLanguage = data["currentLanguage"] ?? "";
@@ -71,6 +74,13 @@ class SearchState extends State<Search> {
         }
       });
     }
+  }
+
+  @override
+  void dispose() {
+    searchFieldFocusNode.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -174,7 +184,7 @@ class SearchState extends State<Search> {
               ),
             ])),
             body: _isLoading
-                ? const Center(child: CircularProgressIndicator())
+                ? const Loader()
                 : databaseHelper.languages.isEmpty
                     ? SizedBox(
                         width: MediaQuery.of(context).size.width,
@@ -271,6 +281,8 @@ class SearchState extends State<Search> {
                                                 databaseHelper.setUserData(
                                                     "currentLanguage", val);
                                                 fetchOptions(_query);
+                                                searchFieldFocusNode
+                                                    .requestFocus();
                                               })
                                           : const Text(
                                               "English",
@@ -326,6 +338,7 @@ class SearchState extends State<Search> {
                             color: Colors.white,
                             child: TextField(
                               controller: controller,
+                              focusNode: searchFieldFocusNode,
                               autofocus: shouldAutoFocus,
                               onChanged: (value) async {
                                 setState(() {
@@ -371,6 +384,7 @@ class SearchState extends State<Search> {
                                       int id = _options[index]["id"] as int;
                                       setState(() {
                                         _options = [];
+                                        _query = "";
                                       });
 
                                       if (!mounted) return;
