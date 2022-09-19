@@ -2,12 +2,31 @@
 
 import 'dart:convert' show json;
 import 'package:flutter/material.dart';
-// import 'package:multilingual_dictionary/ExpandableFab.dart';
+import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/formsTable.dart';
 
+Future<Map<String, dynamic>> getData(
+    DatabaseHelper databaseHelper, String language, int id) async {
+  List<String>? saved =
+      await databaseHelper.collections.getWordCollections(language, id);
+
+  return {
+    "saved": saved == null ? [] : ["Collection-$language-All", ...saved],
+    "wordData": await databaseHelper.getById(id, language)
+  };
+}
+
 class WordDisplay extends StatefulWidget {
-  final Map word;
-  const WordDisplay({Key? key, required this.word}) : super(key: key);
+  final int id;
+  final DatabaseHelper databaseHelper;
+  final String language;
+  const WordDisplay(
+      {Key? key,
+      required this.id,
+      required this.databaseHelper,
+      required this.language})
+      : super(key: key);
 
   @override
   State<WordDisplay> createState() => _WordDisplayState();
@@ -16,6 +35,8 @@ class WordDisplay extends StatefulWidget {
 class _WordDisplayState extends State<WordDisplay> {
   bool isReadyToDraw = false;
   bool areTablesOpened = false;
+  List<String>? savedTo;
+
   void setReady() {
     if (mounted && !isReadyToDraw) {
       setState(() {
@@ -27,51 +48,201 @@ class _WordDisplayState extends State<WordDisplay> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.word["word"]),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-        ),
-        bottomNavigationBar: BottomAppBar(
-          shape: !isReadyToDraw || areTablesOpened
-              ? null
-              : const CircularNotchedRectangle(),
-          color: Theme.of(context).colorScheme.tertiary,
-          child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              height: areTablesOpened ? MediaQuery.of(context).size.height : 50,
-              padding: const EdgeInsets.only(top: 70),
-              child: areTablesOpened
-                  ? FormsTable(
-                      forms: widget.word["forms"] ?? [],
+      child: FutureBuilder(
+          future: getData(widget.databaseHelper, widget.language, widget.id),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Loader();
+            }
+
+            Map<String, dynamic> data = snapshot.data as Map<String, dynamic>;
+
+            savedTo ??= List<String>.from(data["saved"]);
+
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(data["wordData"]["word"]),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: IconButton(
+                        tooltip: "Collections",
+                        onPressed: () {
+                          List collections = widget
+                              .databaseHelper.collections.all
+                              .where((element) =>
+                                  element["language"] == widget.language)
+                              .toList();
+                          if (savedTo?.isEmpty ?? false) {
+                            widget.databaseHelper.collections.addTo(
+                                "Collection-${widget.language}-All",
+                                data["wordData"],
+                                widget.language,
+                                savedTo!);
+                            savedTo!.add("Collection-${widget.language}-All");
+                            setState(() {});
+                          }
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return StatefulBuilder(
+                                    builder: (context, setDialogState) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    child: Container(
+                                      constraints: const BoxConstraints(
+                                          maxWidth: 3 * 30),
+                                      child: GridView.count(
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        padding: const EdgeInsets.all(20),
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                        crossAxisCount: 3,
+                                        children: collections
+                                            .map((collection) => Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: savedTo?.contains(
+                                                                collection[
+                                                                    "fullTitle"]) ??
+                                                            false
+                                                        ? Theme.of(context)
+                                                            .colorScheme
+                                                            .tertiary
+                                                        : null),
+                                                alignment: Alignment.center,
+                                                width: 30,
+                                                height: 30,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    if (savedTo == null) return;
+
+                                                    if (savedTo!.contains(
+                                                        collection[
+                                                            "fullTitle"])) {
+                                                      widget.databaseHelper
+                                                          .collections
+                                                          .removeFrom(
+                                                              collection[
+                                                                  "fullTitle"],
+                                                              data["wordData"],
+                                                              widget.language,
+                                                              savedTo);
+                                                      if (collection[
+                                                              "fullTitle"] ==
+                                                          "Collection-${widget.language}-All") {
+                                                        savedTo = [];
+                                                      } else {
+                                                        savedTo!.remove(
+                                                            collection[
+                                                                "fullTitle"]);
+                                                      }
+                                                    } else {
+                                                      savedTo!.add(collection[
+                                                          "fullTitle"]);
+                                                      if (!savedTo!.contains(
+                                                          "Collection-${widget.language}-All")) {
+                                                        savedTo!.add(
+                                                            "Collection-${widget.language}-All");
+                                                      }
+                                                      widget.databaseHelper
+                                                          .collections
+                                                          .addTo(
+                                                              collection[
+                                                                  "fullTitle"],
+                                                              data["wordData"],
+                                                              widget.language,
+                                                              savedTo!);
+                                                    }
+                                                    setState(() {});
+                                                    setDialogState(() {});
+                                                  },
+                                                  tooltip: collection["title"],
+                                                  icon: collection["icon"] ==
+                                                          null
+                                                      ? Text(
+                                                          collection["title"])
+                                                      : Icon(IconData(
+                                                          collection["icon"],
+                                                          fontFamily:
+                                                              "MaterialIcons")),
+                                                )))
+                                            .toList(),
+                                      ),
+                                    ),
+                                  );
+                                });
+                              });
+                        },
+                        iconSize: 30,
+                        icon: Icon(
+                          savedTo?.isNotEmpty ?? false
+                              ? Icons.bookmark
+                              : Icons.bookmark_add_outlined,
+                          color: savedTo?.isNotEmpty ?? false
+                              ? Colors.yellow.shade600
+                              : Colors.white,
+                        )),
+                  )
+                ],
+              ),
+              bottomNavigationBar: BottomAppBar(
+                shape: !isReadyToDraw || areTablesOpened
+                    ? null
+                    : const CircularNotchedRectangle(),
+                color: Theme.of(context).colorScheme.tertiary,
+                child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    height: areTablesOpened
+                        ? MediaQuery.of(context).size.height
+                        : 50,
+                    padding: const EdgeInsets.only(top: 70),
+                    child: areTablesOpened
+                        ? FormsTable(
+                            forms: data["wordData"]["forms"] ?? [],
+                          )
+                        : null),
+              ),
+              floatingActionButton: isReadyToDraw
+                  ? Padding(
+                      padding:
+                          EdgeInsets.only(top: areTablesOpened ? 80.0 : 0.0),
+                      child: FloatingActionButton(
+                        onPressed: () => setState(() {
+                          areTablesOpened = !areTablesOpened;
+                        }),
+                        tooltip: areTablesOpened ? null : 'Tables of forms',
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: Icon(
+                            areTablesOpened
+                                ? Icons.expand_more_outlined
+                                : Icons.grid_on_outlined,
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
                     )
-                  : null),
-        ),
-        floatingActionButton: isReadyToDraw
-            ? Padding(
-                padding: EdgeInsets.only(top: areTablesOpened ? 80.0 : 0.0),
-                child: FloatingActionButton(
-                  onPressed: () => setState(() {
-                    areTablesOpened = !areTablesOpened;
-                  }),
-                  tooltip: areTablesOpened ? null : 'Tables of forms',
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  child: Icon(
-                      areTablesOpened
-                          ? Icons.expand_more_outlined
-                          : Icons.grid_on_outlined,
-                      color: Theme.of(context).colorScheme.onPrimary),
+                  : null,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
+              body: WillPopScope(
+                onWillPop: () {
+                  Navigator.pop(context,
+                      json.encode(savedTo)); //return data along with pop
+                  return Future(() => false);
+                },
+                child: Word(
+                  word: data["wordData"],
+                  setReady: setReady,
                 ),
-              )
-            // ? const ExampleExpandableFab()
-            : null,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: Word(
-          word: widget.word,
-          setReady: setReady,
-        ),
-        backgroundColor: Theme.of(context).colorScheme.background,
-      ),
+              ),
+              backgroundColor: Theme.of(context).colorScheme.background,
+            );
+          }),
     );
   }
 }
@@ -106,8 +277,6 @@ class Word extends StatelessWidget {
             constraints: BoxConstraints(
               minHeight: constraints.maxHeight,
               minWidth: constraints.maxWidth,
-              // maxHeight: constraints.maxHeight * 1.0,
-              // maxWidth: constraints.maxWidth,
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
@@ -150,7 +319,7 @@ class Word extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 20,
                             color: Colors.grey,
-                            fontFamily: "New Times Roman",
+                            fontFamily: "Times Roman",
                             fontWeight: FontWeight.w500,
                             decoration: TextDecoration.none)),
                 ],

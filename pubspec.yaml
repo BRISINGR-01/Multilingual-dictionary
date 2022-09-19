@@ -18,6 +18,7 @@ dependencies:
   sqflite_common_ffi: ^2.1.1+1
   sqlite3_flutter_libs: ^0.5.9
   http: ^0.13.4
+  flutter_iconpicker: ^3.2.1
 
 dev_dependencies:
   args: ^2.3.1

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multilingual_dictionary/Collections.dart';
 import 'package:multilingual_dictionary/data.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
@@ -132,6 +133,23 @@ class SearchState extends State<Search> {
                         builder: (context) => DownloadLanguages(
                           downloadedLanguages: databaseHelper.languages,
                           editLanguagesList: editLanguagesList,
+                          databaseHelper: databaseHelper,
+                        ),
+                      ));
+                },
+              ),
+              ListTile(
+                title: const Text('Collections'),
+                leading: Icon(Icons.collections_bookmark_outlined,
+                    color: Theme.of(context).colorScheme.primary),
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.black38, width: .3),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CollectionsHome(
                           databaseHelper: databaseHelper,
                         ),
                       ));
@@ -349,12 +367,8 @@ class SearchState extends State<Search> {
                                           BorderRadius.all(Radius.circular(3)),
                                     ),
                                     onTap: () async {
-                                      Map wordData =
-                                          await databaseHelper.getById(
-                                              _options[index]["id"] as int,
-                                              _currentLanguage);
-
                                       controller.clear();
+                                      int id = _options[index]["id"] as int;
                                       setState(() {
                                         _options = [];
                                       });
@@ -364,8 +378,10 @@ class SearchState extends State<Search> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                WordDisplay(word: wordData),
+                                            builder: (context) => WordDisplay(
+                                                id: id,
+                                                language: _currentLanguage,
+                                                databaseHelper: databaseHelper),
                                           ));
                                     },
                                   );

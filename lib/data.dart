@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -9,28 +12,55 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 typedef QueryResult = List<Map<String, Object?>>;
 
 class DatabaseHelper {
-  // ignore: prefer_typing_uninitialized_variables
   var _database;
   late Map<String, http.Request> requests;
+  bool isInitialized = false;
   List<String> languages = [];
+  late CollectionsFunctions collections;
 
   DatabaseHelper.init() {
-    requests = {};
     sqfliteFfiInit();
 
     getApplicationDocumentsDirectory().then((value) async {
       databaseFactoryFfi
           .openDatabase(join(value.path, 'database.sql'))
-          .then((value) async {
-        _database = value;
+          .then((db) async {
+        _database = db;
 
         List<String> tables = List<String>.from((await _database.rawQuery(
                 'SELECT name FROM sqlite_schema WHERE type=\'table\''))
             .map((e) => e["name"]));
 
+        // await _database.rawQuery(
+        //     'DELETE FROM \'userData\' where name = \'collection-icons\'');
+
         languages = tables
-            .where((table) => table != "sqlite_sequence" && table != "userData")
+            .where((table) =>
+                table != "sqlite_sequence" &&
+                table != "userData" &&
+                !table.startsWith("Collection-"))
             .toList();
+
+        // tables.forEach((element) {
+        //   print(element);
+        //   if (element.startsWith("Coll")) {
+        //     _database.rawQuery('Drop table "$element"');
+        //   }
+        // });
+
+        // _database.rawQuery('DROP TABLE "Collection-Dutch-All"');
+        // _database.rawQuery('DROP TABLE "Collection-Dutch-lol"');
+
+        // await _database.rawQuery(
+        //     'UPDATE "userData" SET value = \'{"All": 61155}\' WHERE name = "collection-icons"');
+
+        // await _database.rawQuery('''
+        //   CREATE TABLE 'Collection-Dutch-All' (
+        //     id INTEGER ,
+        //     display TEXT,
+        //     groups TEXT
+        //   );
+        // ''');
 
         if (!tables.contains("userData")) {
           await _database.rawQuery('''
@@ -43,7 +73,11 @@ class DatabaseHelper {
               'INSERT INTO \'userData\' (name, value) VALUES (\'isModeToEnglish\', \'true\')');
           await _database.rawQuery(
               'INSERT INTO \'userData\' (name, value) VALUES (\'currentLanguage\', \'\')');
+          await _database.rawQuery(
+              'INSERT INTO \'userData\' (name, value) VALUES (\'collection-icons\', \'{"All": 57585}\')');
         }
+        collections = CollectionsFunctions(
+            _database, () => isInitialized = true, languages);
       });
     });
   }
@@ -62,7 +96,7 @@ class DatabaseHelper {
     };
   }
 
-  void setUserData(String name, String value) async {
+  setUserData(String name, String value) async {
     if (_database == null) {
       await Future.delayed(const Duration(milliseconds: 10));
       return setUserData(name, value);
@@ -169,6 +203,14 @@ class DatabaseHelper {
     await _database.rawQuery(
         'INSERT INTO \'userData\' (name, value) VALUES (\'$lang\', \'$totalLength\')');
 
+    await _database.rawQuery('''
+      CREATE TABLE 'Collection-$lang-All' (
+        id INTEGER ,
+        display TEXT,
+        groups TEXT
+      );
+    ''');
+
     newSqlFile.deleteSync();
 
     return true;
@@ -195,5 +237,116 @@ class DatabaseHelper {
     String rawBundle = await rootBundle.loadString('assets/languagesData.json');
 
     return json.decode(rawBundle);
+  }
+}
+
+class CollectionsFunctions {
+  final _database;
+  final finishInitialization;
+  final List<String> languages;
+  late List<Map<String, dynamic>> _all;
+
+  List<Map<String, dynamic>> get all => _all;
+
+  CollectionsFunctions(
+      this._database, this.finishInitialization, this.languages) {
+    _database
+        .rawQuery(
+            'SELECT value FROM \'userData\' WHERE name = \'collection-icons\'')
+        .then((icons) {
+      icons = json.decode(icons[0]["value"]);
+      _database
+          .rawQuery('SELECT name FROM sqlite_schema WHERE type=\'table\'')
+          .then((tables) {
+        List<String> collections =
+            List<String>.from(tables.map((table) => table["name"]))
+                .where((table) => table.startsWith("Collection"))
+                .toList();
+
+        _all = collections
+            .map((title) => {
+                  "fullTitle": title,
+                  "title": title.replaceFirst(RegExp(r"Collection-\w+-"), ""),
+                  "language": title
+                      .replaceFirst(RegExp(r"Collection-"), "")
+                      .replaceFirst(RegExp(r"-.+"), ""),
+                  "icon":
+                      icons[title.replaceFirst(RegExp(r"Collection-\w+-"), "")],
+                })
+            .toList();
+      });
+
+      finishInitialization();
+    });
+  }
+
+  add(Map<String, dynamic> collection) async {
+    await _database.rawQuery('''
+            CREATE TABLE '${collection["fullTitle"]}' (
+              id INTEGER ,
+              display TEXT
+            );
+          ''');
+
+    _all.add(collection);
+
+    await _database.rawQuery('UPDATE \'userData\' SET value = \'${json.encode({
+          for (var v in _all) v["title"]: v["icon"]
+        })}\' WHERE name = \'collection-icons\'');
+  }
+
+  delete(String title) {
+    _database.rawQuery('DROP TABLE \'$title\'');
+    _all.removeWhere((element) => element["fullTitle"] == title);
+  }
+
+  Future<QueryResult> getWords(String title) {
+    return _database.rawQuery('SELECT * FROM \'$title\'');
+  }
+
+  Future<List<String>?> getWordCollections(String language, int id) async {
+    QueryResult wordCollections = await _database.rawQuery(
+        'SELECT groups FROM \'Collection-$language-All\' where id = $id');
+
+    if (wordCollections.isEmpty) return null;
+
+    return List<String>.from(
+        json.decode(wordCollections[0]["groups"] as String));
+  }
+
+  addTo(String collection, Map<String, dynamic> word, String language,
+      List<String> wordCollections) async {
+    if ("Collection-$language-All" == collection) {
+      _database.rawQuery(
+          'INSERT INTO \'$collection\' (id, display, groups) VALUES (\'${word["id"]}\', \'${word["display"]}\', \'[]\')');
+    } else {
+      _database.rawQuery(
+          'INSERT INTO \'$collection\' (id, display) VALUES (\'${word["id"]}\', \'${word["display"]}\')');
+      _database.rawQuery(
+          'UPDATE \'Collection-$language-All\' SET groups = \'${json.encode([
+            ...wordCollections,
+            collection
+          ])}\' WHERE id = ${word["id"]}');
+    }
+  }
+
+  removeFrom(String collection, Map<String, dynamic> word,
+      [String? language, List<String>? wordCollections]) async {
+    language ??= languages.firstWhere(
+        (lang) => RegExp("Collection-$lang-.+").hasMatch(collection));
+    wordCollections ??= await getWordCollections(language, word["id"]);
+
+    log(collection);
+    if ("Collection-$language-All" == collection) {
+      wordCollections!.forEach((wordCollection) {
+        if (wordCollection.startsWith("Coll"))
+          _database.rawQuery(
+              'DELETE FROM \'$wordCollection\' WHERE id = ${word["id"]}');
+      });
+    } else {
+      _database.rawQuery(
+          'UPDATE \'Collection-$language-All\' SET groups = \'${json.encode(wordCollections!.where((el) => el != collection).toList())}\' WHERE id = ${word["id"]}');
+    }
+    _database.rawQuery('DELETE FROM \'$collection\' WHERE id = ${word["id"]}');
   }
 }
