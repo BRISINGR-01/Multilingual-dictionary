@@ -87,7 +87,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
   @override
   void initState() {
     widget.databaseHelper.getUserData().then((data) => setState(() {
-          data["languages"].forEach((lang) {
+          for (String lang in widget.databaseHelper.languages) {
             int size = data[lang] == null ? 0 : int.parse(data[lang]);
 
             languagesData[lang] = {};
@@ -95,7 +95,7 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
             languagesData[lang]!["isDownloaded"] = true;
             // the provided size can be zero which means the databse was deleted
             // or null which means it was never downloaded
-          });
+          }
         }));
     super.initState();
   }

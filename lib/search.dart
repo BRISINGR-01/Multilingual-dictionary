@@ -26,10 +26,10 @@ class SearchState extends State<Search> {
 
     databaseHelper.getUserData().then((data) async {
       String currentLanguage = data["currentLanguage"] ?? "";
-      List<String> languages = data["languages"];
 
-      if (!languages.contains(currentLanguage) && languages.isNotEmpty) {
-        currentLanguage = languages[0];
+      if (!databaseHelper.languages.contains(currentLanguage) &&
+          databaseHelper.languages.isNotEmpty) {
+        currentLanguage = databaseHelper.languages[0];
       }
 
       setState(() {

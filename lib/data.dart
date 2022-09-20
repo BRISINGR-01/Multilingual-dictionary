@@ -47,15 +47,14 @@ class DatabaseHelper {
         //   }
         // });
 
-        // _database.rawQuery('DROP TABLE "Collection-Dutch-All"');
-
         // await _database.rawQuery(
         //     'UPDATE "userData" SET value = \'{"All": 61155}\' WHERE name = "collection-icons"');
 
+        // _database.rawQuery('DROP TABLE "Collection-Dutch-All"');
         // await _database.rawQuery('''
         //   CREATE TABLE 'Collection-Dutch-All' (
-        //     id INTEGER ,
-        //     display TEXT,
+        //     id INTEGER,
+        //     display TEXT NOT NULL,
         //     groups TEXT
         //   );
         // ''');
@@ -88,10 +87,7 @@ class DatabaseHelper {
 
     QueryResult data = await _database.rawQuery('SELECT * FROM \'userData\'');
 
-    return {
-      "languages": languages,
-      for (var entry in data) entry["name"] as String: entry["value"]
-    };
+    return {for (var entry in data) entry["name"] as String: entry["value"]};
   }
 
   setUserData(String name, String value) async {
@@ -100,7 +96,7 @@ class DatabaseHelper {
       return setUserData(name, value);
     }
 
-    _database.rawQuery(
+    return _database.rawQuery(
         'UPDATE \'userData\' SET value = \'$value\' WHERE name = \'$name\'');
   }
 
@@ -303,8 +299,15 @@ class CollectionsFunctions {
     _all.removeWhere((element) => element["fullTitle"] == title);
   }
 
-  Future<QueryResult> getWords(String title) {
-    return _database.rawQuery('SELECT * FROM \'$title\'');
+  Future<Map<String, List>> getWords(String title) async {
+    List<int> order = List<int>.from(json.decode((await _database.rawQuery(
+            "SELECT value from 'userData' WHERE name = '$title-order'"))[0]
+        ["value"]));
+
+    return {
+      "order": order,
+      "words": await _database.rawQuery('SELECT * FROM \'$title\'')
+    };
   }
 
   Future<List<String>?> getWordCollections(String language, int id) async {
@@ -318,7 +321,12 @@ class CollectionsFunctions {
   }
 
   addTo(String collection, Map<String, dynamic> word, String language,
-      List<String> wordCollections) async {
+      List<String> wordCollections,
+      [List<int>? order]) async {
+    order ??= List<int>.from(json.decode((await _database.rawQuery(
+            "SELECT value from 'userData' WHERE name = '$collection-order'"))[0]
+        ["value"]));
+
     if ("Collection-$language-All" == collection) {
       _database.rawQuery(
           'INSERT INTO \'$collection\' (id, display, groups) VALUES (\'${word["id"]}\', \'${word["display"]}\', \'[]\')');
@@ -331,6 +339,10 @@ class CollectionsFunctions {
             collection
           ])}\' WHERE id = ${word["id"]}');
     }
+    _database.rawQuery('UPDATE \'userData\' SET value = \'${json.encode([
+          ...order,
+          word["id"]
+        ])}\' WHERE name = \'$collection-order\'');
   }
 
   removeFrom(String collection, Map<String, dynamic> word,
@@ -349,5 +361,10 @@ class CollectionsFunctions {
           'UPDATE \'Collection-$language-All\' SET groups = \'${json.encode(wordCollections!.where((el) => el != collection).toList())}\' WHERE id = ${word["id"]}');
     }
     _database.rawQuery('DELETE FROM \'$collection\' WHERE id = ${word["id"]}');
+  }
+
+  setOrder(String collection, List<int> order) {
+    _database.rawQuery(
+        'UPDATE \'userData\' SET value = \'${json.encode(order)}\' WHERE name = \'$collection-order\'');
   }
 }

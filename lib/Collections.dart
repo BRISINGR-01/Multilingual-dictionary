@@ -2,10 +2,12 @@
 
 import 'dart:convert';
 
+import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/data.dart';
 import 'package:multilingual_dictionary/shared/LanguagesWithIcons.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
+import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 
 class CollectionsHome extends StatelessWidget {
@@ -228,7 +230,9 @@ class Collection extends StatefulWidget {
 }
 
 class _CollectionState extends State<Collection> {
-  List<Map<String, dynamic>> words = [];
+  List<Map<String, dynamic>>? words;
+  List<int>? order;
+  bool isEditing = false;
 
   @override
   void initState() {
@@ -236,7 +240,11 @@ class _CollectionState extends State<Collection> {
     widget.databaseHelper.collections.getWords(widget.name).then((value) {
       if (mounted) {
         setState(() {
-          words = List.of(value);
+          order = List<int>.from(value["order"]!.toList());
+          words = List<Map<String, dynamic>>.from(value["words"]!.toList());
+          words = order!
+              .map((id) => words!.firstWhere((word) => word["id"] == id))
+              .toList();
         });
       }
     });
@@ -244,75 +252,138 @@ class _CollectionState extends State<Collection> {
 
   @override
   Widget build(BuildContext context) {
+    if (words == null) return const Loader();
+
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: ListTile(
-            contentPadding: const EdgeInsets.all(0),
-            horizontalTitleGap: 0,
-            leading: widget.icon != null
-                ? Icon(
-                    IconData(widget.icon!, fontFamily: "MaterialIcons"),
-                    color: Colors.white,
-                  )
-                : null,
-            title: FittedBox(
-              alignment: Alignment.centerLeft,
-              fit: BoxFit.scaleDown,
-              child: Text(
-                widget.name.replaceFirst(RegExp(r"Collection-\w+-"), ""),
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 30),
-              ),
-            )),
-        actions: widget.name == "Collection-${widget.language}-All"
-            ? null
-            : [
+            appBar: AppBar(
+              title: ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  horizontalTitleGap: 0,
+                  leading: widget.icon != null
+                      ? Icon(
+                          IconData(widget.icon!, fontFamily: "MaterialIcons"),
+                          color: Colors.white,
+                        )
+                      : null,
+                  title: FittedBox(
+                    alignment: Alignment.centerLeft,
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      widget.name.replaceFirst(RegExp(r"Collection-\w+-"), ""),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 30),
+                    ),
+                  )),
+              actions: [
+                if (widget.name != "Collection-${widget.language}-All" &&
+                    isEditing)
+                  IconButton(
+                      onPressed: () {
+                        widget.deleteCollection();
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.delete)),
                 IconButton(
                     onPressed: () {
-                      widget.deleteCollection();
-                      Navigator.pop(context);
+                      setState(() {
+                        isEditing = !isEditing;
+                      });
                     },
-                    icon: const Icon(Icons.delete))
+                    icon: Icon(isEditing ? Icons.done : Icons.settings))
               ],
-      ),
-      body: words.isEmpty
-          ? Center(
-              child: Padding(
-              padding: const EdgeInsets.all(80),
-              child: Text(
-                "No words saved here!",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ))
-          : Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: ListView.builder(
-                  itemCount: words.length,
-                  itemBuilder: ((context, index) => ListTile(
-                        title: Text(words[index]["display"]),
-                        onTap: () async {
-                          String returnData = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => WordDisplay(
-                                  id: words[index]["id"],
-                                  databaseHelper: widget.databaseHelper,
-                                  language: widget.language,
-                                ),
-                              ));
-
-                          if (!json.decode(returnData).contains(widget.name)) {
-                            setState(() {
-                              words.removeAt(index);
-                            });
-                          }
-                        },
-                      ))),
             ),
-    ));
+            body: words!.isEmpty
+                ? Center(
+                    child: Padding(
+                    padding: const EdgeInsets.all(80),
+                    child: Text(
+                      "No words saved here!",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ))
+                : DragAndDropLists(
+                    children: [
+                      DragAndDropList(
+                          children: List.generate(
+                        words!.length,
+                        (index) => DragAndDropItem(
+                            child: ListTile(
+                          title: Text(words![index]["display"]),
+                          onTap: isEditing
+                              ? null
+                              : () async {
+                                  String returnData = await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => WordDisplay(
+                                          id: words![index]["id"],
+                                          databaseHelper: widget.databaseHelper,
+                                          language: widget.language,
+                                        ),
+                                      ));
+
+                                  if (!json
+                                      .decode(returnData)
+                                      .contains(widget.name)) {
+                                    setState(() {
+                                      words!.removeAt(index);
+                                    });
+                                  }
+                                },
+                        )),
+                      ))
+                    ],
+                    onItemReorder: (int oldItemIndex, int oldListIndex,
+                        int newItemIndex, int newListIndex) {
+                      setState(() {
+                        var movedItem = words!.removeAt(oldItemIndex);
+                        words!.insert(newItemIndex, movedItem);
+                      });
+                      widget.databaseHelper.collections.setOrder(widget.name,
+                          words!.map((word) => word["id"] as int).toList());
+                    },
+                    onListReorder: (_, __) {},
+                    listPadding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
+                    itemDivider: const Divider(
+                      thickness: 2,
+                      height: 2,
+                    ),
+                    itemDecorationWhileDragging: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset:
+                              const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    listInnerDecoration: BoxDecoration(
+                      color: Theme.of(context).canvasColor,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    lastItemTargetHeight: 8,
+                    addLastItemTargetHeightToTop: true,
+                    lastListTargetSize: 40,
+                    itemDragHandle: isEditing
+                        ? const DragHandle(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.menu,
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          )
+                        : null,
+                  )));
   }
 }

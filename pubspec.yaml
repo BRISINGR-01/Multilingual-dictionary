@@ -19,6 +19,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.9
   http: ^0.13.4
   flutter_iconpicker: ^3.2.1
+  drag_and_drop_lists: ^0.3.3
 
 dev_dependencies:
   args: ^2.3.1
