@@ -46,27 +46,66 @@ class _GrammarPageState extends State<GrammarPage> {
           if (textLanguage == "") {
             textLanguage = availableLanguages.contains(widget.language)
                 ? widget.language
-                : "English";
+                : availableLanguages.contains("Emglish")
+                    ? "English"
+                    : availableLanguages.first;
           }
+
           return Scaffold(
             appBar: AppBar(
               title: Text(widget.language),
-              actions: availableLanguages
-                  .map<Widget>((item) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      child: IconButton(
-                        tooltip: item,
-                        icon: data["languageData"]["availableFlags"]
-                                .containsKey(item)
-                            ? Image.asset(
-                                'assets/flags/${data["languageData"]["availableFlags"][item]}.png')
-                            : Text(item),
-                        onPressed: () => setState(() {
-                          textLanguage = item;
-                        }),
-                      )))
-                  .toList(),
+              // actions: availableLanguages
+              //     .map<Widget>((language) => Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: 5),
+              //         child: CircleAvatar(
+              //           backgroundColor: availableLanguages.length == 1
+              //               ? null
+              //               : textLanguage == language
+              //                   ? Colors.white.withOpacity(.35)
+              //                   : const Color(0x00000000),
+              //           child: IconButton(
+              //             tooltip: language,
+              //             icon: data["languageData"]["availableFlags"]
+              //                     .containsKey(language)
+              //                 ? Image.asset(
+              //                     'assets/flags/${data["languageData"]["availableFlags"][language]}.png')
+              //                 : Text(language),
+              //             onPressed: () => setState(() {
+              //               textLanguage = language;
+              //             }),
+              //           ),
+              //         )))
+              //     .toList(),
+              actions: [
+                DropdownButton(
+                    value: textLanguage,
+                    underline: Container(),
+                    items: availableLanguages
+                        .map((language) => DropdownMenuItem(
+                            value: language,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  !data["languageData"]["availableFlags"]
+                                          .containsKey(language)
+                                      ? Image.asset(
+                                          'assets/flags/${data["languageData"]["availableFlags"][language]}.png',
+                                          fit: BoxFit.contain,
+                                          height: 20,
+                                        )
+                                      : Text(language)
+                                ],
+                              ),
+                            )))
+                        .toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        textLanguage = val as String;
+                      });
+                    })
+              ],
             ),
             body: Padding(
               padding: const EdgeInsets.only(top: 16),
@@ -123,7 +162,7 @@ class _GrammarPageState extends State<GrammarPage> {
   }
 }
 
-class GrammarSection extends StatefulWidget {
+class GrammarSection extends StatelessWidget {
   final String title;
   final String language;
   final List<String> text;
@@ -138,11 +177,6 @@ class GrammarSection extends StatefulWidget {
     required this.text,
   }) : super(key: key);
 
-  @override
-  State<GrammarSection> createState() => _GrammarSectionState();
-}
-
-class _GrammarSectionState extends State<GrammarSection> {
   List<TableRow> getTableRow(List rows, bool noHeader, context) {
     List<TableRow> tableRows = [];
     for (var i = 0; i < rows.length; i++) {
@@ -170,120 +204,70 @@ class _GrammarSectionState extends State<GrammarSection> {
 
   @override
   Widget build(BuildContext context) {
-    String textLanguage = "";
-
     return SafeArea(
-        child: FutureBuilder(
-      future: getData(widget.databaseHelper, widget.language),
-      builder: ((context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Loader();
-        }
-
-        if (snapshot.data == null) {
-          return const Text("No grammar");
-        }
-
-        Map<String, dynamic> data = snapshot.data as Map<String, dynamic>;
-        List<String> availableLanguages = data["grammar"].keys.toList();
-
-        if (textLanguage == "") {
-          textLanguage = availableLanguages.contains(widget.language)
-              ? widget.language
-              : "English";
-        }
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-            actions: availableLanguages
-                .map<Widget>((item) => CircleAvatar(
-                      backgroundColor: item == textLanguage
-                          ? Theme.of(context).colorScheme.primary
-                          : const Color.fromARGB(0, 0, 0, 0),
-                      child: IconButton(
-                        tooltip: item,
-                        icon: (data["languageData"]["availableFlags"]
-                                .containsKey(item)
-                            ? Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 1),
-                                ),
-                                child: Image.asset(
-                                    'assets/flags/${data["languageData"]["availableFlags"][item]}.png'),
-                              )
-                            : Text(item)),
-                        onPressed: () => setState(() {
-                          textLanguage = item;
-                        }),
-                      ),
-                    ))
-                .toList(),
-          ),
-          body: ListView.separated(
-            padding: const EdgeInsets.only(bottom: 64),
-            itemCount: widget.text.length,
-            separatorBuilder: ((context, index) =>
-                widget.text[index].startsWith("h: ")
-                    ? const Divider(indent: 24)
-                    : Container()),
-            itemBuilder: ((context, index) {
-              if (widget.text[index].startsWith("@table:")) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                  child: Table(
-                      border: TableBorder.all(
-                          borderRadius: BorderRadius.circular(20)),
-                      children: getTableRow(
-                          widget.tables[widget.text[index]
-                              .replaceFirst("@table:", "")] as List,
-                          widget.tables["no-header"]?.contains(widget
-                                  .text[index]
-                                  .replaceFirst("@table:", "")) ??
-                              false,
-                          context)),
-                );
-              } else if (widget.text[index].startsWith("h: ")) {
-                return ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 24, 0, 0),
-                    child: Text(
-                      widget.text[index].replaceFirst("h: ", ""),
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 25,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                );
-              } else if (widget.text[index].startsWith("\$")) {
-                return ListTile(
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 32),
-                    child: Text(
-                      widget.text[index]
-                          .replaceFirst("\$", "\u2022 ")
-                          .split("|")
-                          .join("\n\u2022 "),
-                      style: const TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                );
-              }
-
-              return ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Text(
-                    widget.text[index],
-                  ),
+        child: Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: ListView.separated(
+        padding: const EdgeInsets.only(bottom: 64),
+        itemCount: text.length,
+        separatorBuilder: ((context, index) => text[index].startsWith("h: ")
+            ? const Divider(indent: 24)
+            : Container()),
+        itemBuilder: ((context, index) {
+          if (text[index].startsWith("@table:")) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              child: Table(
+                  border:
+                      TableBorder.all(borderRadius: BorderRadius.circular(20)),
+                  children: getTableRow(
+                      tables[text[index].replaceFirst("@table:", "")] as List,
+                      tables["no-header"]?.contains(
+                              text[index].replaceFirst("@table:", "")) ??
+                          false,
+                      context)),
+            );
+          } else if (text[index].startsWith("h: ")) {
+            return ListTile(
+              title: Padding(
+                padding: const EdgeInsets.fromLTRB(8, 24, 0, 0),
+                child: Text(
+                  text[index].replaceFirst("h: ", ""),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 25,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500),
                 ),
-              );
-            }),
-          ),
-        );
-      }),
+              ),
+            );
+          } else if (text[index].startsWith("\$")) {
+            return ListTile(
+              title: Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: Text(
+                  text[index]
+                      .replaceFirst("\$", "\u2022 ")
+                      .split("|")
+                      .join("\n\u2022 "),
+                  style: const TextStyle(fontStyle: FontStyle.italic),
+                ),
+              ),
+            );
+          }
+
+          return ListTile(
+            title: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text(
+                text[index],
+              ),
+            ),
+          );
+        }),
+      ),
     ));
   }
 }

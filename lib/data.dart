@@ -30,9 +30,6 @@ class DatabaseHelper {
                 'SELECT name FROM sqlite_schema WHERE type=\'table\''))
             .map((e) => e["name"]));
 
-        // await _database.rawQuery(
-        //     'DELETE FROM \'userData\' where name = \'collection-icons\'');
-
         languages = tables
             .where((table) =>
                 table != "sqlite_sequence" &&
@@ -329,7 +326,7 @@ class CollectionsFunctions {
 
     if ("Collection-$language-All" == collection) {
       _database.rawQuery(
-          'INSERT INTO \'$collection\' (id, display, groups) VALUES (\'${word["id"]}\', \'${word["display"]}\', \'[]\')');
+          'INSERT INTO \'$collection\' (id, display, groups) VALUES (\'${word["id"]}\', \'${word["display"]} - ${word["senses"]}\', \'[]\')');
     } else {
       _database.rawQuery(
           'INSERT INTO \'$collection\' (id, display) VALUES (\'${word["id"]}\', \'${word["display"]}\')');
