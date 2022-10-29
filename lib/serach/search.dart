@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/Collections.dart';
+import 'package:multilingual_dictionary/Drawer.dart';
 import 'package:multilingual_dictionary/data.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
-import 'package:multilingual_dictionary/grammar.dart';
+
+class Search extends StatefulWidget {
+  final String querry;
+  final String? language;
+  const Search({super.key, required this.querry, this.language});
+
+  @override
+  SearchState createState() => SearchState();
+}
 
 class SearchState extends State<Search> {
   DatabaseHelper databaseHelper = DatabaseHelper.init();
@@ -25,18 +33,25 @@ class SearchState extends State<Search> {
     searchFieldFocusNode = FocusNode();
 
     databaseHelper.getUserData().then((data) async {
-      String currentLanguage = data["currentLanguage"] ?? "";
+      String currentLanguage = widget.language ?? data["currentLanguage"] ?? "";
 
       if (!databaseHelper.languages.contains(currentLanguage) &&
           databaseHelper.languages.isNotEmpty) {
         currentLanguage = databaseHelper.languages[0];
       }
 
+      controller.text = widget.querry;
+
       setState(() {
         _currentLanguage = currentLanguage;
-        _isModeToEnglish = data["isModeToEnglish"] != "false";
+        _isModeToEnglish =
+            widget.language != null ? true : data["isModeToEnglish"] != "false";
         _isLoading = false;
+        _query = widget.querry;
       });
+      if (widget.querry.isNotEmpty) {
+        fetchOptions(widget.querry);
+      }
     });
   }
 
@@ -115,74 +130,9 @@ class SearchState extends State<Search> {
         ),
         body: Scaffold(
             key: _key,
-            drawer: Drawer(
-                child: ListView(padding: EdgeInsets.zero, children: [
-              ListTile(
-                title: const Text('Settings'),
-                leading: Icon(Icons.settings,
-                    color: Theme.of(context).colorScheme.primary),
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black38, width: .3),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Download Languages'),
-                leading: Icon(Icons.download,
-                    color: Theme.of(context).colorScheme.primary),
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black38, width: .3),
-                ),
-                onTap: () {
-                  setState(() {
-                    shouldAutoFocus = false;
-                  });
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DownloadLanguages(
-                          downloadedLanguages: databaseHelper.languages,
-                          editLanguagesList: editLanguagesList,
-                          databaseHelper: databaseHelper,
-                        ),
-                      ));
-                },
-              ),
-              ListTile(
-                title: const Text('Collections'),
-                leading: Icon(Icons.collections_bookmark_outlined,
-                    color: Theme.of(context).colorScheme.primary),
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black38, width: .3),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CollectionsHome(
-                          databaseHelper: databaseHelper,
-                        ),
-                      ));
-                },
-              ),
-              ListTile(
-                title: const Text('Grammar'),
-                leading: Icon(Icons.menu_book_outlined,
-                    color: Theme.of(context).colorScheme.primary),
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black38, width: .3),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Grammar(
-                          databaseHelper: databaseHelper,
-                        ),
-                      ));
-                },
-              ),
-            ])),
+            drawer: CustomDrawer(
+                databaseHelper: databaseHelper,
+                editLanguagesList: editLanguagesList),
             body: _isLoading
                 ? const Loader()
                 : databaseHelper.languages.isEmpty
@@ -406,11 +356,4 @@ class SearchState extends State<Search> {
       ),
     );
   }
-}
-
-class Search extends StatefulWidget {
-  const Search({super.key});
-
-  @override
-  SearchState createState() => SearchState();
 }

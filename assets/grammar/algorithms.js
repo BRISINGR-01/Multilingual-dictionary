@@ -25,7 +25,7 @@ function Italian(
           [...row.children].map((col) => col.innerText)
         );
         index2++;
-        localStorage.index = index2 + 1;
+        localStorage.index = index2;
       default:
         break;
     }

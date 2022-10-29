@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:multilingual_dictionary/search.dart';
+import 'package:multilingual_dictionary/serach/search.dart';
 
 void main() async {
   Color tertiary = const Color.fromARGB(255, 201, 143, 253);
@@ -14,7 +14,9 @@ void main() async {
   ));
 
   runApp(MaterialApp(
-    home: const Search(),
+    home: const Search(
+      querry: "",
+    ),
     theme: ThemeData(
       fontFamily: "Noto",
       colorScheme: ColorScheme(

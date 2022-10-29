@@ -231,9 +231,9 @@
     ],
     [
       "",
-      "Maschile ",
+      "Maschile",
       "Femminile",
-      "Maschile ",
+      "Maschile",
       "Femminile"
     ],
     [
@@ -310,15 +310,15 @@
     ],
     [
       "buono",
-      "più buono\n\nmigliore",
-      "buonissimo\n\nottimo",
-      "il più buono\n\nil migliore"
+      "più buono - migliore",
+      "buonissimo - ottimo",
+      "il più buono - il migliore"
     ],
     [
       "cattivo",
-      "più cattivo\n\npeggiore",
-      "(cattivissimo)\n\npessimo",
-      "il più cattivo\n\nil peggiore"
+      "più cattivo - peggiore",
+      "(cattivissimo) - pessimo",
+      "il più cattivo - il peggiore"
     ]
   ],
   "13": [
@@ -330,15 +330,15 @@
     ],
     [
       "grande",
-      "più grande\n\nmaggiore",
-      "grandissimo\n\nmassimo",
-      "il più grande\n\nil maggiore"
+      "più grande - maggiore",
+      "grandissimo - massimo",
+      "il più grande - il maggiore"
     ],
     [
       "piccolo",
-      "più piccolo\n\nminore",
-      "piccolissimo\n\nminimo",
-      "il più piccolo\n\nil minore"
+      "più piccolo - minore",
+      "piccolissimo - minimo",
+      "il più piccolo - il minore"
     ]
   ],
   "14": [
@@ -350,15 +350,15 @@
     ],
     [
       "alto",
-      "più alto\n\nsuperiore",
-      "altissimo\n\nsupremo / sommo",
-      "il più alto\n\nil superiore"
+      "più alto - superiore",
+      "altissimo - supremo / sommo",
+      "il più alto - il superiore"
     ],
     [
       "basso",
-      "più basso\n\ninferiore",
-      "bassissimo\n\ninfimo",
-      "il più basso\n\nl’inferiore"
+      "più basso - inferiore",
+      "bassissimo - infimo",
+      "il più basso - l’inferiore"
     ]
   ],
   "15": [
@@ -574,7 +574,7 @@
     ],
     [
       "gli",
-      "a lui "
+      "a lui"
     ],
     [
       "le",
@@ -661,6 +661,3290 @@
       "Glieli",
       "Gliele",
       "Gliene"
+    ]
+  ],
+  "25": [
+    [
+      "",
+      "PENSARE",
+      "PRENDERE",
+      "PARTIRE"
+    ],
+    [
+      "io",
+      "penserei",
+      "prenderei",
+      "partirei"
+    ],
+    [
+      "tu",
+      "penseresti",
+      "prenderesti",
+      "partiresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "penserebbe",
+      "prenderebbe",
+      "partirebbe"
+    ],
+    [
+      "noi",
+      "penseremmo",
+      "prenderemmo",
+      "partiremmo"
+    ],
+    [
+      "voi",
+      "pensereste",
+      "prendereste",
+      "partireste"
+    ],
+    [
+      "loro",
+      "penserebbero",
+      "prenderebbero",
+      "partirebbero"
+    ]
+  ],
+  "26": [
+    [
+      "",
+      "AVERE",
+      "ESSERE"
+    ],
+    [
+      "io",
+      "avrei",
+      "sarei"
+    ],
+    [
+      "tu",
+      "avresti",
+      "saresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "avrebbe",
+      "sarebbe"
+    ],
+    [
+      "noi",
+      "avremmo",
+      "saremmo"
+    ],
+    [
+      "voi",
+      "avreste",
+      "sareste"
+    ],
+    [
+      "loro",
+      "avrebbero",
+      "sarebbero"
+    ]
+  ],
+  "27": [
+    [
+      "",
+      "CERCARE",
+      "PAGARE"
+    ],
+    [
+      "io",
+      "cercherei",
+      "pagherei"
+    ],
+    [
+      "tu",
+      "cercheresti",
+      "pagheresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "cercherebbe",
+      "pagherebbe"
+    ],
+    [
+      "noi",
+      "cercheremmo",
+      "pagheremmo"
+    ],
+    [
+      "voi",
+      "cerchereste",
+      "paghereste"
+    ],
+    [
+      "loro",
+      "cercherebbero",
+      "pagherebbero"
+    ]
+  ],
+  "28": [
+    [
+      "",
+      "DOVERE",
+      "POTERE",
+      "VEDERE",
+      "SAPERE",
+      "ANDARE",
+      "CADERE",
+      "VIVERE"
+    ],
+    [
+      "io",
+      "dovrei",
+      "potrei",
+      "vedrei",
+      "saprei",
+      "andrei",
+      "cadrei",
+      "vivrei"
+    ],
+    [
+      "tu",
+      "dovresti",
+      "potresti",
+      "vedresti",
+      "sapresti",
+      "andresti",
+      "cadresti",
+      "vivresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "dovrebbe",
+      "potrebbe",
+      "vedrebbe",
+      "saprebbe",
+      "andrebbe",
+      "cadrebbe",
+      "vivrebbe"
+    ],
+    [
+      "noi",
+      "dovremmo",
+      "potremmo",
+      "vedremmo",
+      "sapremmo",
+      "andremmo",
+      "cadremmo",
+      "vivremmo"
+    ],
+    [
+      "voi",
+      "dovreste",
+      "potreste",
+      "vedreste",
+      "sapreste",
+      "andreste",
+      "cadreste",
+      "vivreste"
+    ],
+    [
+      "loro",
+      "dovrebbero",
+      "potrebbero",
+      "vedrebbero",
+      "saprebbero",
+      "andrebbero",
+      "cadrebbero",
+      "vivrebbero"
+    ]
+  ],
+  "29": [
+    [
+      "",
+      "BERE",
+      "VOLERE",
+      "VENIRE",
+      "RIMANERE",
+      "TENERE"
+    ],
+    [
+      "io",
+      "berrei",
+      "vorrei",
+      "verrei",
+      "rimarrei",
+      "terrei"
+    ],
+    [
+      "tu",
+      "berresti",
+      "vorresti",
+      "verresti",
+      "rimarresti",
+      "terresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "berrebbe",
+      "vorrebbe",
+      "verrebbe",
+      "rimarrebbe",
+      "terrebbe"
+    ],
+    [
+      "noi",
+      "berremmo",
+      "vorremmo",
+      "verremmo",
+      "rimarremmo",
+      "terremmo"
+    ],
+    [
+      "voi",
+      "berreste",
+      "vorreste",
+      "verreste",
+      "rimarreste",
+      "terreste"
+    ],
+    [
+      "loro",
+      "berrebbero",
+      "vorrebbero",
+      "verrebbero",
+      "rimarrebbero",
+      "terrebbero"
+    ]
+  ],
+  "30": [
+    [
+      "",
+      "FARE",
+      "DARE",
+      "STARE"
+    ],
+    [
+      "io",
+      "farei",
+      "darei",
+      "starei"
+    ],
+    [
+      "tu",
+      "faresti",
+      "daresti",
+      "staresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "farebbe",
+      "darebbe",
+      "starebbe"
+    ],
+    [
+      "noi",
+      "faremmo",
+      "daremmo",
+      "staremmo"
+    ],
+    [
+      "voi",
+      "fareste",
+      "dareste",
+      "stareste"
+    ],
+    [
+      "loro",
+      "farebbero",
+      "darebbero",
+      "starebbero"
+    ]
+  ],
+  "31": [
+    [
+      "",
+      "TRADURRE",
+      "PRODURRE",
+      "CONDURRE"
+    ],
+    [
+      "io",
+      "tradurrei",
+      "produrrei",
+      "condurrei"
+    ],
+    [
+      "tu",
+      "tradurresti",
+      "produrresti",
+      "condurresti"
+    ],
+    [
+      "lui/lei/Lei",
+      "tradurrebbe",
+      "produrrebbe",
+      "condurrebbe"
+    ],
+    [
+      "noi",
+      "tradurremmo",
+      "produrremmo",
+      "condurremmo"
+    ],
+    [
+      "voi",
+      "tradurreste",
+      "produrreste",
+      "condurreste"
+    ],
+    [
+      "loro",
+      "tradurrebbero",
+      "produrrebbero",
+      "condurrebbero"
+    ]
+  ],
+  "32": [
+    [
+      "",
+      "MANGIARE",
+      "VEDERE",
+      "VENIRE"
+    ],
+    [
+      "io",
+      "avrei mangiato",
+      "avrei visto",
+      "sarei venuto/a"
+    ],
+    [
+      "tu",
+      "avresti mangiato",
+      "avresti visto",
+      "saresti venuto/a"
+    ],
+    [
+      "lui/lei/Lei",
+      "avrebbe mangiato",
+      "avrebbe visto",
+      "sarebbe venuto/a"
+    ],
+    [
+      "noi",
+      "avremmo mangiato",
+      "avremmo visto",
+      "saremmo venuti/e"
+    ],
+    [
+      "voi",
+      "avreste mangiato",
+      "avreste visto",
+      "sareste venuti/e"
+    ],
+    [
+      "loro",
+      "avrebbero mangiato",
+      "avrebbero visto",
+      "sarebbero venuti/e"
+    ]
+  ],
+  "33": [
+    [
+      "",
+      "AVERE",
+      "ESSERE"
+    ],
+    [
+      "io",
+      "avrei avuto",
+      "sarei stato/a"
+    ],
+    [
+      "tu",
+      "avresti avuto",
+      "saresti stato/a"
+    ],
+    [
+      "lui/lei/Lei",
+      "avrebbe avuto",
+      "sarebbe stato/a"
+    ],
+    [
+      "noi",
+      "avremmo avuto",
+      "saremmo stati/e"
+    ],
+    [
+      "voi",
+      "avreste avuto",
+      "sareste stati/e"
+    ],
+    [
+      "loro",
+      "avrebbero avuto",
+      "sarebbero stati/e"
+    ]
+  ],
+  "34": [
+    [
+      "",
+      "ABITARE",
+      "VENDERE",
+      "SENTIRE"
+    ],
+    [
+      "io",
+      "abiti",
+      "venda",
+      "senta"
+    ],
+    [
+      "tu",
+      "abiti",
+      "venda",
+      "senta"
+    ],
+    [
+      "lui/lei/Lei",
+      "abiti",
+      "venda",
+      "senta"
+    ],
+    [
+      "noi",
+      "abitiamo",
+      "vendiamo",
+      "sentiamo"
+    ],
+    [
+      "voi",
+      "abitiate",
+      "vendiate",
+      "sentiate"
+    ],
+    [
+      "loro",
+      "abitino",
+      "vendano",
+      "sentano"
+    ]
+  ],
+  "35": [
+    [
+      "",
+      "CERCARE",
+      "PAGARE"
+    ],
+    [
+      "io",
+      "cerchi",
+      "paghi"
+    ],
+    [
+      "tu",
+      "cerchi",
+      "paghi"
+    ],
+    [
+      "lui/lei/Lei",
+      "cerchi",
+      "paghi"
+    ],
+    [
+      "noi",
+      "cerchiamo",
+      "paghiamo"
+    ],
+    [
+      "voi",
+      "cerchiate",
+      "paghiate"
+    ],
+    [
+      "loro",
+      "cerchino",
+      "paghino"
+    ]
+  ],
+  "36": [
+    [
+      "",
+      "ANDARE",
+      "BERE",
+      "DARE",
+      "DIRE",
+      "DOVERE",
+      "FARE"
+    ],
+    [
+      "io",
+      "vada",
+      "beva",
+      "dia",
+      "dica",
+      "debba",
+      "faccia"
+    ],
+    [
+      "tu",
+      "vada",
+      "beva",
+      "dia",
+      "dica",
+      "debba",
+      "faccia"
+    ],
+    [
+      "lui/lei/Lei",
+      "vada",
+      "beva",
+      "dia",
+      "dica",
+      "debba",
+      "faccia"
+    ],
+    [
+      "noi",
+      "andiamo",
+      "beviamo",
+      "diamo",
+      "diciamo",
+      "dobbiamo",
+      "facciamo"
+    ],
+    [
+      "voi",
+      "andiate",
+      "beviate",
+      "diate",
+      "diciate",
+      "dobbiate",
+      "facciate"
+    ],
+    [
+      "loro",
+      "vadano",
+      "bevano",
+      "diano",
+      "dicano",
+      "debbano",
+      "facciano"
+    ]
+  ],
+  "37": [
+    [
+      "",
+      "POTERE",
+      "RIMANERE",
+      "SALIRE",
+      "SAPERE",
+      "SCEGLIERE"
+    ],
+    [
+      "io",
+      "possa",
+      "rimanga",
+      "salga",
+      "sappia",
+      "scelga"
+    ],
+    [
+      "tu",
+      "possa",
+      "rimanga",
+      "salga",
+      "sappia",
+      "scelga"
+    ],
+    [
+      "lui/lei/Lei",
+      "possa",
+      "rimanga",
+      "salga",
+      "sappia",
+      "scelga"
+    ],
+    [
+      "noi",
+      "possiamo",
+      "rimaniamo",
+      "saliamo",
+      "sappiamo",
+      "scegliamo"
+    ],
+    [
+      "voi",
+      "possiate",
+      "rimaniate",
+      "saliate",
+      "sappiate",
+      "scegliate"
+    ],
+    [
+      "loro",
+      "possano",
+      "rimangano",
+      "salgano",
+      "sappiano",
+      "scelgano"
+    ]
+  ],
+  "38": [
+    [
+      "",
+      "STARE",
+      "TENERE",
+      "TOGLIERE",
+      "USCIRE",
+      "VENIRE",
+      "VOLERE"
+    ],
+    [
+      "io",
+      "stia",
+      "tenga",
+      "tolga",
+      "esca",
+      "venga",
+      "voglia"
+    ],
+    [
+      "tu",
+      "stia",
+      "tenga",
+      "tolga",
+      "esca",
+      "venga",
+      "voglia"
+    ],
+    [
+      "lui/lei/Lei",
+      "stia",
+      "tenga",
+      "tolga",
+      "esca",
+      "venga",
+      "voglia"
+    ],
+    [
+      "noi",
+      "stiamo",
+      "teniamo",
+      "togliamo",
+      "usciamo",
+      "veniamo",
+      "vogliamo"
+    ],
+    [
+      "voi",
+      "stiate",
+      "teniate",
+      "togliate",
+      "usciate",
+      "veniate",
+      "vogliate"
+    ],
+    [
+      "loro",
+      "stiano",
+      "tengano",
+      "tolgano",
+      "escano",
+      "vengano",
+      "vogliano"
+    ]
+  ],
+  "39": [
+    [
+      "",
+      "ESSERE",
+      "AVERE"
+    ],
+    [
+      "io",
+      "sia",
+      "abbia"
+    ],
+    [
+      "tu",
+      "sia",
+      "abbia"
+    ],
+    [
+      "lui/lei/Lei",
+      "sia",
+      "abbia"
+    ],
+    [
+      "noi",
+      "siamo",
+      "abbiamo"
+    ],
+    [
+      "voi",
+      "siate",
+      "abbiate"
+    ],
+    [
+      "loro",
+      "siano",
+      "abbiano"
+    ]
+  ],
+  "40": [
+    [
+      "",
+      "PARLARE ",
+      "PRENDERE ",
+      "USCIRE "
+    ],
+    [
+      "io",
+      "abbia parlato",
+      "abbia preso",
+      "sia uscito/a"
+    ],
+    [
+      "tu",
+      "abbia parlato",
+      "abbia preso",
+      "sia uscito/a"
+    ],
+    [
+      "lui/lei/Lei",
+      "abbia parlato",
+      "abbia preso",
+      "sia uscito/a"
+    ],
+    [
+      "noi",
+      "abbiamo parlato",
+      "abbiamo preso",
+      "siamo usciti/e"
+    ],
+    [
+      "voi",
+      "abbiate parlato",
+      "abbiate preso",
+      "siate usciti/e"
+    ],
+    [
+      "loro",
+      "abbiano parlato",
+      "abbiano preso",
+      "siano usciti/e"
+    ]
+  ],
+  "41": [
+    [
+      "",
+      "SUONARE",
+      "AVERE ",
+      "FINIRE"
+    ],
+    [
+      "io",
+      "suonassi",
+      "avessi",
+      "finissi",
+      "tu",
+      "suonassi",
+      "avessi",
+      "finissi",
+      "lui/lei/Lei",
+      "suonasse",
+      "avesse",
+      "finisse",
+      "noi",
+      "suonassimo",
+      "avessimo",
+      "finissimo",
+      "voi",
+      "suonaste",
+      "aveste",
+      "finiste",
+      "loro",
+      "suonassero",
+      "avessero",
+      "finissero"
+    ]
+  ],
+  "42": [
+    [
+      "",
+      "ESSERE"
+    ],
+    [
+      "io",
+      "fossi"
+    ],
+    [
+      "tu",
+      "fossi"
+    ],
+    [
+      "lui/lei/Lei",
+      "fosse"
+    ],
+    [
+      "noi",
+      "fossimo"
+    ],
+    [
+      "voi",
+      "foste"
+    ],
+    [
+      "loro",
+      "fossero"
+    ]
+  ],
+  "43": [
+    [
+      "",
+      "BERE",
+      "DARE",
+      "DIRE",
+      "FARE",
+      "STARE",
+      "TRADURRE"
+    ],
+    [
+      "io",
+      "bevessi",
+      "dessi",
+      "dicessi",
+      "facessi",
+      "stessi",
+      "traducessi"
+    ],
+    [
+      "tu",
+      "bevessi",
+      "dessi",
+      "dicessi",
+      "facessi",
+      "stessi",
+      "traducessi"
+    ],
+    [
+      "lui/lei/Lei",
+      "bevesse",
+      "desse",
+      "dicesse",
+      "facesse",
+      "stesse",
+      "traducesse"
+    ],
+    [
+      "noi",
+      "bevessimo",
+      "dessimo",
+      "dicessimo",
+      "facessimo",
+      "stessimo",
+      "traducessimo"
+    ],
+    [
+      "voi",
+      "beveste",
+      "deste",
+      "diceste",
+      "faceste",
+      "steste",
+      "traduceste"
+    ],
+    [
+      "loro",
+      "bevessero",
+      "dessero",
+      "dicessero",
+      "facessero",
+      "stessero",
+      "traducessero"
+    ]
+  ],
+  "44": [
+    [
+      "",
+      "COMPRARE",
+      "VENDERE",
+      "USCIRE"
+    ],
+    [
+      "io",
+      "avessi comprato",
+      "avessi venduto",
+      "fossi uscito/a"
+    ],
+    [
+      "tu",
+      "avessi comprato",
+      "avessi venduto",
+      "fossi uscito/a"
+    ],
+    [
+      "lui/lei/Lei",
+      "avesse comprato",
+      "avesse venduto",
+      "fosse uscito/a"
+    ],
+    [
+      "noi",
+      "avessimo comprato",
+      "avessimo venduto",
+      "fossimo usciti/e"
+    ],
+    [
+      "voi",
+      "aveste comprato",
+      "aveste venduto",
+      "foste usciti/e"
+    ],
+    [
+      "loro",
+      "avessero comprato",
+      "avessero venduto",
+      "fossero usciti/e"
+    ]
+  ],
+  "45": [
+    [
+      "",
+      "ESSERE",
+      "AVERE"
+    ],
+    [
+      "io",
+      "fossi stato/a",
+      "avessi avuto"
+    ],
+    [
+      "tu",
+      "fossi stato/a",
+      "avessi avuto"
+    ],
+    [
+      "lui/lei/Lei",
+      "fosse stato/a",
+      "avesse avuto"
+    ],
+    [
+      "noi",
+      "fossimo stati/e",
+      "avessimo avuto"
+    ],
+    [
+      "voi",
+      "foste stati/e",
+      "aveste avuto"
+    ],
+    [
+      "loro",
+      "fossero stati/e",
+      "avessero avuto"
+    ]
+  ],
+  "46": [
+    [
+      "",
+      "STARE",
+      "GERUNDIO"
+    ],
+    [
+      "io",
+      "sto",
+      ""
+    ],
+    [
+      "tu",
+      "stai",
+      "mangiando (-are)"
+    ],
+    [
+      "lui/lei/Lei",
+      "sta",
+      "leggendo (-ere)"
+    ],
+    [
+      "noi",
+      "stiamo",
+      "partendo (-ire)"
+    ],
+    [
+      "voi",
+      "state",
+      ""
+    ],
+    [
+      "loro",
+      "stanno",
+      ""
+    ]
+  ],
+  "47": [
+    [
+      "",
+      "STARE",
+      "GERUNDIO"
+    ],
+    [
+      "io",
+      "stavo",
+      ""
+    ],
+    [
+      "tu",
+      "stavi",
+      "mangiando (-are)"
+    ],
+    [
+      "lui/lei/Lei",
+      "stava",
+      "leggendo (-ere)"
+    ],
+    [
+      "noi",
+      "stavamo",
+      "partendo (-ire)"
+    ],
+    [
+      "voi",
+      "stavate",
+      ""
+    ],
+    [
+      "loro",
+      "stavano",
+      ""
+    ]
+  ],
+  "48": [
+    [
+      "",
+      "MANGIARE",
+      "SCRIVERE",
+      "SENTIRE"
+    ],
+    [
+      "Tu",
+      "Mangia",
+      "Scrivi",
+      "Senti"
+    ],
+    [
+      "Noi",
+      "mangiamo",
+      "Scriviamo",
+      "Sentiamo"
+    ],
+    [
+      "Voi",
+      "Mangiate",
+      "Scrivete",
+      "Sentite"
+    ]
+  ],
+  "49": [
+    [
+      "",
+      "Tu",
+      "Noi",
+      "Voi"
+    ],
+    [
+      "Andare",
+      "Va’",
+      "Andiamo",
+      "Andate"
+    ],
+    [
+      "Fare",
+      "Fa’",
+      "Facciamo",
+      "Fate"
+    ],
+    [
+      "Dire",
+      "Di’",
+      "Diciamo",
+      "Dite"
+    ],
+    [
+      "Dare",
+      "Da’",
+      "Diamo",
+      "Date"
+    ],
+    [
+      "Stare",
+      "Sta’",
+      "Stiamo",
+      "State"
+    ],
+    [
+      "Sapere",
+      "Sappi",
+      "Sappiamo",
+      "Sappiate"
+    ],
+    [
+      "Avere",
+      "Abbi",
+      "Abbiamo",
+      "Abbiate"
+    ],
+    [
+      "Essere",
+      "Sii",
+      "Siamo",
+      "Siate"
+    ]
+  ],
+  "50": [
+    [
+      "",
+      "MANGIARE",
+      "SCRIVERE",
+      "SENTIRE"
+    ],
+    [
+      "Tu",
+      "Non mangiare",
+      "Non scrivere",
+      "Non sentire"
+    ],
+    [
+      "Noi",
+      "Non mangiamo",
+      "Non scriviamo",
+      "Non sentiamo"
+    ],
+    [
+      "Voi",
+      "Non mangiate",
+      "Non scrivete",
+      "Non sentite"
+    ],
+    [
+      "Lei",
+      "Non mangi",
+      "Non scriva",
+      "Non senta"
+    ]
+  ],
+  "51": [
+    [
+      "",
+      "Tu",
+      "Noi",
+      "Voi"
+    ],
+    [
+      "MANGIARE",
+      "mangiala",
+      "mangiamola",
+      "mangiatela"
+    ],
+    [
+      "SCRIVERE",
+      "scrivilo",
+      "scriviamolo",
+      "scrivetelo"
+    ],
+    [
+      "SENTIRE",
+      "sentili",
+      "sentiamoli",
+      "sentiteli"
+    ]
+  ],
+  "52": [
+    [
+      "",
+      "Tu",
+      "Noi",
+      "Voi"
+    ],
+    [
+      "MANGIARE",
+      "Non mangiarla",
+      "Non mangiamola",
+      "Non mangiatela"
+    ],
+    [
+      "SCRIVERE",
+      "Non scriverlo",
+      "Non scriviamolo",
+      "Non scrivetelo"
+    ],
+    [
+      "SENTIRE",
+      "Non sentirli",
+      "Non sentiamoli",
+      "Non sentiteli"
+    ]
+  ],
+  "53": [
+    [
+      "",
+      "MANGIARE",
+      "SCRIVERE",
+      "SENTIRE"
+    ],
+    [
+      "Lei",
+      "Mangi",
+      "Scriva",
+      "Senta"
+    ]
+  ],
+  "54": [
+    [
+      "",
+      "Lei"
+    ],
+    [
+      "Andare",
+      "non vada"
+    ],
+    [
+      "Fare",
+      "non faccia"
+    ],
+    [
+      "Dire",
+      "non dica"
+    ],
+    [
+      "Dare",
+      "non dia"
+    ],
+    [
+      "Stare",
+      "non stia"
+    ],
+    [
+      "Sapere",
+      "non sappia"
+    ],
+    [
+      "Avere",
+      "non abbia"
+    ],
+    [
+      "Essere",
+      "non sia"
+    ]
+  ],
+  "55": [
+    [
+      "",
+      "Lei"
+    ],
+    [
+      "MANGIARE",
+      "la mangi"
+    ],
+    [
+      "SCRIVERE",
+      "lo scriva"
+    ],
+    [
+      "SENTIRE",
+      "li senta"
+    ]
+  ],
+  "56": [
+    [
+      "",
+      "Lei"
+    ],
+    [
+      "MANGIARE",
+      "Non la mangi"
+    ],
+    [
+      "SCRIVERE",
+      "Non lo scriva"
+    ],
+    [
+      "SENTIRE",
+      "Non li senta"
+    ]
+  ],
+  "57": [
+    [
+      "Verbi",
+      "Radice",
+      "Desinenza"
+    ],
+    [
+      "guardare",
+      "vivere",
+      "aprire",
+      "→ GUARD",
+      "→ VIV",
+      "→ APR",
+      "→ Io GUARD – O",
+      "→ Io VIV – O",
+      "→Io APR – O"
+    ]
+  ],
+  "58": [
+    [
+      "",
+      "I. coniugazione",
+      "verbi in -ARE",
+      "II. coniugazione",
+      "verbi in -ERE",
+      "III. coniugazione",
+      "verbi in -IRE"
+    ],
+    [
+      "",
+      "GUARDARE",
+      "VIVERE",
+      "APRIRE"
+    ],
+    [
+      "Io",
+      "guardo",
+      "vivo",
+      "apro"
+    ],
+    [
+      "Tu",
+      "guardi",
+      "vivi",
+      "apri"
+    ],
+    [
+      "Lui/lei/Lei",
+      "guarda",
+      "vive",
+      "apre"
+    ],
+    [
+      "Noi",
+      "guardiamo",
+      "viviamo",
+      "apriamo"
+    ],
+    [
+      "Voi",
+      "guardate",
+      "vivete",
+      "aprite"
+    ],
+    [
+      "Loro",
+      "guardano",
+      "vivono",
+      "aprono"
+    ]
+  ],
+  "59": [
+    [
+      "PAGARE",
+      "CERCARE"
+    ],
+    [
+      "Io pago",
+      "Io cerco"
+    ],
+    [
+      "Tu paghi",
+      "Tu cerchi"
+    ],
+    [
+      "Lui/lei/Lei paga",
+      "Lui/lei/Lei cerca"
+    ],
+    [
+      "Noi paghiamo",
+      "Noi cerchiamo"
+    ],
+    [
+      "Voi pagate",
+      "Voi cercate"
+    ],
+    [
+      "Loro pagano",
+      "Loro cercano"
+    ]
+  ],
+  "60": [
+    [
+      "FINIRE",
+      "CAPIRE"
+    ],
+    [
+      "Io finisco",
+      "Io capisco"
+    ],
+    [
+      "Tu finisci",
+      "Tu capisci"
+    ],
+    [
+      "Lui/lei/Lei finisce",
+      "Lui/lei/Lei capisce"
+    ],
+    [
+      "Noi finiamo",
+      "Noi capiamo"
+    ],
+    [
+      "Voi finite",
+      "Voi capite"
+    ],
+    [
+      "Loro finiscono",
+      "Loro capiscono"
+    ]
+  ],
+  "61": [
+    [
+      "",
+      "ESSERE"
+    ],
+    [
+      "Io",
+      "sono"
+    ],
+    [
+      "Tu",
+      "sei"
+    ],
+    [
+      "Lui/lei",
+      "è"
+    ],
+    [
+      "Noi",
+      "siamo"
+    ],
+    [
+      "Voi",
+      "siete"
+    ],
+    [
+      "Loro",
+      "sono"
+    ]
+  ],
+  "62": [
+    [
+      "-a (femminile) /-o (maschile)",
+      "-e (invariabile)"
+    ],
+    [
+      "americano/a",
+      "israeliano/a",
+      "canadese",
+      "libanese"
+    ],
+    [
+      "algerino/a",
+      "lituano/a",
+      "cinese",
+      "neozelandese"
+    ],
+    [
+      "australiano/a",
+      "marocchino/a",
+      "danese",
+      "norvegese"
+    ],
+    [
+      "austriaco/a",
+      "polacco/a",
+      "finlandese",
+      "olandese"
+    ],
+    [
+      "tedesco/a",
+      "russo/a",
+      "francese",
+      "portoghese"
+    ],
+    [
+      "brasiliano/a ",
+      "sloveno/a",
+      "giapponese",
+      "ungherese"
+    ],
+    [
+      "ceco/a",
+      "spagnolo/a",
+      "inglese",
+      "svedese"
+    ],
+    [
+      "croato/a",
+      "svizzero/a",
+      "irlandese",
+      "tailandese"
+    ],
+    [
+      "indiano/a",
+      "",
+      "islandese",
+      ""
+    ]
+  ],
+  "63": [
+    [
+      "",
+      "AVERE"
+    ],
+    [
+      "Io",
+      "ho"
+    ],
+    [
+      "Tu",
+      "hai"
+    ],
+    [
+      "Lui/lei",
+      "ha"
+    ],
+    [
+      "Noi",
+      "abbiamo"
+    ],
+    [
+      "Voi",
+      "avete"
+    ],
+    [
+      "Loro",
+      "hanno"
+    ]
+  ],
+  "64": [
+    [
+      "",
+      "ANDARE",
+      "DARE",
+      "FARE",
+      "SAPERE",
+      "STARE"
+    ],
+    [
+      "Io",
+      "vado",
+      "do",
+      "faccio",
+      "so",
+      "sto"
+    ],
+    [
+      "Tu",
+      "vai",
+      "dai",
+      "fai",
+      "sai",
+      "stai"
+    ],
+    [
+      "Lui/lei/Lei",
+      "va",
+      "dà",
+      "fa",
+      "sa",
+      "sta"
+    ],
+    [
+      "Noi",
+      "andiamo",
+      "diamo",
+      "facciamo",
+      "sappiamo",
+      "stiamo"
+    ],
+    [
+      "Voi",
+      "andate",
+      "date",
+      "fate",
+      "sapete",
+      "state"
+    ],
+    [
+      "Loro",
+      "vanno",
+      "danno",
+      "fanno",
+      "sanno",
+      "stanno"
+    ]
+  ],
+  "65": [
+    [
+      "",
+      "BERE",
+      "DIRE",
+      "RIMANERE",
+      "SCEGLIERE",
+      "TENERE"
+    ],
+    [
+      "Io",
+      "bevo",
+      "dico",
+      "rimango",
+      "scelgo",
+      "tengo"
+    ],
+    [
+      "Tu",
+      "bevi",
+      "dici",
+      "rimani",
+      "scegli",
+      "tieni"
+    ],
+    [
+      "Lui/lei/Lei",
+      "beve",
+      "dice",
+      "rimane",
+      "sceglie",
+      "tiene"
+    ],
+    [
+      "Noi",
+      "beviamo",
+      "diciamo",
+      "rimaniamo",
+      "scegliamo",
+      "teniamo"
+    ],
+    [
+      "Voi",
+      "bevete",
+      "dite",
+      "rimanete",
+      "scegliete",
+      "tenete"
+    ],
+    [
+      "Loro",
+      "bevono",
+      "dicono",
+      "rimangono",
+      "scelgono",
+      "tengono"
+    ]
+  ],
+  "66": [
+    [
+      "",
+      "SALIRE",
+      "SPEGNERE",
+      "USCIRE",
+      "VENIRE"
+    ],
+    [
+      "Io",
+      "salgo",
+      "spengo",
+      "esco",
+      "vengo"
+    ],
+    [
+      "Tu",
+      "sali",
+      "spegni",
+      "esci",
+      "vieni"
+    ],
+    [
+      "Lui/lei/Lei",
+      "sale",
+      "spegne",
+      "esce",
+      "viene"
+    ],
+    [
+      "Noi",
+      "saliamo",
+      "spegniamo",
+      "usciamo",
+      "veniamo"
+    ],
+    [
+      "Voi",
+      "salite",
+      "spegnete",
+      "uscite",
+      "venite"
+    ],
+    [
+      "Loro",
+      "salgono",
+      "spengono",
+      "escono",
+      "vengono"
+    ]
+  ],
+  "67": [
+    [
+      "",
+      "PROPORRE",
+      "TRADURRE"
+    ],
+    [
+      "Io",
+      "propongo",
+      "traduco"
+    ],
+    [
+      "Tu",
+      "proponi",
+      "traduci"
+    ],
+    [
+      "Lui/lei/Lei",
+      "propone",
+      "traduce"
+    ],
+    [
+      "Noi",
+      "proponiamo",
+      "traduciamo"
+    ],
+    [
+      "Voi",
+      "proponete",
+      "traducete"
+    ],
+    [
+      "Loro",
+      "propongono",
+      "traducono"
+    ]
+  ],
+  "68": [
+    [
+      "",
+      "VOLERE",
+      "POTERE",
+      "DOVERE"
+    ],
+    [
+      "Io",
+      "voglio",
+      "posso",
+      "devo"
+    ],
+    [
+      "Tu",
+      "vuoi",
+      "puoi",
+      "devi"
+    ],
+    [
+      "Lei/lui/lei",
+      "vuole",
+      "può",
+      "deve"
+    ],
+    [
+      "Noi",
+      "vogliamo",
+      "possiamo",
+      "dobbiamo"
+    ],
+    [
+      "Voi",
+      "volete",
+      "potete",
+      "dovete"
+    ],
+    [
+      "Loro",
+      "vogliono",
+      "possono",
+      "devono"
+    ]
+  ],
+  "69": [
+    [
+      "",
+      "SAPERE"
+    ],
+    [
+      "Io",
+      "so"
+    ],
+    [
+      "Tu",
+      "sai"
+    ],
+    [
+      "Lui/lei/lei",
+      "sa"
+    ],
+    [
+      "Noi",
+      "sappiamo"
+    ],
+    [
+      "Voi",
+      "sapete"
+    ],
+    [
+      "Loro",
+      "sanno"
+    ]
+  ],
+  "70": [
+    [
+      "Io",
+      "Mi"
+    ],
+    [
+      "Tu",
+      "Ti"
+    ],
+    [
+      "Lei/lui/lei",
+      "Si*"
+    ],
+    [
+      "Noi",
+      "Ci"
+    ],
+    [
+      "Voi",
+      "Vi"
+    ],
+    [
+      "Loro",
+      "Si*"
+    ]
+  ],
+  "71": [
+    [
+      "",
+      "SVEGLIARSI",
+      "METTERSI",
+      "VESTIRSI"
+    ],
+    [
+      "Io",
+      "mi sveglio",
+      "mi metto",
+      "mi vesto"
+    ],
+    [
+      "Tu",
+      "ti svegli",
+      "ti metti",
+      "ti vesti"
+    ],
+    [
+      "Lui/Lei/Lei",
+      "si sveglia",
+      "si mette",
+      "si veste"
+    ],
+    [
+      "Noi",
+      "ci svegliamo",
+      "ci mettiamo",
+      "ci vestiamo"
+    ],
+    [
+      "Voi",
+      "vi svegliate",
+      "vi mettete",
+      "vi vestite"
+    ],
+    [
+      "Loro",
+      "si svegliano",
+      "si mettono",
+      "si vestono"
+    ]
+  ],
+  "72": [
+    [
+      "",
+      "MANGIARE",
+      "AVERE",
+      "CAPIRE"
+    ],
+    [
+      "Io",
+      "ho mangiato",
+      "ho avuto",
+      "ho capito"
+    ],
+    [
+      "Tu",
+      "hai mangiato ",
+      "hai avuto",
+      "hai capito"
+    ],
+    [
+      "Lui/Lei/Lei",
+      "ha mangiato",
+      "ha avuto",
+      "ha capito"
+    ],
+    [
+      "Noi",
+      "abbiamo mangiato",
+      "abbiamo avuto",
+      "abbiamo capito"
+    ],
+    [
+      "Voi",
+      "avete mangiato",
+      "avete avuto",
+      "avete capito"
+    ],
+    [
+      "Loro",
+      "hanno mangiato",
+      "hanno avuto",
+      "hanno capito"
+    ]
+  ],
+  "73": [
+    [
+      "INFINITO",
+      "PARTICIPIO PASSATO",
+      "ESEMPI"
+    ],
+    [
+      "-DERE",
+      "-SO; -STO",
+      ""
+    ],
+    [
+      "Accendere",
+      "acceso",
+      "Hai acceso la televisione?"
+    ],
+    [
+      "Chiudere",
+      "chiuso",
+      "Luca e Fabio hanno chiuso il loro ristorante"
+    ],
+    [
+      "Perdere",
+      "perso",
+      "Mio fratello ha perso le chiavi di casa"
+    ],
+    [
+      "Prendere",
+      "preso",
+      "Abbiamo preso il treno per andare a Napoli"
+    ],
+    [
+      "Ridere",
+      "riso",
+      "Ho riso moltissimo per la barzelletta"
+    ],
+    [
+      "Scendere",
+      "sceso",
+      "Sono sceso dal treno di fretta"
+    ],
+    [
+      "Spendere",
+      "speso",
+      "Lo scorso fine settimana ho speso molti soldi"
+    ],
+    [
+      "Chiedere",
+      "chiesto",
+      "Ho chiesto informazioni ad un passante"
+    ],
+    [
+      "Nascondere",
+      "nascosto",
+      "Ho nascosto il regalo di Natale per la mamma"
+    ],
+    [
+      "Rispondere",
+      "risposto",
+      "Abbiamo risposto al messaggio dopo tre ore"
+    ],
+    [
+      "Vedere      ",
+      "visto",
+      "Avete visto l’ultimo film di Pieraccioni?"
+    ]
+  ],
+  "74": [
+    [
+      "INFINITO",
+      "PARTICIPIO PASSATO",
+      "ESEMPI"
+    ],
+    [
+      "-CERE, -GERE",
+      "-NTO",
+      ""
+    ],
+    [
+      "Dipingere",
+      "dipinto",
+      "Lisa ha dipinto un quadro stupendo"
+    ],
+    [
+      "Piangere",
+      "pianto",
+      "Laura ha pianto guardando il fil"
+    ],
+    [
+      "Vincere    ",
+      "vinto",
+      "La Spagna ha vinto la partita contro la Franci"
+    ]
+  ],
+  "75": [
+    [
+      "INFINITO",
+      "PARTICIPIO PASSATO",
+      "ESEMPI"
+    ],
+    [
+      "-GLIERE",
+      "-LTO",
+      ""
+    ],
+    [
+      "Scegliere",
+      "scelto",
+      "Maria ha scelto il vestito per il suo matrimonio"
+    ],
+    [
+      "Sciogliere",
+      "sciolto",
+      "Per fare la torta ho sciolto lo zucchero con il burro"
+    ],
+    [
+      "Togliere",
+      "tolto",
+      "Hai tolto le lasagne dal forno?"
+    ]
+  ],
+  "76": [
+    [
+      "INFINITO",
+      "PARTICIPIO PASSATO",
+      "ESEMPI"
+    ],
+    [
+      "-RIRE",
+      "-RTO",
+      ""
+    ],
+    [
+      "Aprire",
+      "aperto",
+      "Abbiamo aperto il negozio lunedì scorso"
+    ],
+    [
+      "Morire",
+      "morto",
+      "Il cane di Luca è morto lo scorso mese"
+    ],
+    [
+      "Offrire",
+      "offerto",
+      "Il cameriere ci ha offerto il digestivo"
+    ]
+  ],
+  "77": [
+    [
+      "INFINITO",
+      "PARTICIPIO PASSATO",
+      "ESEMPI"
+    ],
+    [
+      "-GGERE + altri verbi",
+      "-TTO",
+      ""
+    ],
+    [
+      "Leggere",
+      "letto",
+      "Abbiamo letto un bel libro giallo"
+    ],
+    [
+      "Correggere",
+      "corretto",
+      "L’insegnante ha corretto l’esame"
+    ],
+    [
+      "Dire",
+      "detto",
+      "Il direttore ha detto a Maria di andare a casa prima"
+    ],
+    [
+      "Fare",
+      "fatto",
+      "Hai già fatto i compiti per domani?"
+    ],
+    [
+      "Scrivere",
+      "scritto",
+      "Ho scritto una cartolina ai miei genitori"
+    ],
+    [
+      "Rompere",
+      "rotto",
+      "Marco ha rotto il vaso di sua madre"
+    ]
+  ],
+  "78": [
+    [
+      "",
+      "SVEGLIARSI",
+      "METTERSI",
+      "VESTIRSI"
+    ],
+    [
+      "Io",
+      "mi sono svegliato/a",
+      "mi sono messo/a",
+      "mi sono vestito/a "
+    ],
+    [
+      "Tu",
+      "ti sei svegliato/a",
+      "ti sei messo/a",
+      "ti sei vestito/a"
+    ],
+    [
+      "Lui/Lei",
+      "si è svegliato/a",
+      "si è messo/a",
+      "si è vestito/a"
+    ],
+    [
+      "Noi",
+      "ci siamo svegliati/e",
+      "ci siamo messi/e",
+      "ci siamo vestiti/e"
+    ],
+    [
+      "Voi",
+      "vi siete svegliati/e",
+      "vi siete messi/e",
+      "vi siete vestiti/e"
+    ],
+    [
+      "Loro",
+      "si sono svegliati/e",
+      "si sono messi/e",
+      "si sono vestiti/e"
+    ]
+  ],
+  "79": [
+    [
+      "",
+      "PARLARE",
+      "AVERE",
+      "DORMIRE"
+    ],
+    [
+      "Io",
+      "parlavo",
+      "avevo",
+      "dormivo"
+    ],
+    [
+      "Tu",
+      "parlavi",
+      "avevi",
+      "dormivi"
+    ],
+    [
+      "Lui/lei",
+      "parlava",
+      "aveva",
+      "dormiva"
+    ],
+    [
+      "Noi",
+      "parlavamo",
+      "avevamo",
+      "dormivamo"
+    ],
+    [
+      "Voi",
+      "parlavate",
+      "avevate",
+      "dormivate"
+    ],
+    [
+      "loro",
+      "parlavano",
+      "avevano",
+      "dormivano"
+    ]
+  ],
+  "80": [
+    [
+      "",
+      "ESSERE",
+      "BERE",
+      "DIRE",
+      "FARE"
+    ],
+    [
+      "Io",
+      "ero",
+      "bevevo",
+      "dicevo",
+      "facevo"
+    ],
+    [
+      "Tu",
+      "eri",
+      "bevevi",
+      "dicevi",
+      "facevi"
+    ],
+    [
+      "Lui/lei",
+      "era",
+      "beveva",
+      "diceva",
+      "faceva"
+    ],
+    [
+      "Noi",
+      "eravamo",
+      "bevevamo",
+      "dicevamo",
+      "facevamo"
+    ],
+    [
+      "Voi",
+      "eravate",
+      "bevevate",
+      "dicevate",
+      "facevate"
+    ],
+    [
+      "Loro",
+      "erano",
+      "bevevano",
+      "dicevano",
+      "facevano"
+    ]
+  ],
+  "81": [
+    [
+      "",
+      "PRODURRE",
+      "TRADURRE"
+    ],
+    [
+      "Io",
+      "producevo",
+      "traducevo"
+    ],
+    [
+      "Tu",
+      "producevi",
+      "traducevi"
+    ],
+    [
+      "Lui/lei",
+      "produceva",
+      "traduceva"
+    ],
+    [
+      "Noi",
+      "producevamo",
+      "traducevamo"
+    ],
+    [
+      "Voi",
+      "producevate",
+      "traducevate"
+    ],
+    [
+      "Loro",
+      "producevano",
+      "traducevano"
+    ]
+  ],
+  "82": [
+    [
+      "Passato Prossimo (una volta)",
+      "Imperfetto (più di una volta)"
+    ],
+    [
+      "Ieri ho lavorato dalle 9 alle 13.",
+      "L’anno scorso lavoravo sempre dalle 9 alle 13."
+    ],
+    [
+      "Domenica ho dormito fino alle 10.",
+      "Da bambina, la domenica, dormivo fino alle 10."
+    ],
+    [
+      "Sono rimasto a Firenze per 2 mesi.",
+      "Da giovane rimanevo a Firenze per 2 mesi ogni anno."
+    ],
+    [
+      "Domenica scorsa ho guardato la tv tutto il giorno.",
+      "Da bambino, la domenica, guardavo la tv tutto il giorno."
+    ]
+  ],
+  "83": [
+    [
+      "",
+      "ARRIVARE",
+      "PRENDERE",
+      "PARTIRE"
+    ],
+    [
+      "io",
+      "arriverò",
+      "prenderò",
+      "partirò"
+    ],
+    [
+      "tu",
+      "arriverai",
+      "prenderai",
+      "partirai"
+    ],
+    [
+      "lui/lei/Lei",
+      "arriverà",
+      "prenderà",
+      "partirà"
+    ],
+    [
+      "noi",
+      "arriveremo",
+      "prenderemo",
+      "partiremo"
+    ],
+    [
+      "voi",
+      "arriverete",
+      "prenderete",
+      "partirete"
+    ],
+    [
+      "loro",
+      "arriveranno",
+      "prenderanno",
+      "partiranno"
+    ]
+  ],
+  "84": [
+    [
+      "",
+      "CERCARE",
+      "PAGARE"
+    ],
+    [
+      "io",
+      "cercherò",
+      "pagherò"
+    ],
+    [
+      "tu",
+      "cercherai",
+      "pagherai"
+    ],
+    [
+      "lui/lei/Lei",
+      "cercherà",
+      "pagherà"
+    ],
+    [
+      "noi",
+      "cercheremo",
+      "pagheremo",
+      "voi",
+      "cercherete",
+      "pagherete"
+    ],
+    [
+      "loro",
+      "cercheranno",
+      "pagheranno"
+    ]
+  ],
+  "85": [
+    [
+      "",
+      "ESSERE  ",
+      "AVERE   "
+    ],
+    [
+      "Io",
+      "sarò",
+      "avrò"
+    ],
+    [
+      "Tu",
+      "sarai",
+      "avrai"
+    ],
+    [
+      "Lui/lei/Lei",
+      "sarà",
+      "avrà"
+    ],
+    [
+      "Noi",
+      "saremo",
+      "avremo"
+    ],
+    [
+      "Voi",
+      "sarete",
+      "avrete"
+    ],
+    [
+      "Loro",
+      "saranno",
+      "avranno"
+    ]
+  ],
+  "86": [
+    [
+      "",
+      "DOVERE",
+      "POTERE",
+      "VEDERE",
+      "SAPERE",
+      "ANDARE"
+    ],
+    [
+      "io",
+      "dovrò",
+      "potrò",
+      "vedrò",
+      "saprò",
+      "andrò"
+    ],
+    [
+      "tu",
+      "dovrai",
+      "potrai",
+      "vedrai",
+      "saprai",
+      "andrai"
+    ],
+    [
+      "lui/lei/Lei",
+      "dovrà",
+      "potrà",
+      "vedrà",
+      "saprà",
+      "andrà"
+    ],
+    [
+      "noi",
+      "dovranno",
+      "potremo",
+      "vedremo",
+      "sapremo",
+      "andremo"
+    ],
+    [
+      "voi",
+      "dovrete",
+      "potrete",
+      "vedrete",
+      "saprete",
+      "andrete"
+    ],
+    [
+      "loro",
+      "dovranno",
+      "potranno",
+      "vedranno",
+      "sapranno",
+      "andranno"
+    ]
+  ],
+  "87": [
+    [
+      "",
+      "BERE",
+      "VOLERE",
+      "VENIR",
+      "RIMANERE",
+      "TENERE"
+    ],
+    [
+      "io",
+      "berrò",
+      "vorrò",
+      "verrò",
+      "rimarrò",
+      "terrò"
+    ],
+    [
+      "tu",
+      "berrai",
+      "vorrai",
+      "verrai",
+      "rimarrai",
+      "terrai"
+    ],
+    [
+      "lui/lei/Lei",
+      "berrà",
+      "vorrà",
+      "verrà",
+      "rimarrà",
+      "terrà"
+    ],
+    [
+      "noi",
+      "berremo",
+      "vorremo",
+      "verremo",
+      "rimarremo",
+      "terremo"
+    ],
+    [
+      "voi",
+      "berrete",
+      "vorrete",
+      "verrete",
+      "rimarrete",
+      "terrete"
+    ],
+    [
+      "loro",
+      "berranno",
+      "vorranno",
+      "verranno",
+      "rimarranno",
+      "terranno"
+    ]
+  ],
+  "88": [
+    [
+      "",
+      "FARE",
+      "DARE",
+      "STARE"
+    ],
+    [
+      "Io",
+      "farò",
+      "darò",
+      "starò"
+    ],
+    [
+      "Tu",
+      "farai",
+      "darai",
+      "starai"
+    ],
+    [
+      "Lu/lei/Lei",
+      "farà",
+      "darà",
+      "starà"
+    ],
+    [
+      "Noi",
+      "faremo",
+      "daremo",
+      "staremo"
+    ],
+    [
+      "Voi",
+      "farete",
+      "darete",
+      "starete"
+    ],
+    [
+      "Loro",
+      "faranno",
+      "daranno",
+      "staranno"
+    ]
+  ],
+  "89": [
+    [
+      "",
+      "I – ARE Arrivare",
+      "I – ARE Arrivare",
+      "II – ERE Conoscere",
+      "II – ERE Conoscere",
+      "III – IRE Dormire",
+      "III – IRE Dormire"
+    ],
+    [
+      "io",
+      "sarò",
+      "arrivato/a",
+      "avrò",
+      "conosciuto",
+      "avrò",
+      "dormito"
+    ],
+    [
+      "tu",
+      "sarai",
+      "arrivato/a",
+      "avrai",
+      "conosciuto",
+      "avrai",
+      "dormito"
+    ],
+    [
+      "lui/lei/Lei",
+      "sarà",
+      "arrivato/a",
+      "avrà",
+      "conosciuto",
+      "avrà",
+      "dormito"
+    ],
+    [
+      "noi",
+      "saremo",
+      "arrivati/e",
+      "avremo",
+      "conosciuto",
+      "avremo",
+      "dormito"
+    ],
+    [
+      "voi",
+      "sarete",
+      "arrivati/e",
+      "avrete",
+      "conosciuto",
+      "avrete",
+      "dormito"
+    ],
+    [
+      "loro",
+      "saranno",
+      "arrivati/e",
+      "avranno",
+      "conosciuto",
+      "avranno",
+      "dormito"
+    ]
+  ],
+  "90": [
+    [
+      "",
+      "ESSERE",
+      "ESSERE",
+      "AVERE",
+      "AVERE"
+    ],
+    [
+      "io",
+      "sarò",
+      "stato/a",
+      "avrò",
+      "avuto"
+    ],
+    [
+      "tu",
+      "sarai",
+      "stato/a",
+      "avrai",
+      "avuto"
+    ],
+    [
+      "lui/lei/Lei",
+      "sarà",
+      "stato/a",
+      "avrà",
+      "avuto"
+    ],
+    [
+      "noi",
+      "saremo",
+      "stati/e",
+      "avremo",
+      "avuto"
+    ],
+    [
+      "voi",
+      "sarete",
+      "stati/e",
+      "avrete",
+      "avuto"
+    ],
+    [
+      "loro",
+      "saranno",
+      "stati/e",
+      "avranno",
+      "avuto"
+    ]
+  ],
+  "91": [
+    [
+      "",
+      "AVERE",
+      "ESSERE*"
+    ],
+    [
+      "io",
+      "avevo avuto",
+      "ero stato/a"
+    ],
+    [
+      "tu",
+      "avevi avuto",
+      "eri stato/a"
+    ],
+    [
+      "lui/lei/Lei",
+      "aveva avuto",
+      "era stato/a"
+    ],
+    [
+      "noi",
+      "avevamo avuto",
+      "eravamo stati/e"
+    ],
+    [
+      "voi",
+      "avevate avuto",
+      "eravate stati/e"
+    ],
+    [
+      "loro",
+      "avevano avuto",
+      "erano stati/e"
+    ]
+  ],
+  "92": [
+    [
+      "",
+      "CAMBIARE",
+      "ANDARE"
+    ],
+    [
+      "io",
+      "avevo cambiato",
+      "ero andato/a"
+    ],
+    [
+      "tu",
+      "avevi cambiato",
+      "eri andato/a"
+    ],
+    [
+      "lui/lei/Lei",
+      "aveva cambiato",
+      "era andato/a"
+    ],
+    [
+      "noi",
+      "avevamo cambiato",
+      "eravamo andati/e"
+    ],
+    [
+      "voi",
+      "avevate cambiato",
+      "eravate andati/e"
+    ],
+    [
+      "loro",
+      "avevano cambiato",
+      "erano andati/e"
+    ]
+  ],
+  "93": [
+    [
+      "",
+      "PARLARE",
+      "RIPETERE",
+      "CREDERE",
+      "FINIRE"
+    ],
+    [
+      "io",
+      "parlai",
+      "ripetei",
+      "credetti",
+      "finii"
+    ],
+    [
+      "tu",
+      "parlasti",
+      "ripetesti",
+      "credesti",
+      "finisti"
+    ],
+    [
+      "lui/lei/Lei",
+      "parlò",
+      "ripeté",
+      "credette",
+      "finì"
+    ],
+    [
+      "noi",
+      "parlammo",
+      "ripetemmo",
+      "credemmo",
+      "finimmo"
+    ],
+    [
+      "voi",
+      "parlaste",
+      "ripeteste",
+      "credeste",
+      "finiste"
+    ],
+    [
+      "loro",
+      "parlarono",
+      "ripeterono",
+      "credettero",
+      "finirono"
+    ]
+  ],
+  "94": [
+    [
+      "",
+      "PRENDERE (to take)",
+      "DECIDERE (to decide)",
+      "VINCERE (to win)",
+      "PIANGERE (to cry)",
+      "SCEGLIERE (to choose)",
+      "CADERE (to fall)",
+      "NASCERE (to be born)"
+    ],
+    [
+      "io",
+      "presi",
+      "decisi",
+      "vinsi",
+      "piansi",
+      "scelsi",
+      "caddi",
+      "nacqui"
+    ],
+    [
+      "tu",
+      "prendesti",
+      "decidesti",
+      "vincesti",
+      "piangesti",
+      "scegliesti",
+      "cadesti",
+      "nascesti"
+    ],
+    [
+      "lui/lei/Lei",
+      "prese",
+      "decise",
+      "vinse",
+      "pianse",
+      "scelse",
+      "cadde",
+      "nacque"
+    ],
+    [
+      "noi",
+      "prendemmo",
+      "decidemmo",
+      "vincemmo",
+      "piangemmo",
+      "scegliemmo",
+      "cademmo",
+      "nascemmo"
+    ],
+    [
+      "voi",
+      "prendeste",
+      "decideste",
+      "vinceste",
+      "piangeste",
+      "sceglieste",
+      "cadeste",
+      "nasceste"
+    ],
+    [
+      "loro",
+      "presero",
+      "decisero",
+      "vinsero",
+      "piansero",
+      "scelsero",
+      "caddero",
+      "nacquero"
+    ]
+  ],
+  "95": [
+    [
+      "",
+      "AVERE",
+      "ESSERE"
+    ],
+    [
+      "Io",
+      "ebbi",
+      "fui"
+    ],
+    [
+      "Tu",
+      "avesti",
+      "fosti"
+    ],
+    [
+      "Lui/lei/Lei",
+      "ebbe",
+      "fu"
+    ],
+    [
+      "Noi",
+      "avemmo",
+      "fummo"
+    ],
+    [
+      "Voi",
+      "aveste",
+      "foste"
+    ],
+    [
+      "Loro",
+      "ebbero",
+      "furono"
+    ]
+  ],
+  "96": [
+    [
+      "",
+      "FARE",
+      "DARE",
+      "STARE"
+    ],
+    [
+      "Io",
+      "feci",
+      "diedi/ detti",
+      "stetti"
+    ],
+    [
+      "Tu",
+      "facesti",
+      "desti",
+      "stesti"
+    ],
+    [
+      "Lu/lei/Lei",
+      "fece",
+      "diede/dette",
+      "stette"
+    ],
+    [
+      "Noi",
+      "facemmo",
+      "demmo",
+      "stemmo"
+    ],
+    [
+      "Voi",
+      "faceste",
+      "deste",
+      "steste"
+    ],
+    [
+      "Loro",
+      "fecero",
+      "diedero/dettero",
+      "stettero"
+    ]
+  ],
+  "97": [
+    [
+      "",
+      "CONOSCERE ",
+      "BERE",
+      "CORRERE",
+      "DIRE"
+    ],
+    [
+      "Io",
+      "conobbi",
+      "bevvi",
+      "corsi",
+      "dissi"
+    ],
+    [
+      "Tu",
+      "conoscesti",
+      "bevesti",
+      "corresti",
+      "dicesti"
+    ],
+    [
+      "Lui/lei/Lei",
+      "conobbe",
+      "bevve",
+      "corse",
+      "disse"
+    ],
+    [
+      "Noi",
+      "conoscemmo",
+      "bevemmo",
+      "corremmo",
+      "dicemmo"
+    ],
+    [
+      "Voi",
+      "conosceste",
+      "beveste",
+      "correste",
+      "diceste"
+    ],
+    [
+      "Loro",
+      "conobbero",
+      "bevvero",
+      "corsero",
+      "dissero"
+    ]
+  ],
+  "98": [
+    [
+      "",
+      "LEGGERE",
+      "METTERE",
+      "PIACERE",
+      "PORRE"
+    ],
+    [
+      "Io",
+      "lessi",
+      "misi",
+      "piacqui",
+      "posi"
+    ],
+    [
+      "Tu",
+      "leggesti",
+      "mettesti",
+      "piacesti",
+      "ponesti"
+    ],
+    [
+      "Lui/lei/Lei",
+      "lesse",
+      "mise",
+      "piacque",
+      "pose"
+    ],
+    [
+      "Noi",
+      "leggemmo",
+      "mettemmo",
+      "piacemmo",
+      "ponemmo"
+    ],
+    [
+      "Voi",
+      "leggeste",
+      "metteste",
+      "piaceste",
+      "poneste"
+    ],
+    [
+      "Loro",
+      "lessero",
+      "misero",
+      "piacquero",
+      "posero"
+    ]
+  ],
+  "99": [
+    [
+      "",
+      "ROMPERE",
+      "SAPERE",
+      "SCRIVERE",
+      "TRADURRE"
+    ],
+    [
+      "Io",
+      "ruppi",
+      "seppi",
+      "scrissi",
+      "tradussi"
+    ],
+    [
+      "Tu",
+      "rompesti",
+      "sapesti",
+      "scrivesti",
+      "traducesti"
+    ],
+    [
+      "Lui/lei/Lei",
+      "ruppe",
+      "seppe",
+      "scrisse",
+      "tradusse"
+    ],
+    [
+      "Noi",
+      "rompemmo",
+      "sapemmo",
+      "scrivemmo",
+      "traducemmo"
+    ],
+    [
+      "Voi",
+      "rompeste",
+      "sapeste",
+      "scriveste",
+      "traduceste"
+    ],
+    [
+      "Loro",
+      "ruppero",
+      "seppero",
+      "scrissero",
+      "tradussero"
+    ]
+  ],
+  "100": [
+    [
+      "",
+      "TENERE",
+      "VENIRE",
+      "VOLERE ",
+      "VIVERE",
+      "VEDERE"
+    ],
+    [
+      "Io",
+      "tenni",
+      "venni",
+      "volli",
+      "vissi",
+      "vidi"
+    ],
+    [
+      "Tu",
+      "tenesti",
+      "venisti",
+      "volesti",
+      "vivesti",
+      "vedesti"
+    ],
+    [
+      "Lui/lei/Lei",
+      "tenne",
+      "venne",
+      "volle",
+      "visse",
+      "vide"
+    ],
+    [
+      "Noi",
+      "tenemmo",
+      "venimmo",
+      "volemmo",
+      "vivemmo",
+      "vedemmo"
+    ],
+    [
+      "Voi",
+      "teneste",
+      "veniste",
+      "voleste",
+      "viveste",
+      "vedeste"
+    ],
+    [
+      "Loro",
+      "tennero",
+      "vennero",
+      "vollero",
+      "vissero",
+      "videro"
+    ]
+  ],
+  "101": [
+    [
+      "PASSATO PROSSIMO",
+      "PASSATO REMOTO"
+    ],
+    [
+      "Dante Alighieri ha avuto una forte influenza sulla letteratura italiana.(influenza ancora il presente)",
+      "Dante Alighieri ebbe una forte influenza sulla letteratura del Trecento.(influenza limitata ad un periodo di tempo limitato)"
+    ],
+    [
+      "Da quel momento ho capito che non potevo più fidarmi di lui.(conclusione valida ancora oggi)",
+      "In quel momento capii che non potevo più fidarmi di lui.(conclusione limitata ad un periodo specifico)"
+    ],
+    [
+      "Quando mia nonna è morta, ho provato un grande dolore.(il sentimento è ancora presente )",
+      "Quando mia nonna morì, provai un grande dolore.(il sentimento è diminuito nel corso del tempo)"
+    ],
+    [
+      "Ho studiato letteratura inglese.(informazione generica, fuori da un contesto temporale)",
+      "Nei primi anni di università studiai letteratura inglese con grande interesse.(informazione specifica in un contesto temporale definito)"
+    ],
+    [
+      "Laura Pausini è nata a Solarolo (Ravenna) nel 1974.(la persona è ancora viva)",
+      "Pavarotti nacque a Modena nel 1936.(la persona non è più viva)"
+    ],
+    [
+      "La Venere di Botticelli è stata restaurata.(si riferisce alla situazione attuale)",
+      "La Venere di Botticelli fu restaurata negli anni ’90.(posizione storica di un evento)"
+    ]
+  ],
+  "102": [
+    [
+      "",
+      "AVERE + MANGIARE",
+      "ESSERE + ANDARE"
+    ],
+    [
+      "Io",
+      "Ebbi mangiato",
+      "Fui andato/a"
+    ],
+    [
+      "Tu",
+      "Avesti mangiato",
+      "Fosti andato/a"
+    ],
+    [
+      "Lui/lei/lei",
+      "Ebbe mangiato",
+      "Fu andato/a"
+    ],
+    [
+      "Noi",
+      "Avemmo mangiato",
+      "Fummo andati/e"
+    ],
+    [
+      "Voi",
+      "Aveste mangiato",
+      "Foste andati/e"
+    ],
+    [
+      "loro",
+      "Ebbero mangiato",
+      "Furono andati/e"
     ]
   ]
 }
