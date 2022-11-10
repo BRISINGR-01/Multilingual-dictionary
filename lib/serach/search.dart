@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/Drawer.dart';
+import 'package:multilingual_dictionary/notificationservice.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
@@ -39,6 +40,11 @@ class SearchState extends State<Search> {
           databaseHelper.languages.isNotEmpty) {
         currentLanguage = databaseHelper.languages[0];
       }
+
+      databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
+        print(value);
+        NotificationService().showNotification(value["word"], value["display"]);
+      });
 
       controller.text = widget.querry;
 

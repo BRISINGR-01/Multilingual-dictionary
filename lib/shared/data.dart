@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
@@ -77,10 +78,7 @@ class DatabaseHelper {
   }
 
   Future<Map<String, dynamic>> getUserData() async {
-    if (_database == null) {
-      await Future.delayed(const Duration(milliseconds: 10));
-      return getUserData();
-    }
+    await ensureInitialized();
 
     QueryResult data = await _database.rawQuery('SELECT * FROM \'userData\'');
 
@@ -88,16 +86,15 @@ class DatabaseHelper {
   }
 
   setUserData(String name, String value) async {
-    if (_database == null) {
-      await Future.delayed(const Duration(milliseconds: 10));
-      return setUserData(name, value);
-    }
+    await ensureInitialized();
 
     return _database.rawQuery(
         'UPDATE \'userData\' SET value = \'$value\' WHERE name = \'$name\'');
   }
 
   Future<QueryResult> searchToEnglish(String val, String lang) async {
+    await ensureInitialized();
+
     val = val.trim();
     if (val.isEmpty) return [];
 
@@ -113,6 +110,8 @@ class DatabaseHelper {
   }
 
   Future<QueryResult> searchFromEnglish(String val, String lang) async {
+    await ensureInitialized();
+
     String query = "";
     RegExp sanitizer = RegExp(r'([\w\s\d\-\p{L}]+)');
     Iterable<Match> matches = sanitizer.allMatches(val);
@@ -136,13 +135,17 @@ class DatabaseHelper {
     }).toList();
   }
 
-  getById(int id, String lang) async {
+  Future getById(int id, String lang) async {
+    await ensureInitialized();
+
     var result = await _database.rawQuery('SELECT * FROM $lang WHERE id = $id');
 
-    return result.toList()[0];
+    return result.first;
   }
 
   addLanguage(String lang, Function setProgressAndSize) async {
+    await ensureInitialized();
+
     String url = 'http://localhost:3000/$lang';
     // String url = 'http://192.168.1.106:3000/$lang';
 
@@ -213,6 +216,8 @@ class DatabaseHelper {
   }
 
   deleteLanguage(String lang) async {
+    await ensureInitialized();
+
     await _database.rawQuery('DROP TABLE $lang');
 
     await _database.rawQuery('DELETE FROM userData WHERE name = \'$lang\'');
@@ -223,6 +228,8 @@ class DatabaseHelper {
   cancel(String lang) {}
 
   Future<Map<String, dynamic>?> getGrammar(String language) async {
+    await ensureInitialized();
+
     language = "Italian";
     String rawBundle = await rootBundle.loadString('assets/grammarBundle.json');
 
@@ -230,9 +237,48 @@ class DatabaseHelper {
   }
 
   Future<Map<String, dynamic>?> getLanguageData() async {
+    await ensureInitialized();
+
     String rawBundle = await rootBundle.loadString('assets/languagesData.json');
 
     return json.decode(rawBundle);
+  }
+
+  Future? getNotificationWord({bool fromCollections = true}) async {
+    await ensureInitialized();
+
+    if (fromCollections) {
+      List<String> shuffledLanguages = languages.toList();
+      shuffledLanguages.shuffle();
+
+      // some languages might not have any saved words
+      for (String lang in shuffledLanguages) {
+        List words = (await collections
+            .getWords("Collection-$lang-All"))["words"] as List;
+
+        if (words.isEmpty) continue;
+
+        int id = words[Random().nextInt(words.length)]["id"];
+        return await getById(id, lang);
+      }
+    } else {
+      String lang = languages[Random().nextInt(languages.length)];
+
+      int amountOfWords = (await _database.rawQuery(
+              'SELECT seq FROM sqlite_sequence WHERE name = \'$lang\''))
+          .first["seq"];
+
+      return (await _database.rawQuery(
+              'SELECT * FROM $lang WHERE id=${Random().nextInt(amountOfWords)}'))
+          .first;
+    }
+  }
+
+  ensureInitialized() async {
+    if (_database == null) {
+      await Future.delayed(const Duration(milliseconds: 10));
+      return ensureInitialized();
+    }
   }
 }
 

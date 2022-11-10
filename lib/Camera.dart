@@ -105,6 +105,7 @@ class _CameraState extends State<Camera> {
                       );
                     }
                   } catch (e) {
+                    // ignore: avoid_print
                     print(e);
                   }
                 },

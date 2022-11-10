@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:multilingual_dictionary/notificationservice.dart';
 import 'package:multilingual_dictionary/serach/search.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
+
   Color tertiary = const Color.fromARGB(255, 201, 143, 253);
   Color primary = Colors.lightBlue.shade400;
 
