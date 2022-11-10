@@ -2,13 +2,10 @@
 
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:multilingual_dictionary/serach/search.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
@@ -358,7 +355,6 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
               }[languages.first] // English is purposefully not there
       });
     }
-    print(data);
     textRecognizer.close();
   }
 

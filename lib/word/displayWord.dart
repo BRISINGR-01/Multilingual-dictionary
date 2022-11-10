@@ -2,7 +2,7 @@
 
 import 'dart:convert' show json;
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/formsTable.dart';
 

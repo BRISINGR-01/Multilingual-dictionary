@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/grammarPage.dart';
 import 'package:multilingual_dictionary/shared/LanguagesWithIcons.dart';
 

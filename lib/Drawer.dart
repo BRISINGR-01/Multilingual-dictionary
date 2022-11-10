@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/Camera.dart';
 import 'package:multilingual_dictionary/Collections.dart';
-import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
 import 'package:multilingual_dictionary/grammar.dart';
 

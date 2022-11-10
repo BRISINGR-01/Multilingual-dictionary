@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
 
 Future<Map<String, Object?>> getData(

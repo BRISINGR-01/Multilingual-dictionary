@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/LanguagesWithIcons.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';

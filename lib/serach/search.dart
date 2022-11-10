@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/Drawer.dart';
-import 'package:multilingual_dictionary/data.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
