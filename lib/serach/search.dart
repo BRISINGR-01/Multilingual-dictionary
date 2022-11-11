@@ -9,7 +9,7 @@ import 'package:multilingual_dictionary/downloadList.dart';
 class Search extends StatefulWidget {
   final String querry;
   final String? language;
-  const Search({super.key, required this.querry, this.language});
+  const Search({super.key, this.querry = "", this.language});
 
   @override
   SearchState createState() => SearchState();
