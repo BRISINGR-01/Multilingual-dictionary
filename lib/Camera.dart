@@ -423,7 +423,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
                                                       builder: (context) =>
                                                           Search(
                                                         language: d["lang"],
-                                                        querry:
+                                                        query:
                                                             word.toLowerCase(),
                                                       ),
                                                     )),

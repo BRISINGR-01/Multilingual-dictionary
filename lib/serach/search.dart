@@ -3,13 +3,14 @@ import 'package:multilingual_dictionary/Drawer.dart';
 import 'package:multilingual_dictionary/notificationservice.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/shared/utilities.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 import 'package:multilingual_dictionary/downloadList.dart';
 
 class Search extends StatefulWidget {
-  final String querry;
+  final String query;
   final String? language;
-  const Search({super.key, this.querry = "", this.language});
+  const Search({super.key, this.query = "", this.language});
 
   @override
   SearchState createState() => SearchState();
@@ -24,7 +25,7 @@ class SearchState extends State<Search> {
   TextEditingController controller = TextEditingController();
   String _currentLanguage = "";
   String _query = "";
-  bool _isModeToEnglish = true;
+  Mode _mode = Mode.toEnglish;
   List<Map<String, Object?>> _options = [];
   late FocusNode searchFieldFocusNode;
 
@@ -33,36 +34,31 @@ class SearchState extends State<Search> {
     super.initState();
     searchFieldFocusNode = FocusNode();
 
-    databaseHelper.getUserData().then((data) async {
-      String currentLanguage = widget.language ?? data["currentLanguage"] ?? "";
+    databaseHelper.ensureInitialized().then((_) async {
+      String currentLanguage =
+          widget.language ?? databaseHelper.userData.currentLanguage;
 
-      if (!databaseHelper.languages.contains(currentLanguage) &&
-          databaseHelper.languages.isNotEmpty) {
-        currentLanguage = databaseHelper.languages[0];
-      }
+      // databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
+      // print(value);
+      // NotificationService().showNotification(value["word"], value["display"]);
+      // });
 
-      databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
-        print(value);
-        NotificationService().showNotification(value["word"], value["display"]);
-      });
-
-      controller.text = widget.querry;
+      controller.text = widget.query;
 
       setState(() {
         _currentLanguage = currentLanguage;
-        _isModeToEnglish =
-            widget.language != null ? true : data["isModeToEnglish"] != "false";
+        _mode = databaseHelper.userData.mode;
         _isLoading = false;
-        _query = widget.querry;
+        _query = widget.query;
       });
-      if (widget.querry.isNotEmpty) {
-        fetchOptions(widget.querry);
+      if (widget.query.isNotEmpty) {
+        fetchOptions(widget.query);
       }
     });
   }
 
   fetchOptions(String querry) async {
-    QueryResult items = _isModeToEnglish
+    QueryResultSet items = _mode == Mode.toEnglish
         ? await databaseHelper.searchToEnglish(querry, _currentLanguage)
         : await databaseHelper.searchFromEnglish(querry, _currentLanguage);
 
@@ -78,7 +74,7 @@ class SearchState extends State<Search> {
 
         if (databaseHelper.languages.length == 1) {
           _currentLanguage = databaseHelper.languages[0];
-          databaseHelper.setUserData("currentLanguage", _currentLanguage);
+          databaseHelper.userData.set("currentLanguage", _currentLanguage);
         }
       });
     } else {
@@ -91,7 +87,7 @@ class SearchState extends State<Search> {
           _currentLanguage = databaseHelper.languages.isNotEmpty
               ? databaseHelper.languages[0]
               : "";
-          databaseHelper.setUserData("currentLanguage", _currentLanguage);
+          databaseHelper.userData.set("currentLanguage", _currentLanguage);
         }
       });
     }
@@ -106,6 +102,10 @@ class SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
+    if (!databaseHelper.isInitialized) {
+      return const Loader();
+    }
+
     return SafeArea(
       child: Scaffold(
         primary: true,
@@ -126,7 +126,7 @@ class SearchState extends State<Search> {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      _isModeToEnglish
+                      _mode == Mode.toEnglish
                           ? '$_currentLanguage to English'
                           : 'English to $_currentLanguage',
                       style: const TextStyle(fontSize: 30),
@@ -220,7 +220,7 @@ class SearchState extends State<Search> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
-                                      child: _isModeToEnglish
+                                      child: _mode == Mode.toEnglish
                                           ? DropdownButton(
                                               value: _currentLanguage,
                                               items: databaseHelper.languages
@@ -234,7 +234,7 @@ class SearchState extends State<Search> {
                                               onChanged: (String? val) {
                                                 _currentLanguage =
                                                     val as String;
-                                                databaseHelper.setUserData(
+                                                databaseHelper.userData.set(
                                                     "currentLanguage", val);
                                                 fetchOptions(_query);
                                                 searchFieldFocusNode
@@ -250,12 +250,15 @@ class SearchState extends State<Search> {
                                           horizontal: 12.0),
                                       child: ElevatedButton(
                                           onPressed: () {
-                                            databaseHelper.setUserData(
-                                                "isModeToEnglish",
-                                                "${!_isModeToEnglish}");
+                                            databaseHelper.userData.set(
+                                                "mode",
+                                                _mode == Mode.toEnglish
+                                                    ? "toEnglish"
+                                                    : "fromEnglish");
                                             setState(() {
-                                              _isModeToEnglish =
-                                                  !_isModeToEnglish;
+                                              _mode = _mode == Mode.toEnglish
+                                                  ? Mode.fromEnglish
+                                                  : Mode.toEnglish;
                                             });
                                             fetchOptions(_query);
                                           },
@@ -264,7 +267,7 @@ class SearchState extends State<Search> {
                                           )),
                                     ),
                                     Expanded(
-                                      child: !_isModeToEnglish
+                                      child: _mode == Mode.fromEnglish
                                           ? DropdownButton(
                                               value: _currentLanguage,
                                               items: databaseHelper.languages
@@ -278,7 +281,7 @@ class SearchState extends State<Search> {
                                               onChanged: (String? val) {
                                                 _currentLanguage =
                                                     val as String;
-                                                databaseHelper.setUserData(
+                                                databaseHelper.userData.set(
                                                     "currentLanguage", val);
                                                 fetchOptions(_query);
                                               })

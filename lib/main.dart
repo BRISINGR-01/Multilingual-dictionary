@@ -24,7 +24,7 @@ void main() async {
       primary: primary,
       tertiary: tertiary,
     ),
-    create: (context) => WordsList(),
+    create: (context) => UserData(context),
   ));
 }
 
@@ -69,11 +69,13 @@ class App extends StatelessWidget {
   }
 }
 
-class WordsList extends ChangeNotifier {
+class UserData extends ChangeNotifier {
   late DatabaseHelper databaseHelper;
   String language = "";
-  WordsList() {
+  String translateToEnglish = "";
+  UserData(BuildContext context) {
     databaseHelper = DatabaseHelper.init();
+    print(context);
   }
 
   void addLanguage() {
@@ -84,7 +86,7 @@ class WordsList extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setWordCollection() {
+  void setWordCollections() {
     notifyListeners();
   }
 }

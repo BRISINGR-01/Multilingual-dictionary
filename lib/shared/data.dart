@@ -5,18 +5,19 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:multilingual_dictionary/shared/utilities.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-typedef QueryResult = List<Map<String, Object?>>;
+typedef QueryResultSet = List<Map<String, Object?>>;
+typedef QueryRow = Map<String, Object?>;
 
 class DatabaseHelper {
   final DBWrapper _database = DBWrapper.init();
   bool isInitialized = false;
-  late String language;
-  List<String> languages = [];
-  List<String> tables = [];
+  late List<String> languages;
+  late List<String> tables;
   late Collections collections;
   late UserData userData;
 
@@ -33,56 +34,44 @@ class DatabaseHelper {
               !table.startsWith("Collection-"))
           .toList();
 
-      // tables.forEach((element) {
-      //   print(element);
-      //   if (element.startsWith("Coll")) {
-      //     _database.rawQuery('Drop table "$element"');
-      //   }
-      // });
-
-      // await _database.rawQuery(
-      //     'UPDATE "userData" SET value = \'{"All": 61155}\' WHERE name = "collection-icons"');
-
-      // _database.rawQuery('DROP TABLE "Collection-Dutch-All"');
-      // await _database.rawQuery('''
-      //   CREATE TABLE 'Collection-Dutch-All' (
-      //     id INTEGER,
-      //     display TEXT NOT NULL,
-      //     groups TEXT
-      //   );
-      // ''');
-
       if (!tables.contains("userData")) {
         await _database
             .createTable('userData', {"name": "TEXT", "value": "TEXT"});
-        _database
-            .insert('userData', {"name": 'isModeToEnglish', "value": true});
+        _database.insert('userData', {"name": 'mode', "value": "toEnglish"});
         _database
             .insert('userData', {"name": 'currentLanguage', "value": null});
         _database.insert('userData',
             {"name": 'collection-icons', "value": "{\"All\": 57585}"});
       }
+
       collections =
-          Collections(_database, () => isInitialized = true, tables, languages);
+          Collections(_database, tables: tables, languages: languages);
+      userData = UserData(_database, languages: languages);
+      isInitialized = true;
     });
   }
 
+  Future<void> ensureInitialized() async {
+    if (!isInitialized) {
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      return ensureInitialized();
+    }
+    await userData.ensureInitialized();
+    await collections.ensureInitialized();
+  }
+
   Future<Map<String, dynamic>> getUserData() async {
-    QueryResult data = await _database.query('userData');
+    QueryResultSet data = await _database.query('userData');
 
     return {for (var entry in data) entry["name"] as String: entry["value"]};
   }
 
-  setUserData(String name, String value) async {
-    return _database.update('userData', {"value": value},
-        where: "name=?", whereArgs: [name]);
-  }
-
-  Future<QueryResult> searchToEnglish(String val, String lang) async {
+  Future<QueryResultSet> searchToEnglish(String val, String lang) async {
     val = val.trim();
     if (val.isEmpty) return [];
 
-    QueryResult result = await _database.query(lang,
+    QueryResultSet result = await _database.query(lang,
         columns: ['id', 'pos', 'word'],
         where: "word LIKE ?",
         whereArgs: ['$val%'],
@@ -96,7 +85,7 @@ class DatabaseHelper {
     }).toList();
   }
 
-  Future<QueryResult> searchFromEnglish(String val, String lang) async {
+  Future<QueryResultSet> searchFromEnglish(String val, String lang) async {
     //! sanitize query properly
     String query = "";
     RegExp sanitizer = RegExp(r'([\w\s\d\-\p{L}]+)');
@@ -106,7 +95,7 @@ class DatabaseHelper {
     }
     if (query.isEmpty) return [];
 
-    QueryResult result = await _database.query(lang,
+    QueryResultSet result = await _database.query(lang,
         columns: ["id", "pos", "translations"],
         where:
             'EXISTS (SELECT * FROM json_each(translations) WHERE value LIKE \'$query%\')',
@@ -124,8 +113,9 @@ class DatabaseHelper {
     }).toList();
   }
 
-  Future getById(int id, String lang) async {
-    var result = await _database.query(lang, where: "id=?", whereArgs: [id]);
+  Future<QueryRow> getById(int id, String lang) async {
+    QueryResultSet result =
+        await _database.query(lang, where: "id=?", whereArgs: [id]);
 
     return result.first;
   }
@@ -244,15 +234,14 @@ class DatabaseHelper {
 
 class Collections {
   final DBWrapper _database;
-  final finishInitialization;
   final List<String> tables;
   final List<String> languages;
   late List<Map<String, dynamic>> _all;
+  bool _isInitialized = false;
 
   List<Map<String, dynamic>> get all => _all;
 
-  Collections(
-      this._database, this.finishInitialization, this.tables, this.languages) {
+  Collections(this._database, {required this.tables, required this.languages}) {
     _database
         .query("userData",
             columns: ['value'],
@@ -275,8 +264,16 @@ class Collections {
               })
           .toList();
 
-      finishInitialization();
+      _isInitialized = true;
     });
+  }
+
+  Future<void> ensureInitialized() async {
+    if (!_isInitialized) {
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      return ensureInitialized();
+    }
   }
 
   add(Map<String, dynamic> collection) async {
@@ -310,8 +307,8 @@ class Collections {
   }
 
   Future<List<String>?> getWordCollections(String language, int id) async {
-    QueryResult wordCollections = await _database.query(
-        'Collection-$language-All',
+    QueryResultSet wordCollections = await _database.query(
+        '"Collection-$language-All"',
         columns: ["groups"],
         where: "id=?",
         whereArgs: [id]);
@@ -384,8 +381,77 @@ class Collections {
 }
 
 class UserData {
-  final _database;
-  UserData(this._database);
+  final DBWrapper _database;
+  final List<String> languages;
+  late String currentLanguage;
+  late Mode mode;
+  bool _isInitialized = false;
+
+  UserData(this._database, {required this.languages}) {
+    _database.ensureInitialized().then((_) async {
+      Map<String, dynamic> userPreferences =
+          (await get(names: ["currentLanguage", "mode"]))!;
+
+      currentLanguage = userPreferences["currentLanguage"] ?? "";
+      if (!languages.contains(currentLanguage) && languages.isNotEmpty) {
+        currentLanguage = languages.first;
+      }
+
+      mode = userPreferences["mode"] != "toEnglish"
+          ? Mode.fromEnglish
+          : Mode.toEnglish;
+      _isInitialized = true;
+    });
+  }
+
+  Future<void> ensureInitialized() async {
+    if (!_isInitialized) {
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      return ensureInitialized();
+    }
+  }
+
+  Future<Map<String, dynamic>?> get({String? name, List<String>? names}) async {
+    if (name != null) {
+      QueryResultSet query =
+          await _database.query('userData', where: "name=?", whereArgs: [name]);
+
+      if (query.isEmpty) return null;
+
+      return {"name": query.first["name"], "value": query.first["value"]};
+    } else {
+      QueryResultSet query = await _database.query('userData',
+          where: "name IN (${List.filled(names!.length, "?").join(",")})",
+          whereArgs: names);
+
+      if (query.isEmpty) return null;
+
+      return {for (QueryRow row in query) row["name"] as String: row["value"]};
+    }
+  }
+
+  set(String name, String value) async {
+    if (await get(name: name) != null) {
+      _database.update('userData', {"value": value},
+          where: "name=?", whereArgs: [name]);
+    } else {
+      _database.insert("userData", {"name": name, "value": value});
+    }
+  }
+
+  Future<Map<String, int>> getLanguageTablesSize() async {
+    QueryResultSet data = await _database.query('userData');
+    Map<String, int> langData = {};
+
+    for (QueryRow row in data) {
+      if (languages.contains(row["name"])) {
+        langData[row["name"] as String] = int.parse(row["value"] as String);
+      }
+    }
+
+    return langData;
+  }
 }
 
 class DBWrapper {
@@ -404,7 +470,7 @@ class DBWrapper {
     return _dbInstance.execute(sqlQuery);
   }
 
-  Future<QueryResult> query(String table,
+  Future<QueryResultSet> query(String table,
       {bool? distinct,
       List<String>? columns,
       String? where,
