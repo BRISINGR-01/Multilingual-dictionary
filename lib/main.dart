@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:multilingual_dictionary/notificationservice.dart';
 import 'package:multilingual_dictionary/serach/search.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  NotificationService().initNotification();
 
   Color tertiary = const Color.fromARGB(255, 201, 143, 253);
   Color primary = Colors.lightBlue.shade400;
@@ -75,7 +73,6 @@ class UserData extends ChangeNotifier {
   String translateToEnglish = "";
   UserData(BuildContext context) {
     databaseHelper = DatabaseHelper.init();
-    print(context);
   }
 
   void addLanguage() {

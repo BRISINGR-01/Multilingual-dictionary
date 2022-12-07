@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/Drawer.dart';
 import 'package:multilingual_dictionary/notificationservice.dart';
@@ -29,24 +30,48 @@ class SearchState extends State<Search> {
   List<Map<String, Object?>> _options = [];
   late FocusNode searchFieldFocusNode;
 
+  late final NotificationService notificationService;
+  void listenToNotificationStream() =>
+      notificationService.behaviorSubject.listen((payload) {
+        List wordInfo = jsonDecode(payload);
+        // print(wordInfo);
+        int id = wordInfo[0];
+        String language = wordInfo[1];
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WordDisplay(
+                      id: id,
+                      language: language,
+                      databaseHelper: databaseHelper,
+                    )));
+      });
+
   @override
   initState() {
     super.initState();
     searchFieldFocusNode = FocusNode();
 
+    // notificationService = NotificationService();
+    // listenToNotificationStream();
+    // notificationService.initializePlatformNotifications();
+    super.initState();
+
     databaseHelper.ensureInitialized().then((_) async {
-      String currentLanguage =
+      String language =
           widget.language ?? databaseHelper.userData.currentLanguage;
 
-      // databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
-      // print(value);
-      // NotificationService().showNotification(value["word"], value["display"]);
-      // });
+      databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
+        // notificationService.showPeriodicLocalNotification(
+        //     title: value["word"],
+        //     body: value["display"],
+        //     payload: jsonEncode([value["id"], value["language"]]));
+      });
 
       controller.text = widget.query;
 
       setState(() {
-        _currentLanguage = currentLanguage;
+        _currentLanguage = language;
         _mode = databaseHelper.userData.mode;
         _isLoading = false;
         _query = widget.query;

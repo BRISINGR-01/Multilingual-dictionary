@@ -1,0 +1,40 @@
+{
+  "todo": "use `derived` (especially verbs)",
+  "patterns": "(?<root>\\w+)en",
+  "constants": {
+    "extracted": {
+      "auxiliary": {
+        "options": ["haben", "sein"],
+        "tags": ["auxiliary"]
+      },
+      "conjugation": {
+        "options": ["strong", "weak"],
+        "tags": ["table-tags"],
+        "source": "conjugation"
+      },
+      "conjugation-class": {
+        "options": ["7 strong"],
+        "tags": ["class"],
+        "source": "conjugation"
+      },
+      "past-participle": {
+        "pattern": "ge${root}en",
+        "tags": ["participle", "past"]
+      }
+    },
+    "conjugations": {
+      "sein": ["bin", "bist", "ist", "sind", "seid", "sind"],
+      "waren" : ["war", "warst", "war", "waren", "wart", "waren"],
+      "wären" : ["wäre", "wärst", "wäre", "wären", "wärt", "wären"],
+      "seien": ["sei", "seist", "sei", "seien", "seiet", "seien"],
+      "haben": ["habe", "hast", "hat", "haben", "habt", "haben"],
+      "hatten": ["hatte", "hattest", "hatte", "hatten", "hatte", "hatten"],
+      "hätten": ["hätte", "hättest", "hätte", "hätten", "hätte", "hätten"],
+      "haben K": ["habe", "habest", "habe", "haben", "habet", "haben"],
+      "werden": ["werde", "wirst", "wird", "werden", "werdet", "werden"],
+      "würden": ["würde", "würdest", "würde", "würden", "würdet", "würden"]
+    },
+    "be": "sein",
+    "have": "haben"
+  }
+}

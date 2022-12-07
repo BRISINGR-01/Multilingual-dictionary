@@ -1,51 +1,57 @@
 {
   "todo": "check thoroughly + what to do with words with the same exact tags",
-  
+  "patterns": "(?<root>\\w+)(?<ending>re|er|ir)",
   "constants": {
-    "auxiliary": {
-      "tags": ["infinitive", "multiword-construction"],
-      "regExp": "avoir|être"
+    "extract": {
+      "auxiliary": {
+        "options": ["avoir", "être"],
+        "tags": ["infinitive", "multiword-construction"]
+      },
+      "present participle": {
+        "tags": ["gerund", "participle", "present"],
+        "ending": "ant"
+      },
+      "past participle": {
+        "tags": ["participle", "past"],
+        "endings": {"all": ["é", "ée", "és", "ées"]}
+      },
+      "infinitive": {
+        "tags": ["infinitive"]
+      }
     },
-    "present participle": {
-      "tags": ["gerund", "participle", "present"],
-      "ending": "ant"
-    },
-    "past participle": {
-      "tags": ["participle", "past"],
-      "endings": {"all": ["é", "ée", "és", "ées"]}
-    },
-    "infinitive": {
-      "tags": ["infinitive"]
-    },
-    "aller present": ["vais", "vas", "va", "allons", "allez", "vont"],
-    "venir present": ["viens", "viens", "vient", "venons", "venez", "viennent"],
-    "avoir": {
-      "present indicative": ["ai", "as", "a", "avons", "avez", "ont"],
-      "present subjunctive": ["aie", "aies", "ait", "ayons", "ayez", "aient"],
-      "present conditional": ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
-      "past historic": ["eus", "eus", "eut", "eûmes", "eûtes", "eurent"],
-      "future simple": ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
-      "imperfect indicative": ["avais", "avais", "avait", "avions", "aviez", "avaient"],
-      "imperfect subjunctive": ["eusse", "eusses", "eût", "eussions", "eussiez", "eussent"],
-      "imperative": ["aie", "ayons", "ayez"],
-      "gerund": "ayant"
-    },
-    "être": {
-      "present indicative": ["suis", "es", "est", "sommes", "êtes", "sont"],
-      "present subjunctive": ["sois", "sois", "soit", "soyons", "soyez", "soient"],
-      "present conditional": ["serais", "serias", "serait", "serions", "seriez", "seraient"],
-      "past historic": ["fus", "fus", "fut", "fûmes", "fûtes", "furent"],
-      "future simple": ["serai", "sera", "seras", "serons", "serez", "seront"],
-      "imperfect indicative": ["étais", "étais", "était", "étions", "étiez", "étaient"],
-      "imperfect subjunctive": ["fusse", "fusses", "fût", "fussions", "fussiez", "fussent"],
-      "imperative": ["sois", "soyons", "soyez"],
-      "gerund": "étant"
+    "conjugations": {
+      "aller": ["vais", "vas", "va", "allons", "allez", "vont"],
+      "venir": ["viens", "viens", "vient", "venons", "venez", "viennent"],
+      "avoir": {
+        "present indicative": ["ai", "as", "a", "avons", "avez", "ont"],
+        "present subjunctive": ["aie", "aies", "ait", "ayons", "ayez", "aient"],
+        "present conditional": ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
+        "past historic": ["eus", "eus", "eut", "eûmes", "eûtes", "eurent"],
+        "future simple": ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
+        "imperfect indicative": ["avais", "avais", "avait", "avions", "aviez", "avaient"],
+        "imperfect subjunctive": ["eusse", "eusses", "eût", "eussions", "eussiez", "eussent"],
+        "imperative": ["aie", "ayons", "ayez"],
+        "gerund": "ayant"
+      },
+      "être": {
+        "present indicative": ["suis", "es", "est", "sommes", "êtes", "sont"],
+        "present subjunctive": ["sois", "sois", "soit", "soyons", "soyez", "soient"],
+        "present conditional": ["serais", "serias", "serait", "serions", "seriez", "seraient"],
+        "past historic": ["fus", "fus", "fut", "fûmes", "fûtes", "furent"],
+        "future simple": ["serai", "sera", "seras", "serons", "serez", "seront"],
+        "imperfect indicative": ["étais", "étais", "était", "étions", "étiez", "étaient"],
+        "imperfect subjunctive": ["fusse", "fusses", "fût", "fussions", "fussiez", "fussent"],
+        "imperative": ["sois", "soyons", "soyez"],
+        "gerund": "étant"
+      }
     },
     "de": {
       "vowel": "'d",
       "consonant": "de"
     },
-    "en": "en"
+    "en": "en",
+    "be": "être",
+    "have": "avoir"
   },
 
   "Présent Indicatif": {

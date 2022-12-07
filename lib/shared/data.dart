@@ -44,9 +44,9 @@ class DatabaseHelper {
             {"name": 'collection-icons', "value": "{\"All\": 57585}"});
       }
 
-      collections =
-          Collections(_database, tables: tables, languages: languages);
       userData = UserData(_database, languages: languages);
+      collections = Collections(_database,
+          userData: userData, tables: tables, languages: languages);
       isInitialized = true;
     });
   }
@@ -57,8 +57,12 @@ class DatabaseHelper {
 
       return ensureInitialized();
     }
-    await userData.ensureInitialized();
-    await collections.ensureInitialized();
+    // now that the late classes are defined
+    if (!userData.isInitialized || !collections.isInitialized) {
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      return ensureInitialized();
+    }
   }
 
   Future<Map<String, dynamic>> getUserData() async {
@@ -122,7 +126,7 @@ class DatabaseHelper {
 
   addLanguage(String lang, Function setProgressAndSize) async {
     String url = 'http://localhost:3000/$lang';
-    // String url = 'http://192.168.1.106:3000/$lang';
+    // String url = 'http://172.16.0.177:3000/$lang';
 
     http.StreamedResponse streamedResponse;
     try {
@@ -216,41 +220,46 @@ class DatabaseHelper {
         if (words.isEmpty) continue;
 
         int id = words[Random().nextInt(words.length)]["id"];
-        return await getById(id, lang);
+        Map<String, dynamic> word = await getById(id, lang);
+
+        return {...word, "language": lang};
       }
     } else {
       String lang = languages[Random().nextInt(languages.length)];
 
-      int amountOfWords = int.parse((await _database.query('sqlite_sequence',
+      int amountOfWords = (await _database.query('sqlite_sequence',
               where: "name=?", whereArgs: [lang], columns: ["seq"]))
-          .first["seq"] as String);
+          .first["seq"] as int;
 
-      return (await _database.query(lang,
-              where: "id=?", whereArgs: [Random().nextInt(amountOfWords)]))
-          .first;
+      Map<String, dynamic> word = (await _database.query(lang,
+          where: "id=?", whereArgs: [Random().nextInt(amountOfWords)]))[0];
+
+      return {...word, "language": lang};
     }
   }
 }
 
 class Collections {
   final DBWrapper _database;
+  final UserData userData;
   final List<String> tables;
   final List<String> languages;
   late List<Map<String, dynamic>> _all;
-  bool _isInitialized = false;
+  bool isInitialized = false;
 
   List<Map<String, dynamic>> get all => _all;
 
-  Collections(this._database, {required this.tables, required this.languages}) {
-    _database
-        .query("userData",
-            columns: ['value'],
-            where: "name=?",
-            whereArgs: ['collection-icons'])
-        .then((iconsData) {
-      Map<String, dynamic> icons = json.decode(iconsData[0]["value"] as String);
-      List<String> collections =
-          tables.where((table) => table.startsWith("Collection")).toList();
+  Collections(
+    this._database, {
+    required this.userData,
+    required this.tables,
+    required this.languages,
+  }) {
+    List<String> collections =
+        tables.where((table) => table.startsWith("Collection")).toList();
+
+    userData.get(name: "collection-icons").then((iconsData) {
+      Map<String, dynamic> icons = json.decode(iconsData as String);
 
       _all = collections
           .map((title) => {
@@ -264,16 +273,8 @@ class Collections {
               })
           .toList();
 
-      _isInitialized = true;
+      isInitialized = true;
     });
-  }
-
-  Future<void> ensureInitialized() async {
-    if (!_isInitialized) {
-      await Future.delayed(const Duration(milliseconds: 10));
-
-      return ensureInitialized();
-    }
   }
 
   add(Map<String, dynamic> collection) async {
@@ -308,7 +309,7 @@ class Collections {
 
   Future<List<String>?> getWordCollections(String language, int id) async {
     QueryResultSet wordCollections = await _database.query(
-        '"Collection-$language-All"',
+        'Collection-$language-All',
         columns: ["groups"],
         where: "id=?",
         whereArgs: [id]);
@@ -385,7 +386,7 @@ class UserData {
   final List<String> languages;
   late String currentLanguage;
   late Mode mode;
-  bool _isInitialized = false;
+  bool isInitialized = false;
 
   UserData(this._database, {required this.languages}) {
     _database.ensureInitialized().then((_) async {
@@ -400,26 +401,18 @@ class UserData {
       mode = userPreferences["mode"] != "toEnglish"
           ? Mode.fromEnglish
           : Mode.toEnglish;
-      _isInitialized = true;
+      isInitialized = true;
     });
   }
 
-  Future<void> ensureInitialized() async {
-    if (!_isInitialized) {
-      await Future.delayed(const Duration(milliseconds: 10));
-
-      return ensureInitialized();
-    }
-  }
-
-  Future<Map<String, dynamic>?> get({String? name, List<String>? names}) async {
+  Future get({String? name, List<String>? names}) async {
     if (name != null) {
       QueryResultSet query =
           await _database.query('userData', where: "name=?", whereArgs: [name]);
 
       if (query.isEmpty) return null;
 
-      return {"name": query.first["name"], "value": query.first["value"]};
+      return query.first["value"];
     } else {
       QueryResultSet query = await _database.query('userData',
           where: "name IN (${List.filled(names!.length, "?").join(",")})",
@@ -482,7 +475,7 @@ class DBWrapper {
       int? offset}) async {
     await ensureInitialized();
 
-    return _dbInstance.query(table,
+    return _dbInstance.query('"$table"',
         columns: columns, where: where, whereArgs: whereArgs, limit: limit);
   }
 

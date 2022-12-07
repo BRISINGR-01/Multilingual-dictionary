@@ -225,10 +225,10 @@ class SaveButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  _SaveButtonState createState() => _SaveButtonState();
+  SaveButtonState createState() => SaveButtonState();
 }
 
-class _SaveButtonState extends State<SaveButton> {
+class SaveButtonState extends State<SaveButton> {
   List<String>? savedTo;
 
   @override
@@ -238,10 +238,13 @@ class _SaveButtonState extends State<SaveButton> {
       child: IconButton(
           tooltip: "Collections",
           onPressed: () {
-            List collections = widget.databaseHelper.collections.all
+            List<Map<String, dynamic>> collections = widget
+                .databaseHelper.collections.all
                 .where((element) => element["language"] == widget.language)
                 .toList();
-            if (savedTo?.isEmpty ?? false) {
+
+            // print(savedTo);
+            if (savedTo == null || savedTo!.isEmpty) {
               widget.databaseHelper.collections.addTo(
                   "Collection-${widget.language}-All",
                   widget.data["wordData"],
@@ -249,84 +252,86 @@ class _SaveButtonState extends State<SaveButton> {
                   savedTo!);
               savedTo!.add("Collection-${widget.language}-All");
               setState(() {});
-            }
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return StatefulBuilder(builder: (context, setDialogState) {
-                    return Dialog(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: Container(
-                        constraints: const BoxConstraints(maxWidth: 3 * 30),
-                        child: GridView.count(
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: const EdgeInsets.all(20),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 3,
-                          children: collections
-                              .map((collection) => Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: savedTo?.contains(
-                                                  collection["fullTitle"]) ??
-                                              false
-                                          ? Theme.of(context)
-                                              .colorScheme
-                                              .tertiary
-                                          : null),
-                                  alignment: Alignment.center,
-                                  width: 30,
-                                  height: 30,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      if (savedTo == null) return;
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return StatefulBuilder(builder: (context, setDialogState) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 3 * 30),
+                          child: GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: const EdgeInsets.all(20),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisCount: 3,
+                            children: collections
+                                .map((collection) => Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: savedTo?.contains(
+                                                    collection["fullTitle"]) ??
+                                                false
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .tertiary
+                                            : null),
+                                    alignment: Alignment.center,
+                                    width: 30,
+                                    height: 30,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        if (savedTo == null) return;
 
-                                      if (savedTo!
-                                          .contains(collection["fullTitle"])) {
-                                        widget.databaseHelper.collections
-                                            .removeFrom(
-                                                collection["fullTitle"],
-                                                widget.data["wordData"],
-                                                widget.language,
-                                                savedTo);
-                                        if (collection["fullTitle"] ==
-                                            "Collection-${widget.language}-All") {
-                                          savedTo = [];
+                                        if (savedTo!.contains(
+                                            collection["fullTitle"])) {
+                                          widget.databaseHelper.collections
+                                              .removeFrom(
+                                                  collection["fullTitle"],
+                                                  widget.data["wordData"],
+                                                  widget.language,
+                                                  savedTo);
+                                          if (collection["fullTitle"] ==
+                                              "Collection-${widget.language}-All") {
+                                            savedTo = [];
+                                          } else {
+                                            savedTo!.remove(
+                                                collection["fullTitle"]);
+                                          }
                                         } else {
-                                          savedTo!
-                                              .remove(collection["fullTitle"]);
+                                          savedTo!.add(collection["fullTitle"]);
+                                          if (!savedTo!.contains(
+                                              "Collection-${widget.language}-All")) {
+                                            savedTo!.add(
+                                                "Collection-${widget.language}-All");
+                                          }
+                                          widget.databaseHelper.collections
+                                              .addTo(
+                                                  collection["fullTitle"],
+                                                  widget.data["wordData"],
+                                                  widget.language,
+                                                  savedTo!);
                                         }
-                                      } else {
-                                        savedTo!.add(collection["fullTitle"]);
-                                        if (!savedTo!.contains(
-                                            "Collection-${widget.language}-All")) {
-                                          savedTo!.add(
-                                              "Collection-${widget.language}-All");
-                                        }
-                                        widget.databaseHelper.collections.addTo(
-                                            collection["fullTitle"],
-                                            widget.data["wordData"],
-                                            widget.language,
-                                            savedTo!);
-                                      }
-                                      setState(() {});
-                                      setDialogState(() {});
-                                    },
-                                    tooltip: collection["title"],
-                                    icon: collection["icon"] == null
-                                        ? Text(collection["title"])
-                                        : Icon(IconData(collection["icon"],
-                                            fontFamily: "MaterialIcons")),
-                                  )))
-                              .toList(),
+                                        setState(() {});
+                                        setDialogState(() {});
+                                      },
+                                      tooltip: collection["title"],
+                                      icon: collection["icon"] == null
+                                          ? Text(collection["title"])
+                                          : Icon(IconData(collection["icon"],
+                                              fontFamily: "MaterialIcons")),
+                                    )))
+                                .toList(),
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    });
                   });
-                });
+            }
           },
           iconSize: 30,
           icon: Icon(

@@ -50,11 +50,13 @@ class _DownloadLanguagesState extends State<DownloadLanguages> {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
                 'An error ocurred! Please check your internet connection')));
+
+        setState(() {
+          languagesData[languageToDownload]!["isLoading"] = false;
+          languagesData[languageToDownload]!["size"] = null;
+        });
       }
-      return setState(() {
-        languagesData[languageToDownload]!["isLoading"] = false;
-        languagesData[languageToDownload]!["size"] = null;
-      });
+      return;
     }
 
     widget.editLanguagesList(addLang: languageToDownload);
