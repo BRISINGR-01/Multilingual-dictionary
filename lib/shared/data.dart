@@ -125,26 +125,26 @@ class DatabaseHelper {
   }
 
   addLanguage(String lang, Function setProgressAndSize) async {
+    Directory dir = await getApplicationDocumentsDirectory();
     String url = 'http://localhost:3000/$lang';
     // String url = 'http://172.16.0.177:3000/$lang';
 
-    http.StreamedResponse streamedResponse;
+    http.StreamedResponse dbStreamedResponse;
     try {
-      http.Request request = http.Request('GET', Uri.parse(url));
-      streamedResponse = await request.send();
+      dbStreamedResponse =
+          await http.Request('GET', Uri.parse("$url/db")).send();
     } catch (e) {
       return false;
     }
 
     int totalLength =
-        int.parse(streamedResponse.headers["original-length"] ?? "0");
+        int.parse(dbStreamedResponse.headers["uncompressed-length"] ?? "0");
     num lengthOfSaved = 0;
 
-    Directory dir = await getApplicationDocumentsDirectory();
     File newSqlFile = File(join(dir.path, '$lang.sql'));
 
     IOSink out = newSqlFile.openWrite();
-    await streamedResponse.stream.map((List<int> d) {
+    await dbStreamedResponse.stream.map((List<int> d) {
       if (totalLength != 0) {
         lengthOfSaved += d.length / 1024;
 
@@ -181,6 +181,17 @@ class DatabaseHelper {
 
     newSqlFile.deleteSync();
 
+    // http.StreamedResponse grammarStreamedResponse;
+    // try {
+    //   grammarStreamedResponse =
+    //       await http.Request('GET', Uri.parse("$url/grammar")).send();
+    // } catch (e) {
+    //   return false;
+    // }
+
+    // File newGrammarFile = File(join(dir.path, '$lang.grammar.json'));
+    // await grammarStreamedResponse.stream.pipe(newGrammarFile.openWrite());
+
     return true;
   }
 
@@ -194,11 +205,10 @@ class DatabaseHelper {
 
   cancel(String lang) {}
 
-  Future<Map<String, dynamic>?> getGrammar(String language) async {
-    language = "Italian";
+  Future<Map<String, dynamic>?> getGrammar() async {
     String rawBundle = await rootBundle.loadString('assets/grammarBundle.json');
 
-    return json.decode(rawBundle)[language];
+    return json.decode(rawBundle);
   }
 
   Future<Map<String, dynamic>?> getLanguageData() async {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:multilingual_dictionary/grammar/languageChooser.dart';
+import 'package:multilingual_dictionary/grammar/noGrammar.dart';
+import 'package:multilingual_dictionary/grammar/optionsPage.dart';
+import 'package:multilingual_dictionary/shared/Loader.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/grammarPage.dart';
-import 'package:multilingual_dictionary/shared/LanguagesWithIcons.dart';
 
 class Grammar extends StatelessWidget {
   final DatabaseHelper databaseHelper;
@@ -10,73 +12,33 @@ class Grammar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return databaseHelper.languages.length > 1
-        ? LanguageChooser(databaseHelper: databaseHelper)
-        : databaseHelper.languages.length == 1
-            ? GrammarPage(
-                language: databaseHelper.languages.single,
-                databaseHelper: databaseHelper,
-              )
-            : const NoGrammar();
-  }
-}
-
-class NoGrammar extends StatelessWidget {
-  const NoGrammar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(),
-            body: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(80.0),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  "Downlaod a language",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            )));
-  }
-}
+      child: FutureBuilder(
+        future: databaseHelper.getGrammar(),
+        builder: ((context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Loader();
+          }
 
-class LanguageChooser extends StatelessWidget {
-  final DatabaseHelper databaseHelper;
+          if (snapshot.data == null) {
+            return const NoGrammar();
+          }
 
-  const LanguageChooser({Key? key, required this.databaseHelper})
-      : super(key: key);
+          Map<String, dynamic> grammar = snapshot.data as Map<String, dynamic>;
 
-  @override
-  Widget build(BuildContext context) {
-    return LanguagesWithIcons(
-      databaseHelper: databaseHelper,
-      builder: (flags, data) => Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            title: const Text("Grammar"),
-          ),
-          body: ListView.builder(
-            itemCount: databaseHelper.languages.length,
-            itemBuilder: (context, index) {
-              String language = databaseHelper.languages[index];
-              return ListTile(
-                  title: Text(language),
-                  shape: const RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black38, width: .3),
-                  ),
-                  leading: flags[language],
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GrammarPage(
-                          language: language,
-                          databaseHelper: databaseHelper,
-                        ),
-                      )));
-            },
-          )),
+          return databaseHelper.languages.length > 1
+              ? LanguageChooser(
+                  databaseHelper: databaseHelper,
+                  grammar: grammar,
+                )
+              : databaseHelper.languages.length == 1
+                  ? OptionsPage(
+                      items: grammar[databaseHelper.languages.first],
+                      title: databaseHelper.languages.first,
+                    )
+                  : const NoGrammar();
+        }),
+      ),
     );
   }
 }

@@ -1,0 +1,433 @@
+{
+  "title": "Adjectives and adverbs",
+  "body": [
+    {
+      "type": "p",
+      "text": "Adjectives can either be placed before a noun or be joined to a noun by a verb. If placed before a noun, they come between the article and the noun. Examples:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "de",
+          "mooie tuin",
+          "the beautiful garden"
+        ],
+        [
+          "een",
+          "mooie tuin",
+          " a beautiful garden"
+        ],
+        [
+          "mooie",
+          "tuin",
+          "beautiful garden"
+        ],
+        [
+          "de",
+          "mooie tuinen",
+          " the beautiful gardens"
+        ],
+        [
+          "-",
+          "mooie tuinen",
+          " beautiful gardens"
+        ],
+        [
+          "het",
+          "mooie boek",
+          " the beautiful book"
+        ],
+        [
+          "een",
+          "mooi boek",
+          " a beautiful book"
+        ],
+        [
+          "mooi",
+          "boek",
+          "beautiful book"
+        ],
+        [
+          "de",
+          "mooie boeken",
+          "the beautiful books"
+        ],
+        [
+          "-",
+          "mooie boeken",
+          " beautiful books"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "From the above you can see that an adjective before a noun always has the ending -e, except if it precedes a singular het-noun used with een1. This also applies if there is no article at all or if een is replaced by one of the following words:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "geen",
+          "no, not a"
+        ],
+        [
+          "zo'n",
+          "such a"
+        ],
+        [
+          "elk",
+          "every"
+        ],
+        [
+          "welk",
+          "which (Both the interrogative and the (formal) relative pronoun)"
+        ],
+        [
+          "veel",
+          "much (The word veel followed by a singular noun can only denote uncountable concepts)"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Therefore, to make the correct form of the adjective it is important to know whether a noun is a de-noun or an het-noun."
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "een mooi boek (het boek!)",
+          "a beautiful book"
+        ],
+        [
+          "geen mooi boek",
+          "no beautiful book"
+        ],
+        [
+          "zo'n mooi boek",
+          "such a beautiful book"
+        ],
+        [
+          "elk mooi boek",
+          "every beautiful book"
+        ],
+        [
+          "welk mooi boek(?)",
+          "which beautiful book(?)"
+        ],
+        [
+          "veel oud brood (het brood!)",
+          "much stale bread"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Compare:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "een leuke dag (de dag!)",
+          "a pleasant day"
+        ],
+        [
+          "geen leuke dag",
+          "not a pleasant day"
+        ],
+        [
+          "zo'n leuke dag",
+          "such a pleasant day"
+        ],
+        [
+          "elke leuke dag",
+          "every pleasant day"
+        ],
+        [
+          "welke leuke dag(?)",
+          "which pleasant day(?)"
+        ],
+        [
+          "(veel leuke dagen ",
+          "many pleasant days)"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Like the spelling of the nouns, for reasons of correct pronunciation the spelling of an adjective may change slightly when an ending is added. Examples:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "droog/droge",
+          "een droge dag - a dry day"
+        ],
+        [
+          "nat/natte",
+          "een natte dag - a wet day"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Adjectives that are joined to a noun by a verb have no ending:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "De tuin is mooi.",
+          "The garden is beautiful."
+        ],
+        [
+          "De tuinen zijn mooi.",
+          "The gardens are b..."
+        ],
+        [
+          "Het boek blijft mooi.",
+          "The book remains b..."
+        ],
+        [
+          "De boeken blijven mooi.",
+          "The books remain beautiful."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Adjectives ending in -en always remain unchanged:"
+    },
+    {
+      "type": "p",
+      "text": "(gevonden* - Past participles of verbs are often used as adjectives. The past participles of many strong verbs end in -en, so they also remain unchanged when used as adjectives.)"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "gevonden voorwerpen",
+          "lost property (litterally: found objects)"
+        ],
+        [
+          "een gebakken ei",
+          "a fried egg"
+        ],
+        [
+          "een open deur",
+          "an open door"
+        ],
+        [
+          "een dronken zeeman",
+          "a drunken sailor"
+        ],
+        [
+          "onze eigen bagage",
+          "our own luggage"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "A small group of other adjectives also remain unchanged:"
+    },
+    {
+      "type": "b",
+      "text": "- adjectives ending in -a or in -schwa"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "prima",
+          " excellent"
+        ],
+        [
+          "een prima idee",
+          "an excellent idea"
+        ],
+        [
+          "oranje",
+          "orange"
+        ],
+        [
+          "een oranje pet",
+          "an orange cap"
+        ]
+      ]
+    },
+    {
+      "type": "b",
+      "text": "'modern materials' like:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "plastic",
+          "(made of) plastic"
+        ],
+        [
+          "een plastic zakje",
+          "a (small) plastic bag"
+        ],
+        [
+          "aluminium",
+          "(made of) aluminium"
+        ],
+        [
+          "een aluminium ladder",
+          "an aluminium ladder"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Comparatives and Comparatives are usually made by adding -er to the adjective, superlatives superlatives are made by adding -st."
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "klein, kleiner, kleinst",
+          "all, smaller etc."
+        ],
+        [
+          "leuk, leuker, leukst",
+          "nice etc."
+        ],
+        [
+          "mooi, mooier, mooist",
+          "beautiful etc."
+        ],
+        [
+          "kort, korter, kortst",
+          "short etc."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "In comparatives of adjectives ending in -r, a -d is added:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "duur, duurder, duurst",
+          "expensive etc."
+        ],
+        [
+          "zwaar, zwaarder, zwaarst",
+          "heavy etc."
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "A small group of comparatives and superlatives is irregular:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "goed, beter, best",
+          " good, better, best"
+        ],
+        [
+          "graag, liever, liefst",
+          "gladly, rather, for preference - In English these concepts are expressed in a different way"
+        ],
+        [
+          "veel, meer, meest",
+          "many/much, more, most"
+        ],
+        [
+          "weinig, minder, minst ",
+          "little, less, least"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "When comparing two specimens, in Dutch the superlative is used:"
+    },
+    {
+      "type": "p",
+      "text": "(I have two daughters.) De oudste is 15 en de jongste is 12 - The elder (litterally: eldest) is 15 and the younger (litterally: youngest) is 12."
+    },
+    {
+      "type": "p",
+      "text": "Iets, niets When combined with iets 'something' or niets 'nothing' an adjective"
+    },
+    {
+      "type": "p",
+      "text": "+adjective takes s for an ending:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "iets moois",
+          "something beautiful"
+        ],
+        [
+          "iets raars",
+          "something strange"
+        ],
+        [
+          "niets belangrijks",
+          "nothing important"
+        ],
+        [
+          "niets nieuws",
+          "nothing new"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "This does not apply to adjectives ending in s, for a Dutch word never ends in two identical consonants:"
+    },
+    {
+      "type": "p",
+      "text": "iets vies - something dirty."
+    },
+    {
+      "type": "p",
+      "text": "Adverbs Adjectives can be used as adverbs, too. There is no special adverbial (bijwoorden) form of the adjectives. Adverbs do not get an ending."
+    },
+    {
+      "type": "p",
+      "text": "An exception is the adverb heel 'very', which in spoken language often behaves like an adjective: een hele hoge toren - a very high tower."
+    },
+    {
+      "type": "p",
+      "text": "Examples:"
+    },
+    {
+      "type": "table",
+      "table": [
+        [
+          "een fraai versierde schotel",
+          "a finely garnished dish"
+        ],
+        [
+          "een mooi gedekte tafel",
+          "a beautifully set table"
+        ],
+        [
+          "een zwaar opgemaakte dame",
+          "a heavily painted lady"
+        ],
+        [
+          "Ze hebben goed gewerkt",
+          "They have worked well"
+        ]
+      ]
+    }
+  ]
+}
