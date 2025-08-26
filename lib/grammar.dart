@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/grammar/languageChooser.dart';
-import 'package:multilingual_dictionary/grammar/noGrammar.dart';
-import 'package:multilingual_dictionary/grammar/optionsPage.dart';
-import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/grammar/language_chooser.dart';
+import 'package:multilingual_dictionary/grammar/missing_grammar_page.dart';
+import 'package:multilingual_dictionary/grammar/options_page.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
+import 'package:multilingual_dictionary/shared/loader.dart';
 
 class Grammar extends StatelessWidget {
   final DatabaseHelper databaseHelper;

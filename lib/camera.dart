@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:multilingual_dictionary/serach/search.dart';
-import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/shared/loader.dart';
 
 late List<CameraDescription> _cameras;
 

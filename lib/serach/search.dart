@@ -1,12 +1,13 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/Drawer.dart';
-import 'package:multilingual_dictionary/notificationservice.dart';
+import 'package:multilingual_dictionary/download_list.dart';
+import 'package:multilingual_dictionary/drawer.dart';
+import 'package:multilingual_dictionary/notification_service.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/shared/loader.dart';
 import 'package:multilingual_dictionary/shared/utilities.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
-import 'package:multilingual_dictionary/downloadList.dart';
 
 class Search extends StatefulWidget {
   final String query;
@@ -197,9 +198,9 @@ class SearchState extends State<Search> {
                                       ),
                                     )),
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Theme.of(context).colorScheme.background),
-                                  shape: MaterialStateProperty.all<
+                                  backgroundColor: WidgetStateProperty.all(
+                                      Theme.of(context).colorScheme.surface),
+                                  shape: WidgetStateProperty.all<
                                           RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                           borderRadius:
@@ -237,7 +238,7 @@ class SearchState extends State<Search> {
                         child:
                             Column(mainAxisSize: MainAxisSize.max, children: [
                           Container(
-                            color: Theme.of(context).colorScheme.background,
+                            color: Theme.of(context).colorScheme.surface,
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(10, 8, 0, 4),
                               child: Row(

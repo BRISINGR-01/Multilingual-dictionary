@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/grammar/article.dart';
-import 'package:multilingual_dictionary/grammar/noGrammar.dart';
+import 'package:multilingual_dictionary/grammar/missing_grammar_page.dart';
 
 class OptionsPage extends StatelessWidget {
   final Map<String, dynamic> items;

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/shared/LanguagesWithIcons.dart';
+import 'package:multilingual_dictionary/shared/languages_with_icons.dart';
 
 class DownloadLanguages extends StatefulWidget {
   final Function editLanguagesList;

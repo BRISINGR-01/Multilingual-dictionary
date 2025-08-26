@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/Camera.dart';
-import 'package:multilingual_dictionary/Collections.dart';
-import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/downloadList.dart';
+import 'package:multilingual_dictionary/camera.dart';
+import 'package:multilingual_dictionary/collections.dart';
+import 'package:multilingual_dictionary/download_list.dart';
 import 'package:multilingual_dictionary/grammar.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
 
 class CustomDrawer extends StatefulWidget {
   final DatabaseHelper databaseHelper;

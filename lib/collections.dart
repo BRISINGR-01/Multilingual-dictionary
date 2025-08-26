@@ -4,10 +4,10 @@ import 'dart:convert';
 
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/shared/LanguagesWithIcons.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
-import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/shared/data.dart';
+import 'package:multilingual_dictionary/shared/languages_with_icons.dart';
+import 'package:multilingual_dictionary/shared/loader.dart';
 import 'package:multilingual_dictionary/word/displayWord.dart';
 
 class CollectionsHome extends StatelessWidget {
@@ -96,7 +96,7 @@ class _CollectionsListState extends State<CollectionsList> {
               actions: <Widget>[
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                           Theme.of(context).colorScheme.tertiary)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6),
@@ -118,7 +118,7 @@ class _CollectionsListState extends State<CollectionsList> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.green)),
+                      backgroundColor: WidgetStateProperty.all(Colors.green)),
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text("Add"),
@@ -149,7 +149,7 @@ class _CollectionsListState extends State<CollectionsList> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.red)),
+                      backgroundColor: WidgetStateProperty.all(Colors.red)),
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text("Cancel"),

@@ -1,9 +1,10 @@
 // ignore_for_file: file_names
 
 import 'dart:convert' show json;
+
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/shared/loader.dart';
 import 'package:multilingual_dictionary/word/formsTable.dart';
 
 // if the word is accessed from a collection, when returning (popping) to the collections page it is expected that the collections of this word are returned
@@ -121,7 +122,7 @@ class _WordDisplayState extends State<WordDisplay> {
                   setReady: setReady,
                 ),
               ),
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
             );
           }),
     );
@@ -152,7 +153,7 @@ class Word extends StatelessWidget {
       return Container(
         height: constraints.maxHeight,
         width: constraints.maxWidth,
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
@@ -175,7 +176,7 @@ class Word extends StatelessWidget {
                           word["display"],
                           style: TextStyle(
                               fontSize: 40,
-                              color: Theme.of(context).colorScheme.onBackground,
+                              color: Theme.of(context).colorScheme.onSurface,
                               fontWeight: FontWeight.w600,
                               decoration: TextDecoration.none),
                         ),
@@ -190,7 +191,7 @@ class Word extends StatelessWidget {
                           word["senses"],
                           style: TextStyle(
                               fontSize: 30,
-                              color: Theme.of(context).colorScheme.onBackground,
+                              color: Theme.of(context).colorScheme.onSurface,
                               decoration: TextDecoration.none),
                         )
                       ]),

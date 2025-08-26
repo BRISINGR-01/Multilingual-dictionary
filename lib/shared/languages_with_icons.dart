@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
-import 'package:multilingual_dictionary/shared/Loader.dart';
+import 'package:multilingual_dictionary/shared/loader.dart';
 
 class LanguagesWithIcons extends StatelessWidget {
   final DatabaseHelper databaseHelper;
