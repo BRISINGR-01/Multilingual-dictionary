@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:multilingual_dictionary/camera.dart';
 import 'package:multilingual_dictionary/collections.dart';
 import 'package:multilingual_dictionary/download_list.dart';
 import 'package:multilingual_dictionary/grammar.dart';
@@ -82,21 +81,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 builder: (context) => Grammar(
                   databaseHelper: widget.databaseHelper,
                 ),
-              ));
-        },
-      ),
-      ListTile(
-        title: const Text('Camera'),
-        leading: Icon(Icons.photo_camera,
-            color: Theme.of(context).colorScheme.primary),
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(color: Colors.black38, width: .3),
-        ),
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CameraInitializer(),
               ));
         },
       ),

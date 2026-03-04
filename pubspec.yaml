@@ -1,7 +1,7 @@
 name: multilingual_dictionary
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -19,10 +19,10 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.9
   http: ^0.13.4
   flutter_iconpicker: ^3.2.1
-  google_mlkit_text_recognition: ^0.4.0
-  drag_and_drop_lists: ^0.3.3
-  camera: ^0.10.0+4
-  flutter_local_notifications: ^9.3.1
+  # google_mlkit_text_recognition: ^0.4.0
+  drag_and_drop_lists: ^0.4.2
+  # camera: ^0.10.0+4
+  # flutter_local_notifications: ^9.3.1
   rxdart: ^0.27.5
 
 dev_dependencies:
@@ -45,4 +45,3 @@ flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/icon.png"
-

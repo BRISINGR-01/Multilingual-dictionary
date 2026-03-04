@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:multilingual_dictionary/shared/utilities.dart';
@@ -462,9 +463,11 @@ class DBWrapper {
   DBWrapper.init() {
     sqfliteFfiInit();
 
-    getApplicationDocumentsDirectory().then((dbDirectory) => databaseFactoryFfi
-        .openDatabase(join(dbDirectory.path, 'database.sql'))
-        .then((db) => _dbInstance = db));
+    getApplicationDocumentsDirectory()
+        .catchError((_) => Directory("${Directory.current.path}/data"))
+        .then((dbDirectory) => databaseFactoryFfi
+            .openDatabase(join(dbDirectory.path, 'database.sql'))
+            .then((db) => _dbInstance = db));
   }
 
   Future execute(String sqlQuery) async {

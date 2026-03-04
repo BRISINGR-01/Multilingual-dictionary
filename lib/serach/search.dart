@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/download_list.dart';
 import 'package:multilingual_dictionary/drawer.dart';
-import 'package:multilingual_dictionary/notification_service.dart';
+// import 'package:multilingual_dictionary/notification_service.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/loader.dart';
 import 'package:multilingual_dictionary/shared/utilities.dart';
-import 'package:multilingual_dictionary/word/displayWord.dart';
+import 'package:multilingual_dictionary/word/display_word.dart';
 
 class Search extends StatefulWidget {
   final String query;
@@ -31,22 +29,22 @@ class SearchState extends State<Search> {
   List<Map<String, Object?>> _options = [];
   late FocusNode searchFieldFocusNode;
 
-  late final NotificationService notificationService;
-  void listenToNotificationStream() =>
-      notificationService.behaviorSubject.listen((payload) {
-        List wordInfo = jsonDecode(payload);
-        // print(wordInfo);
-        int id = wordInfo[0];
-        String language = wordInfo[1];
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => WordDisplay(
-                      id: id,
-                      language: language,
-                      databaseHelper: databaseHelper,
-                    )));
-      });
+  // late final NotificationService notificationService;
+  // void listenToNotificationStream() =>
+  //     notificationService.behaviorSubject.listen((payload) {
+  //       List wordInfo = jsonDecode(payload);
+  //       // print(wordInfo);
+  //       int id = wordInfo[0];
+  //       String language = wordInfo[1];
+  //       Navigator.push(
+  //           context,
+  //           MaterialPageRoute(
+  //               builder: (context) => WordDisplay(
+  //                     id: id,
+  //                     language: language,
+  //                     databaseHelper: databaseHelper,
+  //                   )));
+  //     });
 
   @override
   initState() {
@@ -62,12 +60,12 @@ class SearchState extends State<Search> {
       String language =
           widget.language ?? databaseHelper.userData.currentLanguage;
 
-      databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
-        // notificationService.showPeriodicLocalNotification(
-        //     title: value["word"],
-        //     body: value["display"],
-        //     payload: jsonEncode([value["id"], value["language"]]));
-      });
+      // databaseHelper.getNotificationWord(fromCollections: false)!.then((value) {
+      // notificationService.showPeriodicLocalNotification(
+      //     title: value["word"],
+      //     body: value["display"],
+      //     payload: jsonEncode([value["id"], value["language"]]));
+      // });
 
       controller.text = widget.query;
 

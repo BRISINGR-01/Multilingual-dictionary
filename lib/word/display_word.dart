@@ -5,7 +5,7 @@ import 'dart:convert' show json;
 import 'package:flutter/material.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/loader.dart';
-import 'package:multilingual_dictionary/word/formsTable.dart';
+import 'package:multilingual_dictionary/word/forms_table.dart';
 
 // if the word is accessed from a collection, when returning (popping) to the collections page it is expected that the collections of this word are returned
 // that is not working since the willpop method requires the savedTo variable from the savedBtn widget

@@ -4,11 +4,12 @@ import 'dart:convert';
 
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconpicker/Models/configuration.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:multilingual_dictionary/shared/data.dart';
 import 'package:multilingual_dictionary/shared/languages_with_icons.dart';
 import 'package:multilingual_dictionary/shared/loader.dart';
-import 'package:multilingual_dictionary/word/displayWord.dart';
+import 'package:multilingual_dictionary/word/display_word.dart';
 
 class CollectionsHome extends StatelessWidget {
   final DatabaseHelper databaseHelper;
@@ -105,13 +106,14 @@ class _CollectionsListState extends State<CollectionsList> {
                         : const Icon(Icons.emoji_emotions_outlined),
                   ),
                   onPressed: () {
-                    FlutterIconPicker.showIconPicker(context,
-                        iconPackModes: [IconPack.material]).then((val) {
+                    showIconPicker(context,
+                        configuration: const SinglePickerConfiguration(
+                            iconPackModes: [IconPack.material])).then((val) {
                       setState(() {
-                        _icon = val?.codePoint;
+                        _icon = val?.data.codePoint;
                       });
                       setDialogState(() {
-                        _icon = val?.codePoint;
+                        _icon = val?.data.codePoint;
                       });
                     });
                   },
